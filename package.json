@@ -1,9 +1,9 @@
 {
-  "name": "polimi-hyp-2017-boilerplate",
+  "name": "polimi-hyp-2017-project",
   "version": "1.0.0",
   "main": "index.js",
-  "repository": "https://polimi-hyp-2017-10173412@bitbucket.org/polimi-hyp-2017-10173412/polimi-hyp-2017-project.git",
-  "author": "Vittorio Zaccaria <vittorio.zaccaria@polimi.it>",
+  "repository": "https://bitbucket.org/polimihyp2017team10459278/polimi-hyp-2017-project",
+  "author": "Matteo Colombo <matteo32.colombo@mail.polimi.it>, Andrea Troianiello <andrea.troianiello@mail.polimi.it>",
   "engines": {
     "node": ">= 7.5.0"
   },
@@ -11,9 +11,6 @@
   "dependencies": {
     "body-parser": "1.17.1",
     "express": "4.15.2",
-    "knex": "^0.13.0",
-    "lodash": "4.17.4",
-    "sqlite3": "^3.1.8"
   },
   "scripts": {
     "start": "node ./index.js"
