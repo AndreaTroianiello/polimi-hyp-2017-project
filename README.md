@@ -1,34 +1,10 @@
-# README
+# Team Info
+## Heroku
+Heroku: https://polimi-hyp-2017-team-10459278.herokuapp.com/
 
-This repository will be updated during our hands on lectures with a
-small app to manage pets. We suggest to use it as a starting point
-(fork) for your project once we finished.
+## Bitbucket
+Bitbucket: https://bitbucket.org/polimihyp2017team10459278/polimi-hyp-2017-project
 
-## What is this repository for?
-
-Once you fork this repo, you can completely modify it at your own will
-to write your project. You will find the instructions to deploy this
-repo directly to your heroku account below.
-
-## How do I get set up to test this locally?
-
--   To run this server locally you should have Nodejs
-    (v7.5.0) installed.
-
--   To install the dependencies:
-
-        npm install .
-
--   To start the server (see property `scripts` in package.json)
-
-        npm start
-
-## How do I deploy this to Heroku
-
-*Do this only if you are the team administrator*.
-
-1.  Setup heroku and/or login according to the manual
-
-2.  just type:
-
-        git push heroku master
+## Members
+Team Administrator: Matteo Colombo, 10459278, polimi-hyp-2017-10459278
+Team Member n.2: Andrea Troianiello, 10455250, polimi-hyp-2017-10455250 
