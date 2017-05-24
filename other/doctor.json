@@ -1,0 +1,92 @@
+[
+  {
+    "id": 0,
+    "surname": "Colombo",
+    "name": "Andrea",
+    "telephone": "+39 02 12345678",
+    "fax": "+39 02 12345678",
+    "email": "andrea.colombo@medicalcenter.it",
+    "role": "chirurgo"
+  },
+  {
+    "id": 1,
+    "surname": "Corbetta",
+    "name": "Manuel",
+    "telephone": "+39 02 12345677",
+    "fax": "+39 02 12345677",
+    "email": "manuel.corbetta@medicalcenter.it",
+    "role": "medico di base"
+  },
+  {
+    "id": 2,
+    "surname": "Galbusera",
+    "name": "Andrea",
+    "telephone": "+39 02 12345676",
+    "fax": "+39 02 12345676",
+    "email": "andrea.galbusera@medicalcenter.it",
+    "role": "neurologo"
+  },
+  {
+    "id": 3,
+    "surname": "Giussani",
+    "name": "Federico",
+    "telephone": "+39 02 12345675",
+    "fax": "+39 02 12345675",
+    "email": "federico.giussani@medicalcenter.it",
+    "role": "chirurgo"
+  },
+  {
+    "id": 4,
+    "surname": "Panepinto",
+    "name": "Manuel",
+    "telephone": "+39 02 12345679",
+    "fax": "+39 02 12345679",
+    "email": "manuel.panepinto@medicalcenter.it",
+    "role": "chirurgo"
+  },
+  {
+    "id": 5,
+    "surname": "Perego",
+    "name": "Alessandro",
+    "telephone": "+39 02 12345674",
+    "fax": "+39 02 12345674",
+    "email": "alessandro.perego@medicalcenter.it",
+    "role": "chirurgo"
+  },
+  {
+    "id": 6,
+    "surname": "Peruffo",
+    "name": "Renato",
+    "telephone": "+39 02 12345673",
+    "fax": "+39 02 12345673",
+    "email": "renato.peruffo@medicalcenter.it",
+    "role": "pediatra"
+  },
+  {
+    "id": 7,
+    "surname": "Rossi",
+    "name": "Davide",
+    "telephone": "+39 02 12345672",
+    "fax": "+39 02 12345672",
+    "email": "davide.rossi@medicalcenter.it",
+    "role": "medico di base"
+  },
+  {
+    "id": 8,
+    "surname": "Rossi",
+    "name": "Dalila",
+    "telephone": "+39 02 12345671",
+    "fax": "+39 02 12345671",
+    "email": "dalila.rossi@medicalcenter.it",
+    "role": "chirurgo"
+  },
+  {
+    "id": 9,
+    "surname": "Sironi",
+    "name": "Mattia",
+    "telephone": "+39 02 12345670",
+    "fax": "+39 02 12345670",
+    "email": "mattia.sironi@medicalcenter.it",
+    "role": "ginecologo"
+  }
+]
