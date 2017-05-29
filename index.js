@@ -18,15 +18,31 @@ app.use(bodyParser.urlencoded({ extended: true }));
 let serverPort = process.env.PORT || 5000;
 app.set("port", serverPort); 
 
+// RESTful APIs
+app.get("/doctors", function(req, res) {
+	res.json();
+});
 
-app.get("/doctor", function(req, res) {
-	let idn = parseInt(_.get(req, "query.id", 0));
-	if(idn>=0 && idn<doctorsList.length)
-  		doctor=_.find(doctorsList, [ 'id' , idn ]);
-  	res.send(JSON.stringify(doctor));
+app.get("/doctors/:doctor_id", function(req, res) {
+	let answer = getDoctor(req.params.doctor_id)
+	if(answer == null){
+		answer = {error: "Invalid doctor ID"};
+	} 
+  	res.json(answer);
 });
 
 //Start the server on port 5000
 app.listen(serverPort, function() {
   console.log(`Your app is ready at port ${serverPort}`);
 });
+
+
+// Doctors functions yet to be implemented with SQLite
+
+function getDoctors(){
+	return doctorsList;
+}
+
+function getDoctor(id){
+	return doctorsList[id];
+}
