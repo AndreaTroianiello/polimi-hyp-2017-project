@@ -20,7 +20,7 @@ app.set("port", serverPort);
 
 // RESTful APIs
 app.get("/doctors", function(req, res) {
-	res.json();
+	res.json(getDoctors);
 });
 
 app.get("/doctors/:doctor_id", function(req, res) {
