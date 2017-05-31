@@ -1,6 +1,6 @@
 var server = "../"
 var api = "doctors/";
-var doctors=["fakedoctor.jpg","client-1.jpg", "client-2.jpg", "team-2.jpg","team-3.jpg","team-4.jpg"];
+var doctors=["therock.jpg","fakedoctor.jpg","client-1.jpg", "client-2.jpg", "team-2.jpg","team-3.jpg","team-4.jpg"];
 $(document).ready(function () {
     $.ajax({
         method: "GET",
@@ -21,8 +21,10 @@ $(document).ready(function () {
                     "<div class='col-xs-4 col-sm-2'><img src='../assets/img/"+doctors[i%doctors.length]+"' class='img-responsive list-img center-block'/></div><div class='col-xs-8 col-sm-4 list-doc'><h3>" + capitalizeFirstLetter(doc.surname) + " " + capitalizeFirstLetter(doc.name) + "</h3><p>"+doc.role+"</p></div>"
                 );
             }
+        },
+        error: function(request,error) { 
+            $('#doctorsList').append("<div class='col-xs-12 text-center'><p>Impossibile ottenere le informazioni richieste, riprovare più tardi.</p></div>");   
         }
-
     });
 
     function capitalizeFirstLetter(temp) {
