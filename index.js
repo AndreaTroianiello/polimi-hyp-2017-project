@@ -4,7 +4,7 @@ const app = express();
 const bodyParser = require("body-parser"); 
 const _ = require("lodash");
 
-let doctorsList = require("./other/doctor.json");
+let doctorsList = require("./other/doctors.json");
 
 let doctor;
 
@@ -19,8 +19,10 @@ let serverPort = process.env.PORT || 5000;
 app.set("port", serverPort); 
 
 // RESTful APIs
+
+//Doctors APIs
 app.get("/doctors", function(req, res) {
-	res.json(getDoctors);
+	res.json(getDoctors());
 });
 
 app.get("/doctors/:doctor_id", function(req, res) {
@@ -30,6 +32,8 @@ app.get("/doctors/:doctor_id", function(req, res) {
 	} 
   	res.json(answer);
 });
+
+//Location APIs
 
 //Start the server on port 5000
 app.listen(serverPort, function() {
@@ -46,3 +50,5 @@ function getDoctors(){
 function getDoctor(id){
 	return doctorsList[id];
 }
+
+// Location functions
