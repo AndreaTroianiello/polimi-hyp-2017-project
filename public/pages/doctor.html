@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Dr. Manuel Corbetta</title>
+    <title></title>
 
 
     <!-- Place your favicon.ico and apple-touch-icon.png in the template root directory -->
@@ -42,13 +42,13 @@
             <nav id="nav-menu-container">
                 <ul class="nav-menu">
                     <li><a href="#">Servizi</a></li>
-                    <li><a href="#">Location</a></li>
+                    <li><a href="#">Strutture</a></li>
                     <li class="menu-has-children"><a href="">Dottori</a>
                         <ul>
                             <li><a href="#">Ordine Alfabetico</a></li>
                             <li><a href="#">Per area</a></li>
                             <li><a href="#">Per servizi</a></li>
-                            <li><a href="#">Per location</a></li>
+                            <li><a href="#">Per struttura</a></li>
                         </ul>
                     </li>
                     <li><a href="#">Aree</a></li>
@@ -66,8 +66,8 @@
     <section>
         <div class="container">
             <ol class="breadcrumb">
-                <li><a href="#">Home</a></li>
-                <li><a href="#">Dottori</a></li>
+                <li><a href="../index.html">Home</a></li>
+                <li><a href="./doctors.html">Dottori</a></li>
                 <li class="active">Dottore</li>
             </ol>
             <nav>
@@ -90,16 +90,15 @@
                 <div class="col-xs-12 col-sm-9">
                     <div class="row">
                         <div class="col-xs-12">
-                            <h2 class="section-title">Dr. Manuel Corbetta</h2>
+                            <h2 class="section-title" id="title-doc-name"></h2>
                             <div class="section-title-divider"></div>
                         </div>
                         <div class="col-xs-12 col-sm-4">
                             <img src="../assets/img/fakedoctor.jpg" class="img-responsive center-block doc-image" />
                         </div>
                         <div class="col-xs-12 col-sm-8">
-                            <p class="doc-info">Medico di grande esperienza, il Dottor Renato Peruffo è responsabile dell'area Chirurgia. Medico
-                                chirurgo, si occupa delle operazioni chirurgiche, specializzato in trapianti di cuore.
-                            </p>
+                            <p class="doc-info"></p>
+                            <div class="hidden" id="id"></div>
                             <div class="panel table-responsive">
                                 <table class="table table-hover">
                                     <tr>
@@ -107,7 +106,7 @@
                                             <i class="fa fa-phone" aria-hidden="true"></i> Telefono
                                         </td>
                                         <td>
-                                            <a href="">+39 02 1234556</a>
+                                            <a href="" id="phone">+39 02 1234556</a>
                                         </td>
                                     </tr>
                                     <tr>
@@ -115,7 +114,7 @@
                                             <i class="fa fa-fax" aria-hidden="true"></i> Fax
                                         </td>
                                         <td>
-                                            <a href="">+39 02 1234556</a>
+                                            <a href="" id="fax">+39 02 1234556</a>
                                         </td>
                                     </tr>
                                     <tr>
@@ -123,7 +122,7 @@
                                             <i class="fa fa-envelope" aria-hidden="true"></i> E-Mail
                                         </td>
                                         <td>
-                                            <a href="">corbetta@medicalcenter.it</a>
+                                            <a href="" id="email">corbetta@medicalcenter.it</a>
                                         </td>
                                     </tr>
                                 </table>
@@ -136,24 +135,23 @@
                                         <td>
                                             Opera nel servizio:
                                         </td>
-                                        <td>
-                                            <a href="">Medico Chirurgo</a>
+                                        <td id="operates">
                                         </td>
                                     </tr>
                                     <tr>
                                         <td>
                                             Responsabile dell'area:
                                         </td>
-                                        <td>
-                                            -
+                                        <td id="manages_a">
+                                            
                                         </td>
                                     </tr>
                                     <tr>
                                         <td>
                                             Responsabile del servizio:
                                         </td>
-                                        <td>
-                                            -
+                                        <td id="manages_s">
+                                            
                                         </td>
                                     </tr>
                                 </table>
@@ -165,9 +163,9 @@
                     <h2 class="section-title">Navigazione</h2>
                     <div class="section-title-divider"></div>
                     <div class="list-group">
-                        <a href="#" class="list-group-item">Curriculum</a>
+                        <a href="#" class="list-group-item" id="curriculum">Curriculum</a>
                         <a href="#" class="list-group-item">Dottori via Golgi</a>
-                        <a href="#" class="list-group-item">Tutti i Dottori</a>
+                        <a href="./doctors.html" class="list-group-item">Tutti i Dottori</a>
                     </div>
                 </div>
             </div>
@@ -229,6 +227,7 @@
     <script src="../assets/js/easing.min.js"></script>
     <script src="../assets/js/superfish.min.js"></script>
     <script src="../assets/js/imperial.js"></script>
+    <script src="../assets/js/doctor.js"></script>
 </body>
 
 </html>
