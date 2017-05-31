@@ -12,6 +12,8 @@ $(document).ready(function () {
 		},
 		error: function (request, error) {
 			console.log(request + ":" + error);
+			$('#location-info').empty();
+			errorMessage();
 		}
 	});
 });
@@ -35,6 +37,9 @@ function cleanLocation(){
 	$('#location-timetable').text('');
 }
 
+function errorMessage(){
+	$('#location-info').append('<h3 class="error">Impossibile le informazione della struttura.</h3>');
+}
 
 var URL = function () {
   // This function is anonymous, is executed immediately and 

@@ -13,6 +13,7 @@ $(document).ready(function () {
 		},
 		error: function (request, error) {
 			console.log(request + ":" + error);
+			errorMessage();
 		}
 	});
 });
@@ -23,13 +24,13 @@ function clearLocations() {
 }
 
 function addLocation(location) {
-	$('#' + location.city).append('<li><a href="../pages/location.html?id='+location.id+'">' + location.city + ', ' + location.address + '</a></li>');
+	$('#' + location.city).append('<li><a href="../pages/location.html?id=' + location.id + '">' + location.city + ', ' + location.address + '</a></li>');
 	console.log("Added location!");
 }
 
 function addParagraph(index) {
 	$('#locations').append('<h4 class="list-index">' + index + '</h4>');
-	$('#locations').append('<ul class="locations-list" id="' + index + '"></ul');
+	$('#locations').append('<ul class="locations-list" id="' + index + '"></ul>');
 	console.log("Added row!");
 }
 
@@ -42,4 +43,8 @@ function updateLocations(locations) {
 		}
 		addLocation(locations[i]);
 	}
+}
+
+function errorMessage(){
+	$('#locations').append('<h3 class="error">Impossibile caricare la lista.</h3>');
 }
