@@ -52,3 +52,25 @@ function getDoctor(id){
 }
 
 // Location functions
+
+let locationsList = require("./other/locations.json");
+
+app.get("/locations", function(req, res) {
+	res.json(getLocations());
+});
+
+app.get("/locations/:location_id", function(req, res) {
+	let answer = getLocation(req.params.location_id);
+	if(answer == null){
+		answer = {error: "Invalid doctor ID"};
+	} 
+  	res.json(answer);
+});
+
+function getLocations(){
+	return locationsList;
+}
+
+function getLocation(id){
+	return locationsList[id];
+}

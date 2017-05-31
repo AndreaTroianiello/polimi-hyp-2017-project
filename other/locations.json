@@ -6,7 +6,7 @@
     "phone": "+39 02 29366678",
     "fax": "+39 02 29366678",
     "email": "info.leccocorsoitalia@medicalcenter.it",
-    "opening hours": "Lun-Sab 08:30-13:00 14:00-18:00"
+    "timetable": "Lun-Sab 08:30-13:00 14:00-18:00"
   },
   {
     "id": 1,
@@ -15,7 +15,7 @@
     "phone": "+39 02 29367775",
     "fax": "+39 02 29367775",
     "email": "info.milanoviavallazze@medicalcenter.it",
-    "opening hours": "Lun-Ven 09:00-12:00 13:00-15:00 Sab 08:30-12:30"
+    "timetable": "Lun-Ven 09:00-12:00 13:00-15:00 Sab 08:30-12:30"
   },
   {
     "id": 2,
@@ -24,6 +24,6 @@
     "phone": "+39 02 29366855",
     "fax": "+39 02 29366855",
     "email": "info.milanoviaripamonti@medicalcenter.it",
-    "opening hours": "Lun-Ven 08:00-12:00 13:00-16:00"
+    "timetable": "Lun-Ven 08:00-12:00 13:00-16:00"
   }
 ]
