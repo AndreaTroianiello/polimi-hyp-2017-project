@@ -60,3 +60,22 @@ a{
 .panel a:hover{
     color: #03A8F3;
 }
+
+.doctors-table thead{
+    font-weight:bold;
+}
+
+.list-img{
+    border-radius: 50px;
+    width:70px;
+    border: 1px solid #e6e6e6;
+}
+
+.list-doc h3{
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.list-index{
+    font-weight: bold;
+}
