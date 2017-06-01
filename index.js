@@ -87,12 +87,15 @@ function getDoctors(filter, value) {
 	if (filter === "location") {
 		doctors= doctors.slice(4, 6);
 	}
-	
+
 	return doctors.sort(docSort);
 }
 
 function getDoctor(id) {
-	return doctorsList[id];
+	docIndex = _.findIndex(doctorsList, function(d){
+		return id == d.id;
+	})
+	return doctorsList[docIndex];
 }
 
 /* =========================================================

@@ -126,6 +126,7 @@ function setNext(id) {
         },
         success: function (response) {
             next = response.id;
+            console.log(next);
         },
         error: function (request, error) {
         }
@@ -151,6 +152,3 @@ function setPrevious(id) {
     });
 }
 
-function updateURL(id,filter,value){
-    
-}
