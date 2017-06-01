@@ -69,9 +69,8 @@ body {
 .doc-image {
 	border: 1px solid #e6e6e6;
 	border-radius: 15px;
-}
 
-.doc-info {
+	.doc-info {
 	font-size: 1.1em;
 	text-align: justify;
 }
