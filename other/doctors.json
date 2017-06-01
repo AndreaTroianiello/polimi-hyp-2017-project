@@ -1,19 +1,5 @@
 [
   {
-    "id": 0,
-    "surname": "Abbriti",
-    "name": "Franca",
-    "male": false,
-    "phone": "+39 02 12345678",
-    "fax": "+39 02 12345678",
-    "email": "abbriti@medicalcenter.it",
-    "img": "../assets/img/doctors/doc-0.jpg",
-    "operates": 1,
-    "manages_s": null,
-    "manages_a": null,
-    "desc": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque gravida vulputate facilisis. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; "
-  },
-  {
     "id": 1,
     "surname": "Cannata",
     "name": "Letizia",
@@ -27,6 +13,20 @@
     "manages_a": null,
     "desc": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque gravida vulputate facilisis. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; "
  
+  },
+  {
+    "id": 0,
+    "surname": "Abbriti",
+    "name": "Franca",
+    "male": false,
+    "phone": "+39 02 12345678",
+    "fax": "+39 02 12345678",
+    "email": "abbriti@medicalcenter.it",
+    "img": "../assets/img/doctors/doc-0.jpg",
+    "operates": 1,
+    "manages_s": null,
+    "manages_a": null,
+    "desc": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque gravida vulputate facilisis. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; "
   },
   {
     "id": 2,
@@ -130,7 +130,7 @@
     "id": 9,
     "surname": "Zumbo",
     "name": "Gaetano",
-    "male": false,
+    "male": true,
     "phone": "+39 02 12345678",
     "fax": "+39 02 12345678",
     "email": "zumbo@medicalcenter.it",

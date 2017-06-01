@@ -73,7 +73,7 @@ app.get("/doctors/:doctor_id/previous", function (req, res) {
 	if(curr_doc===-1){
 		answer = { error: "No doctor found for the given parameters." };
 	}else{
-		answer = docs[(curr_doc - 1) % docs.length];
+		answer = docs[(curr_doc + docs.length - 1) % docs.length];
 	}
 	res.json(answer);
 });
@@ -83,11 +83,12 @@ app.get("/doctors/:doctor_id/previous", function (req, res) {
 ========================================================== */
 
 function getDoctors(filter, value) {
-	// We need to alphabetically order stuff
+	doctors = _.toArray(doctorsList);
 	if (filter === "location") {
-		return doctorsList.slice(4, 6);
+		doctors= doctors.slice(4, 6);
 	}
-	return doctorsList;
+	
+	return doctors.sort(docSort);
 }
 
 function getDoctor(id) {
@@ -120,4 +121,21 @@ function getLocations() {
 
 function getLocation(id) {
 	return locationsList[id];
+}
+
+
+/* ===================
+	Utility functions
+====================*/
+
+function docSort(a,b){
+	a_full= (a.surname+" "+a.name).toLowerCase();
+	b_full= (b.surname+" "+b.name).toLowerCase();
+
+	if(a_full<b_full){
+		return -1;
+	}else if(a_full>b_full){
+		return 1;
+	}
+	return 0;
 }

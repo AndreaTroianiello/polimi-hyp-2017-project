@@ -1,18 +1,31 @@
 var server = "../"
 var api = "doctors/";
+var thisPage= "doctor.html";
 var next;
 var previous;
 
 $(document).ready(function () {
-
     if (URL.id == null) {
         URL.id = 0;
     }
-    
-    getDoctor();
+    getDoctor(URL.id);
 
-    
+
+    $(".next").click(function () {
+        URL.id= next;
+        getDoctor(next);
+    });
+
+    $(".previous").click(function () {
+        URL.id=previous;
+        getDoctor(previous);
+    });
+
 });
+
+/* ==========================
+    The following are methods used 
+===========================*/
 
 var URL = function () {
     // This function is anonymous, is executed immediately and 
@@ -38,15 +51,15 @@ var URL = function () {
 }();
 
 
-function getDoctor(){
+function getDoctor(id) {
     $.ajax({
         method: "GET",
         dataType: "json",
         crossDomain: true,
-        url: server + api + URL.id,
+        url: server + api + id,
         success: function (response) {
-            $('#id').text(URL.id);
-            $('#curriculum').attr("href", "./curriculum.html?id=" + URL.id);
+            $('#id').text(id);
+            $('#curriculum').attr("href", "./curriculum.html?id=" + id);
             $('title').text(getDoctorName(response));
             $('#title-doc-name').text(getDoctorName(response));
             $('#phone').text(response.phone);
@@ -69,8 +82,9 @@ function getDoctor(){
                 m_s = "<a href='./service.html?id=" + response.manages_s + "'>" + getServiceName(response.manages_s) + "</a>";
             }
             $('#manages_s').html(m_s);
-            setNext();
-            setPrevious();
+            setNext(id);
+            setPrevious(id);
+            fixURL(URL);
         },
         error: function (request, error) {
         }
@@ -78,56 +92,65 @@ function getDoctor(){
 }
 
 function capitalizeFirstLetter(temp) {
-        return temp.charAt(0).toUpperCase() + temp.slice(1);
-    }
+    return temp.charAt(0).toUpperCase() + temp.slice(1);
+}
 
-    function getDoctorName(obj) {
-        return "Dr." + (obj.male ? " " : "ssa ") + obj.surname + " " + obj.name;
-    }
+function getDoctorName(obj) {
+    return "Dr." + (obj.male ? " " : "ssa ") + obj.surname + " " + obj.name;
+}
 
-    function getServiceName(id) {
-        return "Servizio " + id;
-    }
-    function getAreaName(id) {
-        return "Area " + id;
-    }
+function getServiceName(id) {
+    return "Servizio " + id;
+}
+function getAreaName(id) {
+    return "Area " + id;
+}
 
-    function setNext() {
-        $.ajax({
-            method: "GET",
-            dataType: "json",
-            crossDomain: true,
-            url: server + api + URL.id+"/next",
-            data: {
-                "filter": URL.filter,
-                "value": URL.value
-            },
-            success: function (response) {
-                console.log("got "+response.id);
-                $('.nexthref').attr("href","./doctor.html?id="+response.id);
-            },
-            error: function (request, error) {
-
-            }
-        });
+function fixURL(URL){
+    fixString = "/pages/doctor.html?id="+URL.id;
+    if(URL.filter != null){
+        fixString+="&filter="+URL.filter+"&value="+URL.value;
     }
+    window.history.pushState("Dottore","Dottore",fixString);
+}
 
-    function setPrevious() {
-        $.ajax({
-            method: "GET",
-            dataType: "json",
-            crossDomain: true,
-            url: server + api + URL.id+"/previous",
-            data: {
-                "filter": URL.filter,
-                "value": URL.value
-            },
-            success: function (response) {
-                console.log("got "+response.id);
-                $('.previoushref').attr("href","./doctor.html?id="+response.id);
-            },
-            error: function (request, error) {
+function setNext(id) {
+    $.ajax({
+        method: "GET",
+        dataType: "json",
+        crossDomain: true,
+        url: server + api + id + "/next",
+        data: {
+            "filter": URL.filter,
+            "value": URL.value
+        },
+        success: function (response) {
+            next = response.id;
+        },
+        error: function (request, error) {
+        }
+    });
+}
 
-            }
-        });
-    }
+function setPrevious(id) {
+    $.ajax({
+        method: "GET",
+        dataType: "json",
+        crossDomain: true,
+        url: server + api + id + "/previous",
+        data: {
+            "filter": URL.filter,
+            "value": URL.value
+        },
+        success: function (response) {
+            previous = response.id;
+        },
+        error: function (request, error) {
+
+        }
+    });
+}
+
+function updateURL(id,filter,value){
+    
+}
