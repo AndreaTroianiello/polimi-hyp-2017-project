@@ -19,14 +19,15 @@ $(document).ready(function () {
 });
 
 function updateLocation(location){
-	$('title').text(location.city+','+location.address);
-	$('#location-title').text(location.city+','+location.address);
+	$('title').text(location.name);
+	$('#location-title').text(location.name);
 	$('#location-address').text(location.city+','+location.address);
 	$('#location-telephone').text(location.phone);
 	$('#location-fax').text(location.fax);
 	$('#location-email').text(location.email);
 	$('#location-timetable').text(location.timetable);
 	$('#info-map').attr("href", "./directions.html?id="+URL.id);
+	$('#gallery').attr("href", "./gallery.html?id="+URL.id);
 }
 
 function init(){

@@ -11,6 +11,8 @@ $(document).ready(function () {
 		crossDomain: true,
 		url: "../locations/" + URL.id,
 		success: function (response) {
+			$('title').text(response.name);
+			$('#directions').text(response.directions);
 			var address = response.city + "," + response.address;
 			geocoder.geocode({
 				'address': address
@@ -35,7 +37,9 @@ $(document).ready(function () {
 });
 
 function init() {
+	$('title').text('Struttura');
 	$('.location').attr("href", "./location.html?id=" + URL.id);
+	$('#gallery').attr("href", "./gallery.html?id=" + URL.id);
 	$('.dynamic').hide(true);
 }
 

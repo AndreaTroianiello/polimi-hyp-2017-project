@@ -24,7 +24,7 @@ function clearLocations() {
 }
 
 function addLocation(location) {
-	$('#' + location.city).append('<li><a href="../pages/location.html?id=' + location.id + '">' + location.city + ', ' + location.address + '</a></li>');
+	$('#' + location.city).append('<li><a href="../pages/location.html?id=' + location.id + '">' + location.name + '</a></li>');
 	console.log("Added location!");
 }
 
