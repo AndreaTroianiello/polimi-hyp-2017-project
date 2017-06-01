@@ -18,7 +18,7 @@ $(document).ready(function () {
                     );
                 }
                 $('#doctorsList').append(
-                    "<div class='col-xs-12 col-sm-6'><div class='row'><div class='col-xs-4 col-sm-3'><img class='img-responsive list-img center-block' src='"+doc.img+"' alt='"+doc.surname+"'></div><div class='col-xs-8 col-sm-9'><h3>"+doc.surname+" "+doc.name+"</h3><p></p></div></div></div>" 
+                    "<a href='doctor.html?id="+doc.id+"' class='list-doc'><div class='col-xs-12 col-sm-6'><div class='row'><div class='col-xs-4 col-sm-3'><img class='img-responsive list-img center-block' src='"+doc.img+"' alt='"+doc.surname+"'></div><div class='col-xs-8 col-sm-9'><h3>"+doc.surname+" "+doc.name+"</h3><p></p></div></div></div></a>" 
                 );
                 var p = $('#doctorsList p:last');
                 getServiceName(p,doc.operates);
