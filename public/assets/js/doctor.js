@@ -3,11 +3,22 @@ var api = "doctors/";
 var thisPage= "doctor.html";
 var next;
 var previous;
+var previous_url;
+var previous_label;
 
 $(document).ready(function () {
+
+    getSideMenu();
+
+
     if (URL.id == null) {
         URL.id = 0;
     }
+    var currUrl = "./curriculum.html?id=" + URL.id;
+     if(URL.filter != null){
+        currUrl+="&filter="+URL.filter+"&value="+URL.value;
+    }
+    $('#curriculum').attr("href", currUrl);
     getDoctor(URL.id);
 
 
@@ -19,6 +30,10 @@ $(document).ready(function () {
     $(".previous").click(function () {
         URL.id=previous;
         getDoctor(previous);
+    });
+
+    $('#curriculum').click(function(){
+        setSideMenu();
     });
 
 });
@@ -58,8 +73,6 @@ function getDoctor(id) {
         crossDomain: true,
         url: server + api + id,
         success: function (response) {
-            $('#id').text(id);
-            $('#curriculum').attr("href", "./curriculum.html?id=" + id);
             $('title').text(getDoctorName(response));
             $('#title-doc-name').text(getDoctorName(response));
             $('#phone').text(response.phone);
@@ -109,6 +122,7 @@ function getAreaName(id) {
 function fixURL(URL){
     fixString = "/pages/doctor.html?id="+URL.id;
     if(URL.filter != null){
+        console.log(URL.filter);
         fixString+="&filter="+URL.filter+"&value="+URL.value;
     }
     window.history.pushState("Dottore","Dottore",fixString);
@@ -126,7 +140,6 @@ function setNext(id) {
         },
         success: function (response) {
             next = response.id;
-            console.log(next);
         },
         error: function (request, error) {
         }
@@ -152,3 +165,18 @@ function setPrevious(id) {
     });
 }
 
+function getSideMenu(){
+    previous_label = window.sessionStorage.getItem("label");
+    previous_url = window.sessionStorage.getItem("url");
+    if(previous_label!==null){
+        $('#sidemenu').append("<a href='"+previous_url+"' class='list-group-item'>Torna a "+previous_label+"</a>");
+    }
+    window.sessionStorage.clear();
+}
+
+function setSideMenu(){
+    if(previous_label!==null){
+        window.sessionStorage.setItem("label",previous_label);
+        window.sessionStorage.setItem("url", previous_url);
+    }
+}

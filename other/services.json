@@ -3,12 +3,12 @@
     "id": 0,
     "name": "Visita dermatologica",
     "description": "La visita dermatologica è impiegata per escludere, diagnosticare o monitorare un disturbo di carattere dermatologico. A questa visita vengono sottoposti i soggetti con malattie legate alla cute già note e che devono sottoporsi a controlli periodici; è però possibile che il medico curante consigli di recarsi da un dermatologo al fine di accertare la natura di alcuni sintomi, quali anomalie di un neo, presenza di eruzioni cutanee di diverso tipo, comparsa di pomfi e/o angiodemi con dolore o senza, prurito persistente e cambiamento del colore o della consistenza della pelle.",
-    "responsable": "1"
+    "responsible": "1"
   },
   {
     "id": 1,
     "name": "Chirurgia dermatologica",
     "description": "",
-    "responsable": ""
+    "responsible": ""
   }
 ]

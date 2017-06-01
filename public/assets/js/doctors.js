@@ -1,5 +1,6 @@
 var server = "../"
 var api = "doctors/";
+
 $(document).ready(function () {
     $.ajax({
         method: "GET",
@@ -17,8 +18,10 @@ $(document).ready(function () {
                     );
                 }
                 $('#doctorsList').append(
-                    "<div class='col-xs-4 col-sm-2'><img src='../assets/img/doc-"+i+".jpg' class='img-responsive list-img center-block'/></div><div class='col-xs-8 col-sm-4 list-doc'><h3>" + capitalizeFirstLetter(doc.surname) + " " + capitalizeFirstLetter(doc.name) + "</h3><p>"+doc.role+"</p></div>"
+                    "<div class='col-xs-12 col-sm-6'><div class='row'><div class='col-xs-4 col-sm-3'><img class='img-responsive list-img center-block' src='"+doc.img+"' alt='"+doc.surname+"'></div><div class='col-xs-8 col-sm-9'><h3>"+doc.surname+" "+doc.name+"</h3><p></p></div></div></div>" 
                 );
+                var p = $('#doctorsList p:last');
+                getServiceName(p,doc.operates);
             }
         },
         error: function(request,error) { 
@@ -26,8 +29,9 @@ $(document).ready(function () {
         }
     });
 
-    function capitalizeFirstLetter(temp) {
-        return temp.charAt(0).toUpperCase() + temp.slice(1);
-    }
 
 });
+
+function getServiceName(p, operates){
+   $(p).text("Servizio "+operates);
+}

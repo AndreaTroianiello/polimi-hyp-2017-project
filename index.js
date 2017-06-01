@@ -5,8 +5,8 @@ const bodyParser = require("body-parser");
 const _ = require("lodash");
 
 let doctorsList = require("./other/doctors.json");
+let curriculums = require("./other/curriculums.json");
 
-let doctor;
 
 app.use(express.static(__dirname + "/public"));
 
@@ -78,6 +78,14 @@ app.get("/doctors/:doctor_id/previous", function (req, res) {
 	res.json(answer);
 });
 
+app.get("/doctors/:doctor_id/curriculum", function (req, res) {
+	let answer = getCurriculum(req.params.doctor_id);
+	if (answer == null) {
+		answer = { error: "Invalid doctor ID" };
+	}
+	res.json(answer);
+});
+
 /* =========================================================
  Doctors functions yet to be implemented with SQLite
 ========================================================== */
@@ -96,6 +104,12 @@ function getDoctor(id) {
 		return id == d.id;
 	})
 	return doctorsList[docIndex];
+}
+
+function getCurriculum(id){
+	return curriculums[_.findIndex(curriculums, function(c){
+		return id == c.doctor;
+	})];
 }
 
 /* =========================================================

@@ -3,10 +3,8 @@
 
 <head>
     <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title></title>
-
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
     <!-- Place your favicon.ico and apple-touch-icon.png in the template root directory -->
     <link href="../assets/img/favicon.ico" rel="shortcut icon">
@@ -37,23 +35,23 @@
         <div class="container">
 
             <div id="logo" class="pull-left">
-                <h1><a href="../index.html">Medical Center</a></h1>
+                <h1><a href="#hero">Medical Center</a></h1>
             </div>
             <nav id="nav-menu-container">
                 <ul class="nav-menu">
-                    <li><a href="./services.html">Servizi</a></li>
+                    <li><a href="#">Servizi</a></li>
                     <li><a href="./locations.html">Strutture</a></li>
                     <li class="menu-has-children"><a href="">Dottori</a>
                         <ul>
                             <li><a href="./doctors.html">Ordine Alfabetico</a></li>
-                            <li><a href="./doctor-by-area.html">Per area</a></li>
-                            <li><a href="./doctor-by-service.html">Per servizi</a></li>
-                            <li><a href="./doctor-by-location.html">Per struttura</a></li>
+                            <li><a href="#">Per area</a></li>
+                            <li><a href="#">Per servizi</a></li>
+                            <li><a href="#">Per struttura</a></li>
                         </ul>
                     </li>
-                    <li><a href="./areas.html">Aree</a></li>
+                    <li><a href="#">Aree</a></li>
                     <li><a href="#">Info utili</a></li>
-                    <li><a href="./who-we-are.html">Chi siamo</a></li>
+                    <li><a href="#">Chi siamo</a></li>
                     <li><a href="#">News</a></li>
                     <li><a href="#">FAQ</a></li>
                 </ul>
@@ -68,12 +66,13 @@
             <ol class="breadcrumb">
                 <li><a href="../index.html">Home</a></li>
                 <li><a href="./doctors.html">Dottori</a></li>
-                <li class="active">Dottore</li>
+                <li><a href="#" id="doctor-breadcrumb">Dottore</a></li>
+                <li class="active">Curriculum</li>
             </ol>
             <nav>
                 <ul class="pager">
                     <li class="previous"><a href="#"><span aria-hidden="true">&larr;</span> Precedente</a></li>
-                    <li class="next"><a href="#"> Prossimo <span aria-hidden="true">&rarr;</span></a></li>
+                    <li class="next"><a href="#">Prossimo <span aria-hidden="true">&rarr;</span></a></li>
                 </ul>
             </nav>
         </div>
@@ -88,81 +87,18 @@
         <div class="container">
             <div class="row">
                 <div class="col-xs-12 col-sm-9">
-                    <div class="row">
-                        <div class="col-xs-12">
-                            <h2 class="section-title" id="title-doc-name"></h2>
-                            <div class="section-title-divider"></div>
-                        </div>
-                        <div class="col-xs-12 col-sm-4">
-                            <img src="../assets/img/doctors/placeholder.jpg" class="img-responsive center-block doc-image" />
-                        </div>
-                        <div class="col-xs-12 col-sm-8">
-                            <p class="doc-info"></p>
-                            <div class="panel table-responsive">
-                                <table class="table table-hover">
-                                    <tr>
-                                        <td>
-                                            <i class="fa fa-phone" aria-hidden="true"></i> Telefono
-                                        </td>
-                                        <td>
-                                            <a href="" id="phone"></a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <i class="fa fa-fax" aria-hidden="true"></i> Fax
-                                        </td>
-                                        <td>
-                                            <a href="" id="fax"></a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <i class="fa fa-envelope" aria-hidden="true"></i> E-Mail
-                                        </td>
-                                        <td>
-                                            <a href="" id="email"></a>
-                                        </td>
-                                    </tr>
-                                </table>
-                            </div>
-                        </div>
-                        <div class="col-xs-12">
-                            <div class="panel">
-                                <table class="table table-hover">
-                                    <tr>
-                                        <td>
-                                            Opera nel servizio:
-                                        </td>
-                                        <td id="operates">
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            Responsabile dell'area:
-                                        </td>
-                                        <td id="manages_a">
-                                            
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            Responsabile del servizio:
-                                        </td>
-                                        <td id="manages_s">
-                                            
-                                        </td>
-                                    </tr>
-                                </table>
-                            </div>
-                        </div>
+                    <div class="col-xs-12">
+                        <h2 class="section-title" id="title-doc-name"></h2>
+                        <div class="section-title-divider"></div>
+                    </div>
+                    <div class="col-xs-12" id="cvcontent" >
                     </div>
                 </div>
                 <div class="col-xs-12 col-sm-3 sidebar">
                     <h2 class="section-title">Navigazione</h2>
                     <div class="section-title-divider"></div>
                     <div class="list-group" id="sidemenu">
-                        <a href="#" class="list-group-item" id="curriculum">Curriculum</a>
+                        <a href="#" class="list-group-item" id="doctor">Dottore</a>
                         <a href="./doctors.html" class="list-group-item">Tutti i dottori</a>
                     </div>
                 </div>
@@ -186,13 +122,12 @@
     </section>
     <!-- //Pager-->
 
-
-<div class="footerfix"></div>
+    <div class="footerfix"></div>
 
     <!--==========================
   Footer
 ============================-->
-    <footer  id="footer">
+    <footer id="footer">
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
@@ -222,10 +157,10 @@
     <!-- Script -->
     <script src="../assets/js/jquery.min.js"></script>
     <script src="../assets/js/bootstrap.min.js"></script>
-    <script src="../assets/js/easing.min.js"></script>
     <script src="../assets/js/superfish.min.js"></script>
+    <script src="../assets/js/easing.min.js"></script>
     <script src="../assets/js/imperial.js"></script>
-    <script src="../assets/js/doctor.js"></script>
+    <script src="../assets/js/curriculum.js"></script>
 </body>
 
 </html>
