@@ -67,9 +67,10 @@
 	}
 
 	.doc-image {
-		border: 1px solid #e6e6e6;
-		border-radius: 15px;
-	}
+    border: 1px solid #e6e6e6;
+    border-radius: 15px;
+    margin-bottom:10px;
+  }
 
 	.doc-info {
 		font-size: 1.1em;
@@ -101,6 +102,7 @@
 
 	.list-index {
 		font-weight: bold;
+		padding-top: 15px;
 	}
 
 	#filler {
@@ -117,4 +119,8 @@
 		background-color: grey;
 		height: 200px;
 		width: 100%;
+	}
+
+	.list-doc {
+		color: #000;
 	}
