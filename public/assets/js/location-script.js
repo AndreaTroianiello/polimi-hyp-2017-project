@@ -1,5 +1,6 @@
 $(document).ready(function () {
 	console.log("I'm ready");
+	init();
 	$.ajax({
 		method: "GET",
 		dataType: "json",
@@ -7,7 +8,6 @@ $(document).ready(function () {
 		url: "../locations/"+URL.id,
 		success: function (response) {
 			console.log(response);
-			cleanLocation();
 			updateLocation(response);
 		},
 		error: function (request, error) {
@@ -26,15 +26,17 @@ function updateLocation(location){
 	$('#location-fax').text(location.fax);
 	$('#location-email').text(location.email);
 	$('#location-timetable').text(location.timetable);
+	$('#info-map').attr("href", "./directions.html?id="+URL.id);
 }
 
-function cleanLocation(){
+function init(){
 	$('#location-title').text('');
 	$('#location-address').text('');
 	$('#location-telephone').text('');
 	$('#location-fax').text('');
 	$('#location-email').text('');
 	$('#location-timetable').text('');
+	$('.dynamic').hide(true);
 }
 
 function errorMessage(){
