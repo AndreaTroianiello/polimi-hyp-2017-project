@@ -20,6 +20,7 @@ $(document).ready(function () {
 
 function updateLocation(location){
 	$('title').text(location.name);
+	$('#location-building').append('<img src="../assets/img/locations/'+location.name+'.jpg" class="img-responsive center-block doc-image" />');
 	$('#location-title').text(location.name);
 	$('#location-address').text(location.city+','+location.address);
 	$('#location-telephone').text(location.phone);
@@ -31,6 +32,7 @@ function updateLocation(location){
 }
 
 function init(){
+	$('#location-building').empty();
 	$('#location-title').text('');
 	$('#location-address').text('');
 	$('#location-telephone').text('');
