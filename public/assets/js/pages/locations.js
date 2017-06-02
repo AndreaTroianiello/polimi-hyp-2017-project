@@ -1,4 +1,3 @@
-var locations = $('#locations');
 $(document).ready(function () {
 	console.log("I'm ready");
 	clearLocations();
