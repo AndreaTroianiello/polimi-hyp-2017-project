@@ -7,7 +7,6 @@ $(document).ready(function () {
 		crossDomain: true,
 		url: "../locations",
 		success: function (response) {
-			console.log(response);
 			updateLocations(response);
 		},
 		error: function (request, error) {
@@ -23,14 +22,12 @@ function clearLocations() {
 }
 
 function addLocation(location) {
-	$('#' + location.city).append('<li><a href="../pages/location.html?id=' + location.id + '">' + location.name + '</a></li>');
-	console.log("Added location!");
+	$('#' + location.city).append('<a class="list-group-item" href="./location.html?id=' + location.id + '">' + location.name + '</a>');
 }
 
 function addParagraph(index) {
 	$('#locations').append('<h4 class="list-index">' + index + '</h4>');
-	$('#locations').append('<ul class="locations-list" id="' + index + '"></ul>');
-	console.log("Added row!");
+	$('#locations').append('<ul class="list-group locations-list" id="' + index + '"></ul>');
 }
 
 function updateLocations(locations) {

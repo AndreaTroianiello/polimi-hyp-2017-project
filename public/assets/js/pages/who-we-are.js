@@ -20,7 +20,7 @@ $(document).ready(function () {
 function updateInfo(info) {
 	$('#accordion').empty();
 	for(var i=0;i<info.length;++i){
-		$('#accordion').append('<div class="panel panel-default"><div class="panel-heading"><h4 class="panel-title"><a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#'+i+'">'+info[i].tag+'</a></h4></div><div id="'+i+'"class="panel-collapse collapse"><div class="panel-body"><p>'+info[i].infomation+'</p></div></div></div>');
+		$('#accordion').append('<div class="panel panel-default"><h4 class="panel-title"><a class="accordion-toggle list-group-item" data-toggle="collapse" data-parent="#accordion" href="#'+i+'">'+info[i].tag+'</a></h4><div id="'+i+'"class="panel-collapse collapse"><div class="panel-body"><p>'+info[i].infomation+'</p></div></div></div>');
 	}
 }
 
