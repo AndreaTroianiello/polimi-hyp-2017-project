@@ -20,14 +20,17 @@ function getService(id) {
         url: serverapiservice + id,
         success: function (response) {
             $('#title-service-name').text(response.name);
+            $('title').text(response.name);
             $('#service-desc').html(response.description);
             setArea(response.area);
             setResponsible(response.responsible);
         },
         error: function (request, error) {
-            console.log("error");
+            $('title').text("Servizio " + id);
             $('#title-service-name').text("Servizio " + id);
             $('#service-desc').html("<p class='text-center'>Impossibile ottenere le informazioni richieste.</p>");
+            setArea(response.area);
+            setResponsible(response.responsible);
         }
     });
 }
@@ -62,7 +65,7 @@ function setResponsible(id) {
         crossDomain: true,
         url: serverapidoctor + id,
         success: function (response) {
-            resp = "<a href='./doctor.html?id=" + id + "'>" + response.surname+ " "+response.name + "</a>";
+            resp = "<a href='./doctor.html?id=" + id + "'>" + response.surname + " " + response.name + "</a>";
             $('#responsible').html(resp);
         },
         error: function (request, error) {
@@ -72,11 +75,11 @@ function setResponsible(id) {
     });
 }
 
-function getSideMenu(){
+function getSideMenu() {
     previous_label = window.sessionStorage.getItem("label");
     previous_url = window.sessionStorage.getItem("url");
-    if(previous_label!==null){
-        $('#sidemenu').append("<a href='"+previous_url+"' class='list-group-item'>"+previous_label+"</a>");
+    if (previous_label !== null) {
+        $('#sidemenu').append("<a href='" + previous_url + "' class='list-group-item'>" + previous_label + "</a>");
     }
     window.sessionStorage.clear();
 }
