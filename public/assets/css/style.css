@@ -124,3 +124,14 @@
 	.list-doc {
 		color: #000;
 	}
+
+	@media (max-width: 768px){
+		.list-doc h3{
+			font-size: 20px;
+		}
+	}
+	@media (max-width: 360px){
+		.list-doc h3{
+			font-size: 17px;
+		}
+	}
