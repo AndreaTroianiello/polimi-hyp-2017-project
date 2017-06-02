@@ -32,6 +32,12 @@ function updateLocation(location) {
 	$('#location-timetable').text(location.timetable);
 	$('.info-map').attr("href", "./directions.html?id=" + URL.id);
 	$('#gallery').attr("href", "./gallery.html?id=" + URL.id);
+	$('#available-services').attr("href","./available-here.html?id="+location.id);
+	if(URL.service!=undefined)
+		$('#dyn-service').attr("href","./where.html?id="+URL.service);
+	
+		
+	
 }
 
 function init() {
@@ -42,7 +48,8 @@ function init() {
 	$('#location-fax').text('');
 	$('#location-email').text('');
 	$('#location-timetable').text('');
-	$('.dynamic').hide(true);
+	if(URL.service==undefined)
+		$('.dynamic').hide(true);
 }
 
 function errorMessage() {

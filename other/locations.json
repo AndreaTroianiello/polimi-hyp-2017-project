@@ -9,7 +9,8 @@
 		"email": "info.leccocorsoitalia@medicalcenter.it",
 		"timetable": "Lun-Sab 08:30-13:00 14:00-18:00",
 		"directions": "Prendere la metro, scende, entrare.",
-		"images": ["Clinica Riva-0.jpg", "Clinica Riva-1.jpg", "Clinica Riva-2.jpg"]
+		"images": ["Clinica Riva-0.jpg", "Clinica Riva-1.jpg"],
+		"services": ["0","1"]
   },
 	{
 		"id": 1,
@@ -21,7 +22,8 @@
 		"email": "info.milanoviavallazze@medicalcenter.it",
 		"timetable": "Lun-Ven 09:00-12:00 13:00-15:00 Sab 08:30-12:30",
 		"directions": "Prendere la metro, scende, entrare.",
-		"images": ["Clinica Brambilla-0.jpg", "Clinica Brambilla-1.jpg", "Clinica Brambilla-2.jpg", "Clinica Brambilla-3.jpg"]
+		"images": ["Clinica Brambilla-0.jpg", "Clinica Brambilla-1.jpg", "Clinica Brambilla-2.jpg", "Clinica Brambilla-3.jpg"],
+		"services": ["0","1"]
   },
 	{
 		"id": 2,
@@ -33,6 +35,7 @@
 		"email": "info.milanoviaripamonti@medicalcenter.it",
 		"timetable": "Lun-Ven 08:00-12:00 13:00-16:00",
 		"directions": "Prendere la metro, scende, entrare.",
-		"images": ["Clinica Nava-0.jpg", "Clinica Nava-1.jpg", "Clinica Nava-2.jpg"]
+		"images": ["Clinica Nava-0.jpg", "Clinica Nava-1.jpg", "Clinica Nava-2.jpg"],
+		"services": ["0","1"]
   }
 ]
