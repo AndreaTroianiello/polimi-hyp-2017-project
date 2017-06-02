@@ -1,10 +1,8 @@
-var geocoder;
-var map;
 $(document).ready(function () {
 	console.log("I'm ready");
 	init();
-	geocoder = new google.maps.Geocoder();
-	initMap();
+	var geocoder = new google.maps.Geocoder();
+	var map=initMap();
 	$.ajax({
 		method: "GET",
 		dataType: "json",
@@ -49,7 +47,8 @@ function initMap() {
 		zoom: 20,
 		center: myLatlng
 	};
-	map = new google.maps.Map(document.getElementById('map'), mapOptions);
+	var map = new google.maps.Map(document.getElementById('map'), mapOptions);
+	return map;
 }
 
 function errorMessage() {
