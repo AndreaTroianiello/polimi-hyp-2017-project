@@ -141,7 +141,7 @@ function getServiceName(a,id) {
 }
 
 
-function getServiceName(a,id) {
+function getAreaName(a,id) {
     $.ajax({
         method: "GET",
         dataType: "json",

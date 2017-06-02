@@ -6,7 +6,8 @@ const _ = require("lodash");
 
 let doctorsList = require("./other/doctors.json");
 let curriculums = require("./other/curriculums.json");
-
+let areas = require("./other/areas.json");
+let services = require("./other/services.json");
 
 app.use(express.static(__dirname + "/public"));
 
@@ -87,6 +88,43 @@ app.get("/doctors/:doctor_id/curriculum", function (req, res) {
 });
 
 /* =========================================================
+ Services APIs
+========================================================== */
+
+app.get("/services", function (req, res) {
+	let filter = _.get(req, "query.filter", null);
+	let value = _.get(req, "query.value", null);
+	res.json(getServices(filter, value));
+});
+
+app.get("/services/:service_id", function (req, res) {
+	let answer = getService(req.params.service_id);
+	if (answer == null) {
+		answer = { error: "Invalid service ID" };
+	}
+	res.json(answer);
+});
+
+
+/* =========================================================
+ Areas APIs
+========================================================== */
+
+app.get("/areas", function (req, res) {
+	let filter = _.get(req, "query.filter", null);
+	let value = _.get(req, "query.value", null);
+	res.json(getAreas(filter, value));
+});
+
+app.get("/areas/:area_id", function (req, res) {
+	let answer = getArea(req.params.area_id);
+	if (answer == null) {
+		answer = { error: "Invalid area ID" };
+	}
+	res.json(answer);
+});
+
+/* =========================================================
  Doctors functions yet to be implemented with SQLite
 ========================================================== */
 
@@ -112,6 +150,45 @@ function getCurriculum(id){
 	})];
 }
 
+
+/* =========================================================
+ Services functions yet to be implemented with SQLite
+========================================================== */
+	function getServices(filter, value) {
+	servicesList = _.toArray(services);
+	if (filter === "location") {
+		servicesList= servicesList.slice(1, 2);
+	}
+
+	return servicesList.sort(genSort);
+}
+
+function getService(id) {
+	serIndex = _.findIndex(services, function(s){
+		return id == s.id;
+	})
+	return services[serIndex];
+}
+
+/* =========================================================
+ Areas functions yet to be implemented with SQLite
+========================================================== */
+
+function getAreas(filter, value) {
+	areasList = _.toArray(areas);
+	if (filter === "location") {
+		areasList= areasList.slice(0, 1);
+	}
+
+	return areasList.sort(genSort);
+}
+
+function getArea(id) {
+	areaIndex = _.findIndex(areas, function(a){
+		return id == a.id;
+	})
+	return areas[areaIndex];
+}
 /* =========================================================
  Location APIs
 ========================================================== */
@@ -148,6 +225,18 @@ function getLocation(id) {
 function docSort(a,b){
 	a_full= (a.surname+" "+a.name).toLowerCase();
 	b_full= (b.surname+" "+b.name).toLowerCase();
+
+	if(a_full<b_full){
+		return -1;
+	}else if(a_full>b_full){
+		return 1;
+	}
+	return 0;
+}
+
+function genSort(a,b){
+	a_full= a.name.toLowerCase();
+	b_full= b.name.toLowerCase();
 
 	if(a_full<b_full){
 		return -1;
