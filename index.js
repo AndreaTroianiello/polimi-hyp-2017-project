@@ -217,6 +217,19 @@ function getLocation(id) {
 	return locationsList[id];
 }
 
+/* =========================================================
+ About us APIs
+========================================================== */
+
+let whoweare = require("./other/whoweare.json");
+
+app.get("/aboutus", function (req, res) {
+	res.json(getWhoweare());
+});
+
+function getWhoweare() {
+	return whoweare;
+} 
 
 /* ===================
 	Utility functions
