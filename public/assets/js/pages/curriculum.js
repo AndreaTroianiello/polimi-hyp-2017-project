@@ -1,6 +1,6 @@
 var previous;
 var next;
-var serverapi = "http://localhost:5000/doctors/";
+var serverapi = "/doctors/";
 var previous_url;
 var previous_label;
 

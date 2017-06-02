@@ -66,18 +66,12 @@
             <ol class="breadcrumb">
                 <li><a href="../index.html">Home</a></li>
                 <li><a href="./doctors.html">Dottori</a></li>
-                <li><a href="#" id="doctor-breadcrumb">Dottore</a></li>
-                <li class="active">Curriculum</li>
+                <li><a href="./locations.html">Strutture</a></li>
+                <li class="active">Dottori della struttura</li>
             </ol>
-            <nav>
-                <ul class="pager">
-                    <li class="previous"><a href="#"><span aria-hidden="true">&larr;</span> Precedente</a></li>
-                    <li class="next"><a href="#">Prossimo <span aria-hidden="true">&rarr;</span></a></li>
-                </ul>
-            </nav>
         </div>
     </section>
-
+    
 
     <!-- ===================
         Main section>
@@ -87,19 +81,17 @@
         <div class="container">
             <div class="row">
                 <div class="col-xs-12 col-sm-9">
-                    <div class="col-xs-12">
-                        <h2 class="section-title" id="title-doc-name"></h2>
-                        <div class="section-title-divider"></div>
-                    </div>
-                    <div class="col-xs-12" id="cvcontent" >
+                    <h2 class="section-title" id="pagetitle"></h2>
+                    <div class="section-title-divider"></div>
+                    <div class="row" id="doctorsList">
+                       
                     </div>
                 </div>
                 <div class="col-xs-12 col-sm-3 sidebar">
                     <h2 class="section-title">Navigazione</h2>
                     <div class="section-title-divider"></div>
                     <div class="list-group" id="sidemenu">
-                        <a href="#" class="list-group-item" id="doctor">Dottore</a>
-                        <a href="./doctors.html" class="list-group-item">Tutti i dottori</a>
+                        <a href="./doctors-by-location.html" class="list-group-item">Tutte le location dei dottori</a>
                     </div>
                 </div>
             </div>
@@ -107,23 +99,10 @@
     </section>
     <!-- //end main section-->
 
-    <!-- ===========
-    Pager
-===============-->
-    <section>
-        <div class="container">
-            <nav>
-                <ul class="pager">
-                    <li class="previous"><a href="#"><span aria-hidden="true">&larr;</span> Precedente</a></li>
-                    <li class="next"><a href="#">Prossimo <span aria-hidden="true">&rarr;</span></a></li>
-                </ul>
-            </nav>
-        </div>
-    </section>
-    <!-- //Pager-->
+
 
     <div class="footerfix"></div>
-
+    
     <!--==========================
   Footer
 ============================-->
@@ -153,14 +132,14 @@
     <a href="#" class="back-to-top"><i class="fa fa-chevron-up"></i></a>
     <!-- /back to top -->
 
-
+    
     <!-- Script -->
     <script src="../assets/js/jquery.min.js"></script>
     <script src="../assets/js/bootstrap.min.js"></script>
     <script src="../assets/js/superfish.min.js"></script>
-    <script src="../assets/js/easing.min.js"></script>
+	<script src="../assets/js/easing.min.js"></script>
     <script src="../assets/js/imperial.js"></script>
-    <script src="../assets/js/pages/curriculum.js"></script>
+    <script src="../assets/js/pages/all-doctor-location.js"></script>
 </body>
 
 </html>

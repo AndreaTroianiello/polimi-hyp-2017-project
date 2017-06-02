@@ -1,5 +1,6 @@
-var server = "../"
-var api = "doctors/";
+var serverapi = "/doctors/";
+var serverapiservice = "/services/";
+var serverapiarea = "/areas/";
 var thisPage= "doctor.html";
 var next;
 var previous;
@@ -14,11 +15,13 @@ $(document).ready(function () {
     if (URL.id == null) {
         URL.id = 0;
     }
+
     var currUrl = "./curriculum.html?id=" + URL.id;
      if(URL.filter != null){
         currUrl+="&filter="+URL.filter+"&value="+URL.value;
     }
     $('#curriculum').attr("href", currUrl);
+    
     getDoctor(URL.id);
 
 
@@ -71,7 +74,7 @@ function getDoctor(id) {
         method: "GET",
         dataType: "json",
         crossDomain: true,
-        url: server + api + id,
+        url: serverapi + id,
         success: function (response) {
             $('title').text(getDoctorName(response));
             $('#title-doc-name').text(getDoctorName(response));
@@ -83,18 +86,28 @@ function getDoctor(id) {
             $('#email').attr("href", "mailto:" + response.email);
             $('.doc-image').attr("src", response.img);
             $('.doc-info').text(response.desc);
-            var op = "<a href='./service.html?id=" + response.operates + "'>" + getServiceName(response.operates) + "</a>";
+
+            var op = "<a href='./service.html?id=" + response.operates + "'></a>";
             $('#operates').html(op);
-            var m_a = "-";
+            getServiceName($('#operates a:first'),response.operates);
+
             if (response.manages_a !== null) {
-                m_a = "<a href='./area.html?id=" + response.manages_a + "'>" + getAreaName(response.manages_a) + "</a>";
+                m_a = "<a href='./area.html?id=" + response.manages_a + "'></a>";
+                $('#manages_a').html(m_a);
+                getServiceName($('#manages_a a:first'),response.manages_a);
+            }else{
+                $('#manages_a').html("-");
             }
-            $('#manages_a').html(m_a);
-            var m_s = "-";
+
             if (response.manages_s !== null) {
-                m_s = "<a href='./service.html?id=" + response.manages_s + "'>" + getServiceName(response.manages_s) + "</a>";
+                m_s = "<a href='./service.html?id=" + response.manages_s + "'></a>";
+                $('#manages_s').html(m_s);
+                getServiceName($('#manages_s a:first'),response.manages_s);
+            }else{
+                $('#manages_s').html("-");
             }
-            $('#manages_s').html(m_s);
+            
+
             setNext(id);
             setPrevious(id);
             fixURL(URL);
@@ -112,17 +125,40 @@ function getDoctorName(obj) {
     return "Dr." + (obj.male ? " " : "ssa ") + obj.surname + " " + obj.name;
 }
 
-function getServiceName(id) {
-    return "Servizio " + id;
+function getServiceName(a,id) {
+    $.ajax({
+        method: "GET",
+        dataType: "json",
+        crossDomain: true,
+        url: serverapiservice + id,
+        success: function (response) {
+            $(a).text(response.name);
+        },
+        error: function (request, error) {
+            $(a).text("Servizio "+ id);
+        }
+    });
 }
-function getAreaName(id) {
-    return "Area " + id;
+
+
+function getServiceName(a,id) {
+    $.ajax({
+        method: "GET",
+        dataType: "json",
+        crossDomain: true,
+        url: serverapiarea + id,
+        success: function (response) {
+            $(a).text(response.name);
+        },
+        error: function (request, error) {
+            $(a).text("Area "+ id);
+        }
+    });
 }
 
 function fixURL(URL){
     fixString = "/pages/doctor.html?id="+URL.id;
     if(URL.filter != null){
-        console.log(URL.filter);
         fixString+="&filter="+URL.filter+"&value="+URL.value;
     }
     window.history.pushState("Dottore","Dottore",fixString);
@@ -133,7 +169,7 @@ function setNext(id) {
         method: "GET",
         dataType: "json",
         crossDomain: true,
-        url: server + api + id + "/next",
+        url: serverapi + id + "/next",
         data: {
             "filter": URL.filter,
             "value": URL.value
@@ -151,7 +187,7 @@ function setPrevious(id) {
         method: "GET",
         dataType: "json",
         crossDomain: true,
-        url: server + api + id + "/previous",
+        url: serverapi + id + "/previous",
         data: {
             "filter": URL.filter,
             "value": URL.value
@@ -169,7 +205,7 @@ function getSideMenu(){
     previous_label = window.sessionStorage.getItem("label");
     previous_url = window.sessionStorage.getItem("url");
     if(previous_label!==null){
-        $('#sidemenu').append("<a href='"+previous_url+"' class='list-group-item'>Torna a "+previous_label+"</a>");
+        $('#sidemenu').append("<a href='"+previous_url+"' class='list-group-item'>"+previous_label+"</a>");
     }
     window.sessionStorage.clear();
 }

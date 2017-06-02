@@ -1,12 +1,12 @@
-var server = "../"
-var api = "doctors/";
+var serverapi = "/doctors";
+var serverapiservice = "/services/";
 
 $(document).ready(function () {
     $.ajax({
         method: "GET",
         dataType: "json",
         crossDomain: true,
-        url: server + api,
+        url: serverapi,
         success: function (response) {
             var currentInitial;
             for (var i = 0; i < response.length; i++) {
@@ -25,13 +25,24 @@ $(document).ready(function () {
             }
         },
         error: function(request,error) { 
-            $('#doctorsList').append("<div class='col-xs-12 text-center'><p>Impossibile ottenere le informazioni richieste, riprovare più tardi.</p></div>");   
+            $('#doctorsList').append("<div class='col-xs-12 text-center'><p>Impossibile ottenere le informazioni richieste.</p></div>");   
         }
     });
 
 
 });
 
-function getServiceName(p, operates){
-   $(p).text("Servizio "+operates);
+function getServiceName(p, operates) {
+    $.ajax({
+        method: "GET",
+        dataType: "json",
+        crossDomain: true,
+        url: serverapiservice + operates,
+        success: function (response) {
+            $(p).text(response.name);
+        },
+        error: function (request, error) {
+            $(p).text("Servizio " + operates);
+        }
+    });
 }
