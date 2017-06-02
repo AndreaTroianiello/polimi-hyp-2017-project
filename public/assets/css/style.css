@@ -73,7 +73,7 @@
   }
 
 	.doc-info {
-		font-size: 1.1em;
+		font-size: 1.2em;
 		text-align: justify;
 	}
 
@@ -147,3 +147,7 @@
 	outline: 0 none;
 }
 
+#service-desc{
+	margin-bottom:15px;
+	font-size: 1.2em;
+}

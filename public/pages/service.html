@@ -35,23 +35,23 @@
         <div class="container">
 
             <div id="logo" class="pull-left">
-                <h1><a href="#hero">Medical Center</a></h1>
+                <h1><a href="../index.html">Medical Center</a></h1>
             </div>
             <nav id="nav-menu-container">
                 <ul class="nav-menu">
                     <li><a href="#">Servizi</a></li>
-                    <li><a href="#">Location</a></li>
+                    <li><a href="./locations.html">Strutture</a></li>
                     <li class="menu-has-children"><a href="">Dottori</a>
                         <ul>
-                            <li><a href="#">Ordine Alfabetico</a></li>
+                            <li><a href="./doctors.html">Ordine alfabetico</a></li>
                             <li><a href="#">Per area</a></li>
                             <li><a href="#">Per servizi</a></li>
-                            <li><a href="#">Per location</a></li>
+                            <li><a href="./doctors-by-location.html">Per strutture</a></li>
                         </ul>
                     </li>
                     <li><a href="#">Aree</a></li>
                     <li><a href="#">Info utili</a></li>
-                    <li><a href="#">Chi siamo</a></li>
+                    <li><a href="./who-we-are.html">Chi siamo</a></li>
                     <li><a href="#">News</a></li>
                     <li><a href="#">FAQ</a></li>
                 </ul>
@@ -64,19 +64,13 @@
     <section>
         <div class="container">
             <ol class="breadcrumb">
-                <li><a href="#">Home</a></li>
-                <li><a href="#"></a></li>
-                <li class="active"></li>
+                <li><a href="../index.html">Home</a></li>
+                <li><a href="#">Servizi</a></li>
+                <li class="active">Servizio</li>
             </ol>
-            <nav>
-                <ul class="pager">
-                    <li class="previous"><a href="#"><span aria-hidden="true">&larr;</span> Precedente</a></li>
-                    <li class="next"><a href="#">Prossimo <span aria-hidden="true">&rarr;</span></a></li>
-                </ul>
-            </nav>
         </div>
     </section>
-    
+
 
     <!-- ===================
         Main section>
@@ -86,12 +80,45 @@
         <div class="container">
             <div class="row">
                 <div class="col-xs-12 col-sm-9">
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <h2 class="section-title" id="title-service-name"></h2>
+                            <div class="section-title-divider"></div>
+                        </div>
+                        <div class="col-xs-12 text-justify" id="service-desc">
+
+                        </div>
+                        <div class="col-xs-12">
+                            <div class="panel">
+                                <table class="table table-hover">
+                                    <tr>
+                                        <td>
+                                            Area del servizio:
+                                        </td>
+                                        <td id="area">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            Responsabile del servizio:
+                                        </td>
+                                        <td id="responsible">
+                                            
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+
+                    </div>
                 </div>
                 <div class="col-xs-12 col-sm-3 sidebar">
                     <h2 class="section-title">Navigazione</h2>
                     <div class="section-title-divider"></div>
                     <div class="list-group">
-                        <a href="#" class="list-group-item"></a>
+                        <a href="#" class="list-group-item">Tutte le aree</a>
+                        <a href="#" class="list-group-item" id="where">Strutture dove è offerto il servizio</a>
+                        <a href="" class="list-group-item" id="docOpServ">Dottori che operano nel servizio</a>
                     </div>
                 </div>
             </div>
@@ -99,22 +126,10 @@
     </section>
     <!-- //end main section-->
 
-    <!-- ===========
-    Pager
-===============-->
-    <section>
-        <div class="container">
-            <nav>
-                <ul class="pager">
-                    <li class="previous"><a href="#"><span aria-hidden="true">&larr;</span> Precedente</a></li>
-                    <li class="next"><a href="#">Prossimo <span aria-hidden="true">&rarr;</span></a></li>
-                </ul>
-            </nav>
-        </div>
-    </section>
-    <!-- //Pager-->
+  
 
-    
+    <div class="footerfix"></div>
+
     <!--==========================
   Footer
 ============================-->
@@ -144,13 +159,14 @@
     <a href="#" class="back-to-top"><i class="fa fa-chevron-up"></i></a>
     <!-- /back to top -->
 
-    
+
     <!-- Script -->
     <script src="../assets/js/jquery.min.js"></script>
     <script src="../assets/js/bootstrap.min.js"></script>
     <script src="../assets/js/superfish.min.js"></script>
-	<script src="../assets/js/easing.min.js"></script>
+    <script src="../assets/js/easing.min.js"></script>
     <script src="../assets/js/imperial.js"></script>
+    <script src="../assets/js/pages/service.js"></script>
 </body>
 
-</html>
+</html> 
