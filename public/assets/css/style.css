@@ -151,3 +151,7 @@
 	margin-bottom:15px;
 	font-size: 1.2em;
 }
+
+#mobile-nav ul .menu-has-children i.fa-chevron-down:hover {
+  color: #03C4EB;
+}

@@ -7,6 +7,7 @@ jQuery(document).ready(function( $ ) {
   });
   
   // Mobile Navigation
+
   if( $('#nav-menu-container').length ) {
       var $mobile_nav = $('#nav-menu-container').clone().prop({ id: 'mobile-nav'});
       $mobile_nav.find('> ul').attr({ 'class' : '', 'id' : '' });
@@ -15,10 +16,10 @@ jQuery(document).ready(function( $ ) {
       $('body').append( '<div id="mobile-body-overly"></div>' );
       $('#mobile-nav').find('.menu-has-children').prepend('<i class="fa fa-chevron-down"></i>');
       
-      $(document).on('click', '.menu-has-children i', function(e){
-          $(this).next().toggleClass('menu-item-active');
-          $(this).nextAll('ul').eq(0).slideToggle();
-          $(this).toggleClass("fa-chevron-up fa-chevron-down");
+      $(document).on('click', '.menu-has-children', function(e){
+          $(this).find("a").first().toggleClass('menu-item-active');
+          $(this).children('ul').eq(0).slideToggle();
+          $(this).find("i").toggleClass("fa-chevron-up fa-chevron-down ");
       });
       
       $(document).on('click', '#mobile-nav-toggle', function(e){
