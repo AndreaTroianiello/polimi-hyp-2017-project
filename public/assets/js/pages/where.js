@@ -8,7 +8,9 @@ $(document).ready(function () {
 	setServiceLinks(URL.id);
 	setLocationText(URL.id);
 	getLocations();
-	$('.location-item').click(setSideMenu());
+	$('#locations').click(".location-item",function (){
+		setSideMenu();
+	});
 });
 
 function setServiceLinks(id){
@@ -56,7 +58,7 @@ function getLocations(){
 }
 
 function cleanLocations() {
-	$('#Locations').empty();
+	$('#locations').empty();
 	console.log("list cleaned");
 }
 
@@ -77,7 +79,7 @@ function addParagraph(index) {
 }
 
 function addLocation(location) {
-	$('#locations').append('<a class="list-group-item location-item" href="./location.html?id=' + location.id + '&service=' + URL.id + '">' + location.name + '</a>');
+	$('#locations').append('<a class="list-group-item location-item" href="./location.html?id=' + location.id + '">' + location.name + '</a>');
 }
 
 function errorMessage(){

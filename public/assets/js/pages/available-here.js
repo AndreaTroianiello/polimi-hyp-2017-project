@@ -8,7 +8,9 @@ $(document).ready(function () {
 	setLocationLinks(URL.id);
 	setLocationText(URL.id);
 	getLocations();
-	$('.service-item').click(setSideMenu());
+	$('#services-info').click(".service-item",function (){
+		setSideMenu();
+	});
 });
 
 function setLocationLinks(id){
