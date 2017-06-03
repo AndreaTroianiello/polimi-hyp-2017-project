@@ -1,2 +1,6 @@
 # ignore all node_modules directories
 /node_modules/*
+
+# ignore all sqlite databases
+*.sqlite
+
