@@ -117,6 +117,7 @@
     "id": 8,
     "surname": "Mennea",
     "name": "Anna",
+	"male": false,
     "phone": "+39 02 12345678",
     "fax": "+39 02 12345678",
     "email": "mennea@medicalcenter.it",

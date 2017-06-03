@@ -397,19 +397,30 @@ app.get("/areas/:area_id", function (req, res) {
 ========================================================== */
 
 app.get("/locations", function (req, res) {
-	let filter = _.get(req, "query.filter", null);
-	let value = _.get(req, "query.value", null);
-	res.json(getLocations(filter, value));
+	sqlDb('locations').then(result => {
+		if (result.lenght != 0)
+			res.send(JSON.stringify(result));
+		else {
+			answer = {
+				error: "Invalid doctor ID"
+			};
+			res.json(answer);
+		}
+	});
 });
 
 app.get("/locations/:location_id", function (req, res) {
-	let answer = getLocation(req.params.location_id);
-	if (answer == null) {
-		answer = {
-			error: "Invalid doctor ID"
-		};
-	}
-	res.json(answer);
+	sqlDb('locations').where('id', req.params.location_id).then(result => {
+		if (result.lenght != 0)
+			res.send(JSON.stringify(result[0]));
+		else {
+			answer = {
+				error: "Invalid doctor ID"
+			};
+			res.json(answer);
+		}
+	});
+
 });
 
 
@@ -418,12 +429,17 @@ app.get("/locations/:location_id", function (req, res) {
 ========================================================== */
 
 app.get("/aboutus", function (req, res) {
-	res.json(getWhoweare());
+	sqlDb('whoweare').then(result => {
+		if (result.lenght != 0)
+			res.send(JSON.stringify(result));
+		else {
+			answer = {
+				error: "Invalid doctor ID"
+			};
+			res.json(answer);
+		}
+	});
 });
-
-function getWhoweare() {
-	return whoweare;
-}
 
 /* =========================================================
  Doctors functions yet to be implemented with SQLite
