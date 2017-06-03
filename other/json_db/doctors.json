@@ -1,0 +1,133 @@
+[
+  {
+    "surname": "Abbriti",
+    "name": "Franca",
+    "male": false,
+    "phone": "+39 02 12345678",
+    "fax": "+39 02 12345678",
+    "email": "abbriti@medicalcenter.it",
+    "img": "../assets/img/doctors/doc-0.jpg",
+    "operates": 1,
+    "manages_s": null,
+    "manages_a": null,
+    "desc": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque gravida vulputate facilisis. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; "
+  },
+  {
+    "surname": "Cannata",
+    "name": "Letizia",
+    "male": false,
+    "phone": "+39 02 12345678",
+    "fax": "+39 02 12345678",
+    "email": "cannata@medicalcenter.it",
+    "img": "../assets/img/doctors/doc-1.jpg",
+    "operates": 0,
+    "manages_s": 0,
+    "manages_a": null,
+    "desc": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque gravida vulputate facilisis. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; "
+ 
+  },
+  {
+    "surname": "Cattabeni",
+    "name": "Stefano",
+    "male": true,
+    "phone": "+39 02 12345678",
+    "fax": "+39 02 12345678",
+    "email": "cattabeni@medicalcenter.it",
+    "img": "../assets/img/doctors/doc-2.jpg",
+    "operates": 1,
+    "manages_s": 1,
+    "manages_a": null,
+    "desc": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque gravida vulputate facilisis. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; "
+   },
+  {
+    "surname": "Galimberti",
+    "name": "Fabio",
+    "male": true,
+    "phone": "+39 02 12345678",
+    "fax": "+39 02 12345678",
+    "email": "galimberti@medicalcenter.it",
+    "img": "../assets/img/doctors/doc-3.jpg",
+    "operates": 2,
+    "manages_s": null,
+    "manages_a": null,
+    "desc": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque gravida vulputate facilisis. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; "
+  },
+  {
+    "surname": "Gargantini",
+    "name": "Andrea",
+    "male": true,
+    "phone": "+39 02 12345678",
+    "fax": "+39 02 12345678",
+    "email": "gargantini@medicalcenter.it",
+    "img": "../assets/img/doctors/doc-4.jpg",
+    "operates": 4,
+    "manages_s": null,
+    "manages_a": 1,
+    "desc": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque gravida vulputate facilisis. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; "
+
+  },
+  {
+    "surname": "Gazzola",
+    "name": "Marco",
+    "male": true,
+    "phone": "+39 02 12345678",
+    "fax": "+39 02 12345678",
+    "email": "gazzola@medicalcenter.it",
+    "img": "../assets/img/doctors/doc-5.jpg",
+    "operates": 2,
+    "manages_s": 2,
+    "manages_a": null,
+    "desc": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque gravida vulputate facilisis. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; "
+  },
+  {
+    "surname": "Lovati",
+    "name": "Chiara",
+    "male": false,
+    "phone": "+39 02 12345678",
+    "fax": "+39 02 12345678",
+    "email": "lovati@medicalcenter.it",
+    "img": "../assets/img/doctors/doc-6.jpg",
+    "operates": 1,
+    "manages_s": null,
+    "manages_a": 0,
+    "desc": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque gravida vulputate facilisis. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; "
+  },
+  {
+    "surname": "Marzi",
+    "name": "Martina",
+    "male": false,
+    "phone": "+39 02 12345678",
+    "fax": "+39 02 12345678",
+    "email": "marzi@medicalcenter.it",
+    "img": "../assets/img/doctors/doc-7.jpg",
+    "operates": 3,
+    "manages_s": 3,
+    "manages_a": null,
+    "desc": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque gravida vulputate facilisis. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; "
+  },
+  {
+    "surname": "Mennea",
+    "name": "Anna",
+    "phone": "+39 02 12345678",
+    "fax": "+39 02 12345678",
+    "email": "mennea@medicalcenter.it",
+    "img": "../assets/img/doctors/doc-8.jpg",
+    "operates": 4,
+    "manages_s": 4,
+    "manages_a": null,
+    "desc": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque gravida vulputate facilisis. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; "
+  },
+  {
+    "surname": "Zumbo",
+    "name": "Gaetano",
+    "male": true,
+    "phone": "+39 02 12345678",
+    "fax": "+39 02 12345678",
+    "email": "zumbo@medicalcenter.it",
+    "img": "../assets/img/doctors/doc-9.jpg",
+    "operates": 4,
+    "manages_s": 4,
+    "manages_a": null,
+    "desc": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque gravida vulputate facilisis. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; "
+  }
+]

@@ -1,0 +1,48 @@
+[
+    {
+        "inc": 0,
+        "location": 0,
+        "path": "Clinica Riva-0.jpg"
+    },
+    {
+        "inc": 1,
+        "location": 0,
+        "path": "Clinica Riva-1.jpg"
+    },
+    {
+        "inc": 0,
+        "location": 1,
+        "path": "Clinica Brambilla-0.jpg"
+    },
+    {
+        "inc": 1,
+        "location": 1,
+        "path": "Clinica Brambilla-1.jpg"
+    },
+    {
+        "inc": 2,
+        "location": 1,
+        "path": "Clinica Brambilla-2.jpg"
+    },
+    {
+        "inc": 3,
+        "location": 1,
+        "path": "Clinica Brambilla-3.jpg"
+    },
+    {
+        "inc": 0,
+        "location": 2,
+        "path": "Clinica Nava-0.jpg"
+    },
+    {
+        "inc": 1,
+        "location": 2,
+        "path": "Clinica Nava-1.jpg"
+    },
+    {
+        "inc": 2,
+        "location": 2,
+        "path": "Clinica Nava-2.jpg"
+    }
+
+]

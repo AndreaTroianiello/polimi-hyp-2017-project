@@ -1,0 +1,27 @@
+[
+  {
+    "name": "Visita dermatologica",
+    "description": "<p>La visita dermatologica è impiegata per escludere, diagnosticare o monitorare un disturbo di carattere dermatologico. A questa visita vengono sottoposti i soggetti con malattie legate alla cute già note e che devono sottoporsi a controlli periodici; è però possibile che il medico curante consigli di recarsi da un dermatologo al fine di accertare la natura di alcuni sintomi, quali anomalie di un neo, presenza di eruzioni cutanee di diverso tipo, comparsa di pomfi e/o angiodemi con dolore o senza, prurito persistente e cambiamento del colore o della consistenza della pelle.</p>",
+    "area": 0
+  },
+  {
+    "name": "Visita venereologica",
+    "description": "",
+    "area": 0	
+  },
+  {
+    "name": "Chirurgia dermatologica",
+    "description": "",
+    "area": 0	
+  },
+  {
+    "name": "Visita cardiologica",
+    "description": "Con la visita cardiologica è possibile escludere, diagnosticare o monitorare un disturbo di carattere cardiologico. Possono essere sottoposti alla visita cardiologica per accertare la natura dei sintomi ed il possibile legame con i disturbi di tipo cardiaco i paziente che soffrono di malattia cardiovascolare e coloro che accusano dolore toracico, affanno, sincope, capogiri e palpitazioni.",
+    "area": 1
+  },
+  {
+    "name": "Chirurgia cardiologica",
+    "description": "",
+    "area": 1
+  }
+]
