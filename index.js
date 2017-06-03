@@ -397,7 +397,7 @@ app.get("/areas/:area_id", function (req, res) {
 ========================================================== */
 
 app.get("/locations", function (req, res) {
-	sqlDb('locations').then(result => {
+	sqlDb('locations').orderBy('city','asc').orderBy('name','asc').then(result => {
 		if (result.lenght != 0)
 			res.send(JSON.stringify(result));
 		else {
