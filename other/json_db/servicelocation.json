@@ -25,7 +25,7 @@
     },
     {
         "service": 3,
-        "location": 2
+        "location": 0
     },
     {
         "service": 3,
@@ -39,7 +39,7 @@
         "service": 4,
         "location": 1
     },{
-        "service": 3,
+        "service": 4,
         "location": 2
     }
 
