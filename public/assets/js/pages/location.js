@@ -48,12 +48,21 @@ function init() {
 	$('#location-fax').text('');
 	$('#location-email').text('');
 	$('#location-timetable').text('');
-	if(URL.service==undefined)
-		$('.dynamic').hide(true);
+	getSideMenu();
 }
 
 function errorMessage() {
 	$('#location-info').append('<h3 class="error">Impossibile le informazione della struttura.</h3>');
+}
+
+
+function getSideMenu() {
+    previous_label = window.sessionStorage.getItem("label");
+    previous_url = window.sessionStorage.getItem("url");
+    if (previous_label !== null) {
+        $('#sidemenu').append("<a href='" + previous_url + "' class='list-group-item'>" + previous_label + "</a>");
+    }
+    window.sessionStorage.clear();
 }
 
 var URL = function () {

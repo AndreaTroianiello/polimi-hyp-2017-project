@@ -11,14 +11,14 @@
     "name": "Visita venereologica",
     "description": "",
     "responsible": 2,
-    "area": 0
+    "area": 0	
   },
   {
     "id": 2,
     "name": "Chirurgia dermatologica",
     "description": "",
     "responsible": 5,
-    "area": 0
+    "area": 0	
   },
   {
     "id": 3,

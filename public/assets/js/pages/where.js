@@ -1,18 +1,18 @@
-var serverapilocation = "/locations/";
 var serverapiservice = "/services/";
+var serverapilocation = "/locations/";
 $(document).ready(function () {
 	console.log("I'm ready");
 	if(URL.id == null){
 		URL.id = 0;
 	}
-	setLocationLinks(URL.id);
+	setServiceLinks(URL.id);
 	setLocationText(URL.id);
 	getLocations();
-	$('.service-item').click(setSideMenu());
+	$('.location-item').click(setSideMenu());
 });
 
-function setLocationLinks(id){
-	$('.location').attr("href","./location.html?id="+URL.id);
+function setServiceLinks(id){
+	$('.service-info').attr("href","./service.html?id="+URL.id);
 }
 
 function setLocationText(id) {
@@ -20,15 +20,15 @@ function setLocationText(id) {
         method: "GET",
         dataType: "json",
         crossDomain: true,
-        url: serverapilocation + id,
+        url: serverapiservice + id,
         success: function (response) {
-            $('#side-location').text(response.name);
-            $('title').text("Servizi di "+response.name);
-            $('#pagetitle').text("Servizi presenti nella "+response.name);
+            $('#side-service').text(response.name);
+            $('title').text("Strutture di "+response.name);
+            $('#pagetitle').text("Strutture in cui è presente "+response.name);
         },
         error: function (request, error) {
             console.log(request + ":" + error);
-			cleanServices();
+			cleanLocations();
 			errorMessage();
         }
     });
@@ -39,40 +39,49 @@ function getLocations(){
         method: "GET",
         dataType: "json",
         crossDomain: true,
-        url: serverapiservice,
+        url: serverapilocation,
         data: {
-            "filter": "location",
+            "filter": "service",
             "value": URL.id
         },
         success: function (response) {
-            $('#services-info').append('<ul class="list-group services-list"></ul>');
-			updateServices(response);
+			updateLocations(response);
         },
         error: function (request, error) {
         	console.log(request + ":" + error);
-			cleanServices();
+			cleanLocations();
 			errorMessage();
         }
     });
 }
 
-function clearServices() {
-	$('#services-info').empty();
+function cleanLocations() {
+	$('#Locations').empty();
 	console.log("list cleaned");
 }
 
-function updateServices(services) {
-	for (var i = 0; i < services.length; i++) {
-		addService(services[i]);
+function updateLocations(locations) {
+	var city;
+	for (var i = 0; i < locations.length; i++) {
+		if (locations[i].city !== city) {
+			city = locations[i].city;
+			addParagraph(city);
+		}
+		addLocation(locations[i]);
 	}
 }
 
-function addService(service) {
-	$('#services-info').append('<a class="list-group-item service-item" href="./service.html?id=' + service.id + '">' + service.name + '</a>');
+function addParagraph(index) {
+	$('#locations').append('<h4 class="list-index">' + index + '</h4>');
+	$('#locations').append('<ul class="list-group locations-list" id="' + index + '"></ul>');
+}
+
+function addLocation(location) {
+	$('#locations').append('<a class="list-group-item location-item" href="./location.html?id=' + location.id + '&service=' + URL.id + '">' + location.name + '</a>');
 }
 
 function errorMessage(){
-	$('#services-info').append('<h3 class="error">Impossibile caricare la lista.</h3>');
+	$('#locations').append('<h3 class="error">Impossibile caricare la lista.</h3>');
 }
 
 

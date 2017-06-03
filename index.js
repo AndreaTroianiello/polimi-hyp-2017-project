@@ -4,10 +4,11 @@ const app = express();
 const bodyParser = require("body-parser");
 const _ = require("lodash");
 
-let doctorsList = require("./other/doctors.json");
+let doctors = require("./other/doctors.json");
 let curriculums = require("./other/curriculums.json");
 let areas = require("./other/areas.json");
 let services = require("./other/services.json");
+let locations = require("./other/locations.json");
 
 app.use(express.static(__dirname + "/public"));
 
@@ -125,23 +126,56 @@ app.get("/areas/:area_id", function (req, res) {
 });
 
 /* =========================================================
+ Location APIs
+========================================================== */
+
+app.get("/locations", function (req, res) {
+	let filter = _.get(req, "query.filter", null);
+	let value = _.get(req, "query.value", null);
+	res.json(getLocations(filter,value));
+});
+
+app.get("/locations/:location_id", function (req, res) {
+	let answer = getLocation(req.params.location_id);
+	if (answer == null) {
+		answer = { error: "Invalid doctor ID" };
+	}
+	res.json(answer);
+});
+
+
+/* =========================================================
+ About us APIs
+========================================================== */
+
+let whoweare = require("./other/whoweare.json");
+
+app.get("/aboutus", function (req, res) {
+	res.json(getWhoweare());
+});
+
+function getWhoweare() {
+	return whoweare;
+} 
+
+/* =========================================================
  Doctors functions yet to be implemented with SQLite
 ========================================================== */
 
 function getDoctors(filter, value) {
-	doctors = _.toArray(doctorsList);
+	doctorsList = _.toArray(doctors);
 	if (filter === "location") {
-		doctors= doctors.slice(4, 6);
+		doctorsList= doctorsList.slice(4, 6);
 	}
 
 	return doctors.sort(docSort);
 }
 
 function getDoctor(id) {
-	docIndex = _.findIndex(doctorsList, function(d){
+	docIndex = _.findIndex(doctors, function(d){
 		return id == d.id;
 	})
-	return doctorsList[docIndex];
+	return doctors[docIndex];
 }
 
 function getCurriculum(id){
@@ -189,47 +223,25 @@ function getArea(id) {
 	})
 	return areas[areaIndex];
 }
+
 /* =========================================================
- Location APIs
+ Locations functions yet to be implemented with SQLite
 ========================================================== */
 
-let locationsList = require("./other/locations.json");
-
-app.get("/locations", function (req, res) {
-	res.json(getLocations());
-});
-
-app.get("/locations/:location_id", function (req, res) {
-	let answer = getLocation(req.params.location_id);
-	if (answer == null) {
-		answer = { error: "Invalid doctor ID" };
+function getLocations(filter,value) {
+	locationsList = _.toArray(locations)
+	if (filter === "service") {
+		locationsList= locationsList.slice(0, 1);
 	}
-	res.json(answer);
-});
-
-// Location functions
-
-function getLocations() {
 	return locationsList;
 }
 
 function getLocation(id) {
-	return locationsList[id];
+	locIndex = _.findIndex(doctors, function(l){
+		return id == l.id;
+	})
+	return locations[locIndex];
 }
-
-/* =========================================================
- About us APIs
-========================================================== */
-
-let whoweare = require("./other/whoweare.json");
-
-app.get("/aboutus", function (req, res) {
-	res.json(getWhoweare());
-});
-
-function getWhoweare() {
-	return whoweare;
-} 
 
 /* ===================
 	Utility functions
