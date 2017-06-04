@@ -314,9 +314,8 @@ app.get("/doctors/:doctor_id/previous", function (req, res) {
 });
 
 function getPrevNext(req, res, next) {
-	query = sqlDb("doctors");
+	let query = sqlDb("doctors");
 	query = filterDoctor(req, query);
-
 	query.orderBy("surname", "asc").orderBy("name", "asc")
 		.then(result => {
 			let i = _.findIndex(result, (r) => {
@@ -327,7 +326,8 @@ function getPrevNext(req, res, next) {
 					error: "No doctor found for the given parameters."
 				});
 			} else {
-				res.json(result[(i + result.lenght + next ? 1 : -1) % result.length]);
+				let diff = next ? 1 : -1;
+				res.json(result[(i + result.length + diff) % result.length]);
 			}
 		});
 }
