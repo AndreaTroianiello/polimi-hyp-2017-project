@@ -8,6 +8,9 @@ $(document).ready(function () {
 		dataType: "json",
 		crossDomain: true,
 		url: "../locations/" + URL.id,
+		data: {
+            "filter": "locationdirection"        
+		},
 		success: function (response) {
 			$('title').text(response.name);
 			$('#directions').text(response.directions);

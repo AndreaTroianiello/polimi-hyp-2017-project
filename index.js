@@ -179,7 +179,7 @@ function initDb() {
 					table.increments('id');
 					table.string('path');
 					table.integer('inc');
-					table.integer('location').unsigned();
+					table.integer('location');
 					table.foreign('location').references('locations.id');
 				})
 				.then(() => {
@@ -199,7 +199,7 @@ function initDb() {
 				.createTable("locationdirection", table => {
 					table.increments('id');
 					table.string('directions');
-					table.integer('location').unsigned();
+					table.integer('location');
 					table.foreign('location').references('locations.id');
 				})
 				.then(() => {
@@ -397,7 +397,9 @@ app.get("/areas/:area_id", function (req, res) {
 ========================================================== */
 
 app.get("/locations", function (req, res) {
-	sqlDb('locations').orderBy('city','asc').orderBy('name','asc').then(result => {
+	let filter = _.get(req, "query.filter", null);
+	let value = _.get(req, "query.value", null);
+	getLocations(filter,value).then(result => {
 		if (result.lenght != 0)
 			res.send(JSON.stringify(result));
 		else {
@@ -512,11 +514,11 @@ function getArea(id) {
 ========================================================== */
 
 function getLocations(filter, value) {
-	locationsList = _.toArray(locations)
-	if (filter === "service") {
-		locationsList = locationsList.slice(0, 1);
+	if(filter == null){
+		return sqlDb('locations').orderBy('city','asc').orderBy('name','asc');
 	}
-	return locationsList;
+	else
+		return sqlDb('locations').innerJoin('locationdirection','locationdirection.location','locations.id');
 }
 
 function getLocation(id) {
