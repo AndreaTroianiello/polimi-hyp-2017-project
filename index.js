@@ -15,13 +15,6 @@ const sqlDb = sqlDbFactory({
 });
 
 
-/*let doctors = require("./other/doctors.json");
-let curriculums = require("./other/curriculums.json");
-let areas = require("./other/areas.json");
-let services = require("./other/services.json");
-let locations = require("./other/locations.json");
-let whoweare = require("./other/json_db/whoweare.json");*/
-
 let whoweare = require("./other/json_db/whoweare.json");
 let areas = require("./other/json_db/areas.json");
 let services = require("./other/json_db/services.json");
@@ -193,10 +186,10 @@ function initDb() {
 			return true;
 		}
 	});
-	sqlDb.schema.hasTable("locationdirection").then(exists => {
+	sqlDb.schema.hasTable("locationdirections").then(exists => {
 		if (!exists) {
 			sqlDb.schema
-				.createTable("locationdirection", table => {
+				.createTable("locationdirections", table => {
 					table.increments('id');
 					table.string('directions');
 					table.integer('location');
@@ -205,7 +198,7 @@ function initDb() {
 				.then(() => {
 					return Promise.all(
 						_.map(locationsDirections, l => {
-							return sqlDb("locationdirection").insert(l);
+							return sqlDb("locationdirections").insert(l);
 						})
 					);
 				});
@@ -290,66 +283,96 @@ function initDb() {
 ========================================================== */
 
 app.get("/doctors", function (req, res) {
-	let filter = _.get(req, "query.filter", null);
-	let value = _.get(req, "query.value", null);
-	res.json(getDoctors(filter, value));
+	let query = sqlDb("doctors");
+	filterDoctor(req, query);
+	query
+		.orderBy("surname", "asc").orderBy("name", "asc")
+		.then(result => {
+			res.json(result);
+		}
+		);
 });
 
 app.get("/doctors/:doctor_id", function (req, res) {
-	let answer = getDoctor(req.params.doctor_id);
-	if (answer == null) {
-		answer = {
-			error: "Invalid doctor ID"
-		};
-	}
-	res.json(answer);
+	sqlDb("doctors").where("id", req.params.doctor_id).then(result => {
+		if (result.length === 0) {
+			res.json({
+				error: "Invalid doctor ID"
+			});
+		} else {
+			res.json(result[0]);
+		}
+	});
 });
 
 app.get("/doctors/:doctor_id/next", function (req, res) {
-	let answer;
-	let filter = _.get(req, "query.filter", null);
-	let value = _.get(req, "query.value", null);
-	let docs = getDoctors(filter, value);
-	let curr_doc = _.findIndex(docs, function (d) {
-		return d.id == req.params.doctor_id;
-	});
-	if (curr_doc === -1) {
-		answer = {
-			error: "No doctor found for the given parameters."
-		};
-	} else {
-		answer = docs[(curr_doc + 1) % docs.length];
-	}
-	res.json(answer);
+	getPrevNext(req, res, true);
 });
 
 app.get("/doctors/:doctor_id/previous", function (req, res) {
-	let answer;
-	let filter = _.get(req, "query.filter", null);
-	let value = _.get(req, "query.value", null);
-	let docs = getDoctors(filter, value);
-	let curr_doc = _.findIndex(docs, function (d) {
-		return d.id == req.params.doctor_id;
-	});
-	if (curr_doc === -1) {
-		answer = {
-			error: "No doctor found for the given parameters."
-		};
-	} else {
-		answer = docs[(curr_doc + docs.length - 1) % docs.length];
-	}
-	res.json(answer);
+	getPrevNext(req, res, false);
 });
 
-app.get("/doctors/:doctor_id/curriculum", function (req, res) {
-	let answer = getCurriculum(req.params.doctor_id);
-	if (answer == null) {
-		answer = {
-			error: "Invalid doctor ID"
-		};
+function getPrevNext(req, res, next) {
+	query = sqlDb("doctors");
+	query = filterDoctor(req, query);
+
+	query.orderBy("surname", "asc").orderBy("name", "asc")
+		.then(result => {
+			let i = _.findIndex(result, (r) => {
+				return req.params.doctor_id == r.id;
+			});
+			if (i === -1) {
+				res.json({
+					error: "No doctor found for the given parameters."
+				});
+			} else {
+				res.json(result[(i + result.lenght + next ? 1 : -1) % result.length]);
+			}
+		});
+}
+
+function filterDoctor(req, query) {
+	let filter = _.get(req, "query.filter", null);
+	let value = _.get(req, "query.value", null);
+	if (filter !== null) {
+		switch (filter) {
+			case "location":
+				query
+					.select("doctors.*")
+					.join("doctorlocation", "doctors.id", "doctor")
+					.where("location", value);
+				break;
+			case "service":
+				query.where("operates", value);
+				break;
+			case "area":
+				query
+					.select("doctors.*")
+					.join("services", "operates", "services.id")
+					.where("area", value);
+				break;
+		}
 	}
-	res.json(answer);
+	return query;
+}
+
+
+
+
+
+app.get("/doctors/:doctor_id/curriculum", function (req, res) {
+	sqlDb("curriculums").where("doctor", req.params.doctor_id).then(result => {
+		if (result.length === 0) {
+			res.json({
+				error: "Invalid doctor ID"
+			});
+		} else {
+			res.json(result[0]);
+		}
+	});
 });
+
 
 /* =========================================================
  Services APIs
@@ -358,19 +381,41 @@ app.get("/doctors/:doctor_id/curriculum", function (req, res) {
 app.get("/services", function (req, res) {
 	let filter = _.get(req, "query.filter", null);
 	let value = _.get(req, "query.value", null);
-	res.json(getServices(filter, value));
+	let query = sqlDb("services")
+		.select("services.*", "doctors.id as responsible")
+		.join("doctors", "services.id", "doctors.manages_s");
+	if (filter !== null) {
+		switch (filter) {
+			case "location":
+				query
+					.join("servicelocation", "services.id", "servicelocation.service")
+					.where("servicelocation.location", value);
+				break;
+			case "area":
+				query.where("area", value);
+				break;
+		}
+	}
+	query.orderBy("services.id", "asc").then(result => {
+		res.json(result);
+	});
 });
 
 app.get("/services/:service_id", function (req, res) {
-	let answer = getService(req.params.service_id);
-	if (answer == null) {
-		answer = {
-			error: "Invalid service ID"
-		};
-	}
-	res.json(answer);
+	sqlDb("services")
+		.select("services.*", "doctors.id as responsible")
+		.join("doctors", "services.id", "doctors.manages_s")
+		.where("services.id", req.params.service_id)
+		.then(result => {
+			if (result.length === 0) {
+				res.json({
+					error: "Invalid service ID"
+				});
+			} else {
+				res.json(result[0]);
+			}
+		});
 });
-
 
 /* =========================================================
  Areas APIs
@@ -379,17 +424,39 @@ app.get("/services/:service_id", function (req, res) {
 app.get("/areas", function (req, res) {
 	let filter = _.get(req, "query.filter", null);
 	let value = _.get(req, "query.value", null);
-	res.json(getAreas(filter, value));
+	let query = sqlDb("areas");
+	if (filter !== null) {
+		switch (filter) {
+			case "location":
+				query
+					.distinct("areas.*")
+					.join("services", "areas.id", "services.area")
+					.join("servicelocation", "services.id", "servicelocation.service")
+					.where("servicelocation.location", value);
+				break;
+			default:
+				break;
+		}
+	}
+	query
+		.orderBy("areas.id", "asc")
+		.then(result => {
+			res.json(result);
+		});
 });
 
 app.get("/areas/:area_id", function (req, res) {
-	let answer = getArea(req.params.area_id);
-	if (answer == null) {
-		answer = {
-			error: "Invalid area ID"
-		};
-	}
-	res.json(answer);
+	sqlDb("areas")
+		.where("id", req.params.area_id)
+		.then(result => {
+			if (result.lenght === 0) {
+				res.json({
+					error: "Invalid area ID"
+				});
+			} else {
+				res.json(result[0]);
+			}
+		});
 });
 
 /* =========================================================
@@ -399,31 +466,56 @@ app.get("/areas/:area_id", function (req, res) {
 app.get("/locations", function (req, res) {
 	let filter = _.get(req, "query.filter", null);
 	let value = _.get(req, "query.value", null);
-	getLocations(filter,value).then(result => {
-		if (result.lenght != 0)
-			res.send(JSON.stringify(result));
-		else {
-			answer = {
-				error: "Invalid doctor ID"
-			};
-			res.json(answer);
+	let query = sqlDb("locations");
+	if (filter === null) {
+		switch (filter) {
+			case "location":
+				query
+					.select("locations.*")
+					.join("servicelocation", "location.id", "servicelocation.location")
+					.where("servicelocation.service", value);
+				break;
+			default:
+				break;
 		}
+	}
+	query.orderBy("locations.name", "asc").then(result => {
+		res.json(result);
 	});
 });
 
 app.get("/locations/:location_id", function (req, res) {
-	sqlDb('locations').where('id', req.params.location_id).then(result => {
-		if (result.lenght != 0)
-			res.send(JSON.stringify(result[0]));
-		else {
-			answer = {
-				error: "Invalid doctor ID"
-			};
-			res.json(answer);
-		}
-	});
-
+	sqlDb("locations")
+		.where('id', req.params.location_id)
+		.then(result => {
+			if (result.lenght === 0)
+				res.json({
+					error: "Invalid location ID"
+				});
+			else {
+				res.json(result[0]);
+			}
+		});
 });
+
+app.get("/locations/:location_id/images", function (req, res) {
+	sqlDb("locationimages")
+		.where("location", req.params.location_id)
+		.orderBy("inc", "asc")
+		.then(result => {
+			res.json(result);
+		})
+});
+
+app.get("/locations/:location_id/directions", function (req, res) {
+	sqlDb("locationdirections")
+		.where("location", req.params.location_id)
+		.then(result => {
+			res.json(result[0]);
+		})
+});
+
+
 
 
 /* =========================================================
@@ -431,129 +523,16 @@ app.get("/locations/:location_id", function (req, res) {
 ========================================================== */
 
 app.get("/aboutus", function (req, res) {
-	sqlDb('whoweare').then(result => {
-		if (result.lenght != 0)
-			res.send(JSON.stringify(result));
-		else {
-			answer = {
-				error: "Invalid doctor ID"
-			};
-			res.json(answer);
-		}
+	sqlDb('whoweare').orderBy("id", "asc").then(result => {
+		res.json(result);
 	});
 });
 
-/* =========================================================
- Doctors functions yet to be implemented with SQLite
-========================================================== */
+/*====================================================
+======================================================
+	/ RESTful APIs
+======================================================
+====================================================*/
 
-function getDoctors(filter, value) {
-	doctorsList = _.toArray(doctors);
-	if (filter === "location") {
-		doctorsList = doctorsList.slice(4, 6);
-	}
-
-	return doctors.sort(docSort);
-}
-
-function getDoctor(id) {
-	docIndex = _.findIndex(doctors, function (d) {
-		return id == d.id;
-	})
-	return doctors[docIndex];
-}
-
-function getCurriculum(id) {
-	return curriculums[_.findIndex(curriculums, function (c) {
-		return id == c.doctor;
-	})];
-}
-
-
-/* =========================================================
- Services functions yet to be implemented with SQLite
-========================================================== */
-function getServices(filter, value) {
-	servicesList = _.toArray(services);
-	if (filter === "location") {
-		servicesList = servicesList.slice(1, 2);
-	}
-
-	return servicesList.sort(genSort);
-}
-
-function getService(id) {
-	serIndex = _.findIndex(services, function (s) {
-		return id == s.id;
-	})
-	return services[serIndex];
-}
-
-/* =========================================================
- Areas functions yet to be implemented with SQLite
-========================================================== */
-
-function getAreas(filter, value) {
-	areasList = _.toArray(areas);
-	if (filter === "location") {
-		areasList = areasList.slice(0, 1);
-	}
-
-	return areasList.sort(genSort);
-}
-
-function getArea(id) {
-	areaIndex = _.findIndex(areas, function (a) {
-		return id == a.id;
-	})
-	return areas[areaIndex];
-}
-
-/* =========================================================
- Locations functions yet to be implemented with SQLite
-========================================================== */
-
-function getLocations(filter, value) {
-	if(filter == null){
-		return sqlDb('locations').orderBy('city','asc').orderBy('name','asc');
-	}
-	else
-		return sqlDb('locations').innerJoin('locationdirection','locationdirection.location','locations.id');
-}
-
-function getLocation(id) {
-	locIndex = _.findIndex(doctors, function (l) {
-		return id == l.id;
-	})
-	return locations[locIndex];
-}
-
-/* ===================
-	Utility functions
-====================*/
-
-function docSort(a, b) {
-	a_full = (a.surname + " " + a.name).toLowerCase();
-	b_full = (b.surname + " " + b.name).toLowerCase();
-
-	if (a_full < b_full) {
-		return -1;
-	} else if (a_full > b_full) {
-		return 1;
-	}
-	return 0;
-}
-
-function genSort(a, b) {
-	a_full = a.name.toLowerCase();
-	b_full = b.name.toLowerCase();
-
-	if (a_full < b_full) {
-		return -1;
-	} else if (a_full > b_full) {
-		return 1;
-	}
-	return 0;
-}
 
 initDb();
