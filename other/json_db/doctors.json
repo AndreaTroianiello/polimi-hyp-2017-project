@@ -7,7 +7,7 @@
     "fax": "+39 02 12345678",
     "email": "abbriti@medicalcenter.it",
     "img": "../assets/img/doctors/doc-0.jpg",
-    "operates": 1,
+    "operates": 2,
     "manages_s": null,
     "manages_a": null,
     "desc": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque gravida vulputate facilisis. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; "
@@ -20,8 +20,8 @@
     "fax": "+39 02 12345678",
     "email": "cannata@medicalcenter.it",
     "img": "../assets/img/doctors/doc-1.jpg",
-    "operates": 0,
-    "manages_s": 0,
+    "operates": 1,
+    "manages_s": 1,
     "manages_a": null,
     "desc": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque gravida vulputate facilisis. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; "
  
@@ -34,8 +34,8 @@
     "fax": "+39 02 12345678",
     "email": "cattabeni@medicalcenter.it",
     "img": "../assets/img/doctors/doc-2.jpg",
-    "operates": 1,
-    "manages_s": 1,
+    "operates": 2,
+    "manages_s": 2,
     "manages_a": null,
     "desc": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque gravida vulputate facilisis. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; "
    },
@@ -47,7 +47,7 @@
     "fax": "+39 02 12345678",
     "email": "galimberti@medicalcenter.it",
     "img": "../assets/img/doctors/doc-3.jpg",
-    "operates": 2,
+    "operates": 3,
     "manages_s": null,
     "manages_a": null,
     "desc": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque gravida vulputate facilisis. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; "
@@ -60,9 +60,9 @@
     "fax": "+39 02 12345678",
     "email": "gargantini@medicalcenter.it",
     "img": "../assets/img/doctors/doc-4.jpg",
-    "operates": 4,
+    "operates": 5,
     "manages_s": null,
-    "manages_a": 1,
+    "manages_a": 2,
     "desc": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque gravida vulputate facilisis. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; "
 
   },
@@ -74,8 +74,8 @@
     "fax": "+39 02 12345678",
     "email": "gazzola@medicalcenter.it",
     "img": "../assets/img/doctors/doc-5.jpg",
-    "operates": 2,
-    "manages_s": 2,
+    "operates": 3,
+    "manages_s": 3,
     "manages_a": null,
     "desc": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque gravida vulputate facilisis. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; "
   },
@@ -87,9 +87,9 @@
     "fax": "+39 02 12345678",
     "email": "lovati@medicalcenter.it",
     "img": "../assets/img/doctors/doc-6.jpg",
-    "operates": 1,
+    "operates": 2,
     "manages_s": null,
-    "manages_a": 0,
+    "manages_a": 1,
     "desc": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque gravida vulputate facilisis. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; "
   },
   {
@@ -100,8 +100,8 @@
     "fax": "+39 02 12345678",
     "email": "marzi@medicalcenter.it",
     "img": "../assets/img/doctors/doc-7.jpg",
-    "operates": 3,
-    "manages_s": 3,
+    "operates": 4,
+    "manages_s": 4,
     "manages_a": null,
     "desc": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque gravida vulputate facilisis. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; "
   },
@@ -112,8 +112,8 @@
     "fax": "+39 02 12345678",
     "email": "mennea@medicalcenter.it",
     "img": "../assets/img/doctors/doc-8.jpg",
-    "operates": 4,
-    "manages_s": 4,
+    "operates": 5,
+    "manages_s": null,
     "manages_a": null,
     "desc": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque gravida vulputate facilisis. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; "
   },
@@ -125,8 +125,8 @@
     "fax": "+39 02 12345678",
     "email": "zumbo@medicalcenter.it",
     "img": "../assets/img/doctors/doc-9.jpg",
-    "operates": 4,
-    "manages_s": 4,
+    "operates": 5,
+    "manages_s": 5,
     "manages_a": null,
     "desc": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque gravida vulputate facilisis. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; "
   }

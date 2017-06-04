@@ -1,19 +1,15 @@
 [
     {
-        "doctor": 0,
-        "location": 2
-    },
-    {
         "doctor": 1,
-        "location": 0
-    },
-    {
-        "doctor": 1,
-        "location": 2
+        "location": 3
     },
     {
         "doctor": 2,
         "location": 1
+    },
+    {
+        "doctor": 2,
+        "location": 3
     },
     {
         "doctor": 3,
@@ -21,19 +17,15 @@
     },
     {
         "doctor": 4,
-        "location": 0
+        "location": 3
     },
     {
         "doctor": 5,
-        "location": 2
+        "location": 1
     },
     {
         "doctor": 6,
-        "location": 0
-    },
-    {
-        "doctor": 7,
-        "location": 0
+        "location": 3
     },
     {
         "doctor": 7,
@@ -44,7 +36,15 @@
         "location": 1
     },
     {
+        "doctor": 8,
+        "location": 2
+    },
+    {
         "doctor": 9,
         "location": 2
+    },
+    {
+        "doctor": 10,
+        "location": 3
     }
 ]

@@ -1,47 +1,45 @@
 [
     {
-        "service": 0,
-        "location": 0
-    },
-    {
-        "service": 0,
-        "location": 2
-    },
-    {
-        "service": 1,
-        "location": 0
-    },
-    {
         "service": 1,
         "location": 1
     },
     {
         "service": 1,
-        "location": 2
+        "location": 3
+    },
+    {
+        "service": 2,
+        "location": 1
     },
     {
         "service": 2,
         "location": 2
     },
     {
-        "service": 3,
-        "location": 0
+        "service": 2,
+        "location": 3
     },
     {
         "service": 3,
-        "location": 1
-    },
-    {
-        "service": 4,
-        "location": 0
+        "location": 3
     },
     {
         "service": 4,
         "location": 1
-    },{
+    },
+    {
         "service": 4,
         "location": 2
+    },
+    {
+        "service": 5,
+        "location": 1
+    },
+    {
+        "service": 5,
+        "location": 2
+    },{
+        "service": 5,
+        "location": 3
     }
-
-
 ]

@@ -1,14 +1,14 @@
 [
     {
-        "location": 0,
-        "directions": "Prendere la metro, scendere, entrare."
-    },
-    {
         "location": 1,
         "directions": "Prendere la metro, scendere, entrare."
     },
     {
         "location": 2,
+        "directions": "Prendere la metro, scendere, entrare."
+    },
+    {
+        "location": 3,
         "directions": "Prendere la metro, scendere, entrare."
     }
 ]
