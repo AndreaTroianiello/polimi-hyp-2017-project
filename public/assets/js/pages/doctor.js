@@ -176,7 +176,6 @@ function setNext() {
         },
         error: function (request, error) {
             $(".next").hide();
-            console.log(error);
         }
     });
 }
@@ -222,7 +221,6 @@ function setSessionInfo() {
 
 
 function setCurriculumURL() {
-    console.log(URL.id);
     var curriculum = "./curriculum.html?id=" + URL.id;
     if (URL.filter != null) {
         curriculum += "&filter=" + URL.filter + "&value=" + URL.value;
