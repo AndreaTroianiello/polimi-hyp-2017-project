@@ -479,7 +479,7 @@ app.get("/locations", function (req, res) {
 				break;
 		}
 	}
-	query.orderBy("locations.name", "asc").then(result => {
+	query.orderBy("locations.city", "asc").then(result => {
 		res.json(result);
 	});
 });
