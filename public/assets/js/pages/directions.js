@@ -7,14 +7,11 @@ $(document).ready(function () {
 		method: "GET",
 		dataType: "json",
 		crossDomain: true,
-		url: "../locations/" + URL.id,
-		data: {
-            "filter": "locationdirection"        
-		},
+		url: "../locations/" + URL.id + "/directions",
 		success: function (response) {
 			$('title').text(response.name);
-			$('#directions').text(response.directions);
-			var address = response.city + "," + response.address;
+			setDirections(response);
+			var address = response[0].city + "," + response[0].address;
 			geocoder.geocode({
 				'address': address
 			}, function (results, status) {
@@ -35,13 +32,17 @@ $(document).ready(function () {
 			errorMessage();
 		}
 	});
+	
+	$('.other-page').click(function (){
+		setSideMenu();
+	});
 });
 
 function init() {
 	$('title').text('Struttura');
 	$('.location').attr("href", "./location.html?id=" + URL.id);
 	$('#gallery').attr("href", "./gallery.html?id=" + URL.id);
-	$('.dynamic').hide(true);
+	getSideMenu();
 }
 
 function initMap() {
@@ -54,9 +55,31 @@ function initMap() {
 	return map;
 }
 
+function setDirections(directions){
+	for(var i = 0; i < directions.length; ++i)
+		$('#indications').append('<li>' + directions[i].directions + '</li>');
+}
+
 function errorMessage() {
 	$('#info-map').append('<h3 class="error">Impossibile le informazioni della struttura.</h3>');
 }
+
+function getSideMenu() {
+    previous_label = window.sessionStorage.getItem("label");
+    previous_url = window.sessionStorage.getItem("url");
+    if (previous_label !== null) {
+        $('#sidemenu').append("<a href='" + previous_url + "' class='list-group-item'>" + previous_label + "</a>");
+    }
+    window.sessionStorage.clear();
+}
+
+function setSideMenu(){
+    if(previous_label!==null){
+        window.sessionStorage.setItem("label",previous_label);
+        window.sessionStorage.setItem("url", previous_url);
+    }
+}
+
 
 var URL = function () {
 	// This function is anonymous, is executed immediately and 

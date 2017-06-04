@@ -10,5 +10,14 @@
     {
         "location": 3,
         "directions": "Prendere la metro, scendere, entrare."
+    },
+	{
+        "location": 3,
+        "directions": "dfghfmjg,hjjgfhdffdsghm."
+    },
+	{
+        "location": 1,
+        "directions": "dsfhjfkh,mnvcdfhfxgjm dgzh fdsghm."
     }
+	
 ]

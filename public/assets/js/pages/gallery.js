@@ -1,14 +1,13 @@
 $(document).ready(function () {
 	console.log("I'm ready");
-	init();
 	$.ajax({
 		method: "GET",
 		dataType: "json",
 		crossDomain: true,
-		url: "../locations/" + URL.id,
+		url: "../locations/" + URL.id + "/images",
 		success: function (response) {
 			console.log(response);
-			updatePage(response);
+			init(response);
 			updateImages(response);
 		},
 		error: function (request, error) {
@@ -17,30 +16,46 @@ $(document).ready(function () {
 			errorMessage();
 		}
 	});
+	$('.other-page').click( function (){
+		setSideMenu();
+	});
 });
 
 function updateImages(response) {
 	var x = "active item";
 	$('.carousel-inner').empty();
-	for (var i = 0; i < response.images.length; ++i) {
+	for (var i = 0; i < response.length; ++i) {
 		if (i != 0)
 			x = "item";
-		$('.carousel-inner').append('<div class="' + x + '" data-slide-number="' + i + '"><img src="../assets/img/locations/' + response.images[i] + '"></div>');
+		$('.carousel-inner').append('<div class="' + x + '" data-slide-number="' + i + '"><img src="../assets/img/locations/' + response[i].path + '"></div>');
 	}
 }
 
-function updatePage(location) {
+function init(location) {
 	$('title').text(location.name);
 	$('.location').attr("href", "./location.html?id=" + URL.id);
 	$('.directions').attr("href", "./directions.html?id=" + URL.id);
-}
-
-function init() {
-	$('.dynamic').hide(true);
+	getSideMenu();
 }
 
 function errorMessage() {
 	$('#gallery-info').append('<h3 class="error">Impossibile la gallery.</h3>');
+}
+
+function getSideMenu() {
+    previous_label = window.sessionStorage.getItem("label");
+    previous_url = window.sessionStorage.getItem("url");
+    if (previous_label !== null) {
+        $('#sidemenu').append("<a href='" + previous_url + "' class='list-group-item'>" + previous_label + "</a>");
+    }
+    window.sessionStorage.clear();
+}
+
+function setSideMenu(){
+    if(previous_label!==null){
+        window.sessionStorage.setItem("label",previous_label);
+        window.sessionStorage.setItem("url", previous_url);
+    }
 }
 
 var URL = function () {

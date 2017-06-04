@@ -16,6 +16,9 @@ $(document).ready(function () {
 			errorMessage();
 		}
 	});
+	$('.other-page').click(function (){
+		setSideMenu();
+	});
 });
 
 function updateLocation(location) {
@@ -33,11 +36,6 @@ function updateLocation(location) {
 	$('.info-map').attr("href", "./directions.html?id=" + URL.id);
 	$('#gallery').attr("href", "./gallery.html?id=" + URL.id);
 	$('#available-services').attr("href","./available-here.html?id="+location.id);
-	if(URL.service!=undefined)
-		$('#dyn-service').attr("href","./where.html?id="+URL.service);
-	
-		
-	
 }
 
 function init() {
@@ -63,6 +61,13 @@ function getSideMenu() {
         $('#sidemenu').append("<a href='" + previous_url + "' class='list-group-item'>" + previous_label + "</a>");
     }
     window.sessionStorage.clear();
+}
+
+function setSideMenu(){
+    if(previous_label!==null){
+        window.sessionStorage.setItem("label",previous_label);
+        window.sessionStorage.setItem("url", previous_url);
+    }
 }
 
 var URL = function () {

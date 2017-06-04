@@ -96,7 +96,7 @@ function initDb() {
 					table.increments('id');
 					table.string('name');
 					table.string('description');
-					table.integer('area').unsigned();
+					table.integer('area');
 					table.foreign('area').references('area.id');
 				})
 				.then(() => {
@@ -141,12 +141,12 @@ function initDb() {
 					table.increments('id');
 					table.string('surname');
 					table.string('name');
-					table.enum('male', ["true", "false"]);
+					table.boolean('male');
 					table.string('phone');
 					table.string('fax');
 					table.string('email');
 					table.string('img');
-					table.integer('operates').unsigned();
+					table.integer('operates');
 					table.integer('manages_s').unsigned();
 					table.integer('manages_a').unsigned();
 					table.string('desc');
@@ -500,8 +500,10 @@ app.get("/locations/:location_id", function (req, res) {
 
 app.get("/locations/:location_id/images", function (req, res) {
 	sqlDb("locationimages")
+		.innerJoin("locations","locations.id","locationimages.location")
 		.where("location", req.params.location_id)
 		.orderBy("inc", "asc")
+		.select("name","inc","path")
 		.then(result => {
 			res.json(result);
 		})
@@ -509,9 +511,11 @@ app.get("/locations/:location_id/images", function (req, res) {
 
 app.get("/locations/:location_id/directions", function (req, res) {
 	sqlDb("locationdirections")
+		.innerJoin("locations","locations.id","locationdirections.location")
 		.where("location", req.params.location_id)
+		.select("name","address","city","directions")
 		.then(result => {
-			res.json(result[0]);
+			res.json(result);
 		})
 });
 
