@@ -7,34 +7,32 @@ var previousUrl;
 var previousLabel;
 
 $(document).ready(function () {
-
     addDynamicLink();
-    doctorLoaders(URL);
+    doctorLoaders();
 
     /* the following are events */
 
     $(".next").click(function () {
         URL.id = nextDoctor;
-        doctorLoaders(URL);
+        doctorLoaders();
     });
 
     $(".previous").click(function () {
         URL.id = previousDoctor;
-        doctorLoaders(URL);
+        doctorLoaders();
     });
 
     $('#curriculum').click(function () {
         setSessionInfo();
     });
-
 });
 
-function doctorLoaders(URL){
-    setCurriculumURL(URL);
-    getDoctor(URL);
-    setNext(URL);
-    setPrevious(URL);
-    fixURL(URL);
+function doctorLoaders() {
+    setCurriculumURL();
+    getDoctor();
+    setNext();
+    setPrevious();
+    fixURL();
 }
 
 var URL = function () {
@@ -62,7 +60,7 @@ var URL = function () {
 }();
 
 
-function getDoctor(URL) {
+function getDoctor() {
     $.ajax({
         method: "GET",
         dataType: "json",
@@ -154,7 +152,7 @@ function setAreaName(a, id) {
 }
 
 
-function fixURL(URL) {
+function fixURL() {
     fixString = "/pages/doctor.html?id=" + URL.id;
     if (URL.filter != null) {
         fixString += "&filter=" + URL.filter + "&value=" + URL.value;
@@ -163,7 +161,7 @@ function fixURL(URL) {
 }
 
 
-function setNext(URL) {
+function setNext() {
     $.ajax({
         method: "GET",
         dataType: "json",
@@ -184,7 +182,7 @@ function setNext(URL) {
 }
 
 
-function setPrevious(URL) {
+function setPrevious() {
     console.log(doctorapi + URL.id + "/previous");
     $.ajax({
         method: "GET",
@@ -208,11 +206,9 @@ function setPrevious(URL) {
 function addDynamicLink() {
     previousLabel = window.sessionStorage.getItem("label");
     previousUrl = window.sessionStorage.getItem("url");
-
     if (previousLabel !== null) {
         $('#sidemenu').append("<a href='" + previousUrl + "' class='list-group-item'>" + previousLabel + "</a>");
     }
-
     window.sessionStorage.clear();
 }
 
@@ -225,7 +221,7 @@ function setSessionInfo() {
 }
 
 
-function setCurriculumURL(URL) {
+function setCurriculumURL() {
     console.log(URL.id);
     var curriculum = "./curriculum.html?id=" + URL.id;
     if (URL.filter != null) {

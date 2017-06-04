@@ -1,43 +1,44 @@
+var locationapi = "/locations/";
+
 $(document).ready(function () {
-	clearLocations();
+	getLocations();
+});
+
+
+function getLocations(){
 	$.ajax({
 		method: "GET",
 		dataType: "json",
 		crossDomain: true,
-		url: "../locations",
+		url: locationapi,
 		success: function (response) {
-			updateLocations(response);
+			setLocations(response);
 		},
 		error: function (request, error) {
-			errorMessage();
+			$('#page-title').text("Errore - Impossibile caricare i dati richiesti.");
 		}
 	});
-});
-
-function clearLocations() {
-	$('#locations').empty();
 }
 
-function addLocation(location) {
+
+function addLocationToList(location) {
 	$('#' + location.city).append('<a class="list-group-item" href="../pages/all-doctor-location.html?filter=' + location.id + '">' + location.name + '</a>');
 }
 
-function addParagraph(index) {
-	$('#locations').append('<h4 class="list-index">' + index + '</h4>');
-	$('#locations').append('<div class="list-group locations-list" id="' + index + '"></div>');
+
+function addCityToList(city) {
+	$('#locations').append('<h4 class="list-index">' + city + '</h4>');
+	$('#locations').append('<div class="list-group locations-list" id="' + city + '"></div>');
 }
 
-function updateLocations(locations) {
-	var city;
+
+function setLocations(locations) {
+	var currentCity;
 	for (var i = 0; i < locations.length; i++) {
-		if (locations[i].city !== city) {
-			city = locations[i].city;
-			addParagraph(city);
+		if (locations[i].city !== currentCity) {
+			currentCity = locations[i].city;
+			addCityToList(currentCity);
 		}
-		addLocation(locations[i]);
+		addLocationToList(locations[i]);
 	}
-}
-
-function errorMessage(){
-	$('#locations').append('<h3 class="error">Impossibile caricare la lista.</h3>');
 }

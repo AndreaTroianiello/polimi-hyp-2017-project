@@ -5,9 +5,8 @@ var previousUrl;
 var previousLabel;
 
 $(document).ready(function () {
-
     addDynamicLink();
-    cvLoaders(URL);
+    cvLoaders();
 
     /* The following are events */
 
@@ -17,27 +16,26 @@ $(document).ready(function () {
 
     $(".next").click(function () {
         URL.id = next;
-        cvLoaders(URL);
+        cvLoaders();
     });
 
     $(".previous").click(function () {
         URL.id = previous;
-        cvLoaders(URL);
+        cvLoaders();
     });
-
 });
 
-function cvLoaders(URL) {
-    setDoctorURL(URL);
-    getDoctor(URL);
-    getCV(URL);
-    setNext(URL);
-    setPrevious(URL);
-    fixURL(URL);
+function cvLoaders() {
+    setDoctorURL();
+    getDoctor();
+    getCV();
+    setNext();
+    setPrevious();
+    fixURL();
 }
 
 
-function getCV(URL) {
+function getCV() {
     $.ajax({
         method: "GET",
         dataType: "json",
@@ -58,7 +56,7 @@ function setCV(cv) {
 }
 
 
-function getDoctor(URL) {
+function getDoctor() {
     $.ajax({
         method: "GET",
         dataType: "json",
@@ -88,7 +86,6 @@ function addDynamicLink() {
     if (previousLabel !== null) {
         $('#sidemenu').append("<a href='" + previousUrl + "' class='list-group-item'>" + previousLabel + "</a>");
     }
-
     window.sessionStorage.clear();
 }
 
@@ -101,7 +98,7 @@ function setSessionInfo() {
 }
 
 
-function fixURL(URL) {
+function fixURL() {
     fixString = "/pages/curriculum.html?id=" + URL.id;
     if (URL.filter != null) {
         fixString += "&filter=" + URL.filter + "&value=" + URL.value;
@@ -110,7 +107,7 @@ function fixURL(URL) {
 }
 
 
-function setDoctorURL(URL) {
+function setDoctorURL() {
     var doctor = "./doctor.html?id=" + URL.id;
     if (URL.filter != null) {
         doctor += "&filter=" + URL.filter + "&value=" + URL.value;
@@ -120,7 +117,7 @@ function setDoctorURL(URL) {
 }
 
 
-function setNext(URL) {
+function setNext() {
     $.ajax({
         method: "GET",
         dataType: "json",
@@ -140,7 +137,7 @@ function setNext(URL) {
 }
 
 
-function setPrevious(URL) {
+function setPrevious() {
     $.ajax({
         method: "GET",
         dataType: "json",

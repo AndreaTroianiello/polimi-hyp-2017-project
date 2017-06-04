@@ -1,14 +1,12 @@
-var serverapiservice = "/services/";
-var serverapiarea = "/areas/";
-var serverapidoctor = "/doctors/";
+var serviceapi = "/services/";
+var areaapi = "/areas/";
+var doctorapi = "/doctors/";
 
 $(document).ready(function () {
-    if (URL.id == null) {
-        URL.id = 0;
-    }
-    setSideBarURLs(URL.id);
-    getService(URL.id);
-    getSideMenu();
+    setSideBarURLs(URL);
+    addDynamicLink();
+
+    getService(URL);
 
 });
 
@@ -26,20 +24,19 @@ function getService(id) {
             setResponsible(response.responsible);
         },
         error: function (request, error) {
-            $('title').text("Servizio " + id);
-            $('#title-service-name').text("Servizio " + id);
-            $('#service-desc').html("<p class='text-center'>Impossibile ottenere le informazioni richieste.</p>");
-            setArea(response.area);
-            setResponsible(response.responsible);
+
         }
     });
 }
 
-function setSideBarURLs(id) {
-    $('#docOpServ').attr("href", "./doctor-operating-service.html?id=" + id);
-    $('#where').attr("href", "./where.html?id=" + id);
-
+function setErrorService() {
+    $('title').text("Servizio " + id);
+    $('#title-service-name').text("Servizio " + id);
+    $('#service-desc').html("<p class='text-center'>Impossibile ottenere le informazioni richieste.</p>");
+    setArea(response.area);
+    setResponsible(response.responsible);
 }
+
 
 function setArea(id) {
     $.ajax({
@@ -75,18 +72,23 @@ function setResponsible(id) {
     });
 }
 
-function getSideMenu() {
-    previous_label = window.sessionStorage.getItem("label");
-    previous_url = window.sessionStorage.getItem("url");
-    if (previous_label !== null) {
-        $('#sidemenu').append("<a href='" + previous_url + "' class='list-group-item'>" + previous_label + "</a>");
+
+function setSideBarURLs(URL) {
+    $('#docOpServ').attr("href", "./doctor-operating-service.html?id=" + id);
+    $('#where').attr("href", "./where.html?id=" + id);
+}
+
+
+function addDynamicLink() {
+    previousLabel = window.sessionStorage.getItem("label");
+    previousUrl = window.sessionStorage.getItem("url");
+    if (previousLabel !== null) {
+        $('#sidemenu').append("<a href='" + previousUrl + "' class='list-group-item'>" + previousLabel + "</a>");
     }
     window.sessionStorage.clear();
 }
 
 var URL = function () {
-    // This function is anonymous, is executed immediately and 
-    // the return value is assigned to QueryString!
     var query_string = {};
     var query = window.location.search.substring(1);
     var vars = query.split("&");
@@ -103,6 +105,9 @@ var URL = function () {
         } else {
             query_string[pair[0]].push(decodeURIComponent(pair[1]));
         }
+    }
+    if (query_string.id == null) {
+        query_string = 1;
     }
     return query_string;
 }();

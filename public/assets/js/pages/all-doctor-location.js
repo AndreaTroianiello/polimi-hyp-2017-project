@@ -1,11 +1,9 @@
-var serverapidoctor = "/doctors";
-var serverapilocation = "/locations/";
-var serverapiservice = "/services/";
+var doctorapi = "/doctors/";
+var locationapi = "/locations/";
+var serviceapi = "/services/";
 
 $(document).ready(function () {
-    if (URL.filter == null) {
-        URL.filter = 0;
-    }
+
     window.sessionStorage.clear();
     getDoctors(URL);
     getLocationName(URL.filter);
@@ -13,8 +11,6 @@ $(document).ready(function () {
 
 
 var URL = function () {
-    // This function is anonymous, is executed immediately and 
-    // the return value is assigned to QueryString!
     var query_string = {};
     var query = window.location.search.substring(1);
     var vars = query.split("&");
@@ -32,13 +28,15 @@ var URL = function () {
             query_string[pair[0]].push(decodeURIComponent(pair[1]));
         }
     }
+    if (query_string.filter == null) {
+        query_string.filter = 1;
+    }
     return query_string;
 }();
 
-function setSideMenu() {
-    window.sessionStorage.setItem("label", $('title').text());
-    window.sessionStorage.setItem("url", window.location.href);
-}
+
+
+
 
 function getDoctors(URL) {
     $.ajax({
@@ -103,4 +101,11 @@ function getServiceName(p, operates) {
             $(p).text("Servizio " + operates);
         }
     });
+}
+
+
+
+function setSessionInfo() {
+    window.sessionStorage.setItem("label", $('title').text());
+    window.sessionStorage.setItem("url", window.location.href);
 }
