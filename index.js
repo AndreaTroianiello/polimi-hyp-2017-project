@@ -1,19 +1,29 @@
 const express = require("express");
-const app = express();
 const bodyParser = require("body-parser");
 const _ = require("lodash");
 const sqlDbFactory = require("knex");
+const process = require("process");
 
-let production = false;
-
-const sqlDb = sqlDbFactory({
-	client: "sqlite3",
-	debug: true,
-	connection: {
-		filename: "./other/medicalcenter.sqlite"
-	},
-	useNullAsDefault: true
-});
+const app = express();
+const DEV = process.env.DEV;
+let sqlDb;
+if (DEV) {
+	sqlDb = sqlDbFactory({
+		client: "sqlite3",
+		debug: true,
+		connection: {
+			filename: "./other/medicalcenter.sqlite"
+		},
+		useNullAsDefault: true
+	});
+} else {
+	sqlDb = sqlDbFactory({
+		debug: true,
+		client: "pg",
+		connection: process.env.DATABASE_URL,
+		ssl: true
+	});
+}
 
 
 let whoweare = require("./other/json_db/whoweare.json");
@@ -39,7 +49,7 @@ app.use(bodyParser.urlencoded({
 //Set the server's port
 let serverPort = process.env.PORT || 5000;
 app.set("port", serverPort);
-let serverUrl = ["http://localhost:"+serverPort+"/assets/img/", "https://polimi-hyp-2017-team-10459278.herokuapp.com/assets/img/"];
+let serverUrl = ["http://localhost:" + serverPort + "/assets/img/", "https://polimi-hyp-2017-team-10459278.herokuapp.com/assets/img/"];
 
 //Start the server on port 5000
 app.listen(serverPort, function () {
@@ -134,9 +144,9 @@ function initDb() {
 					);
 				})
 				.then(() => {
-					let select = sqlDb.select("id","img").from("locations").then(result =>{
+					let select = sqlDb.select("id", "img").from("locations").then(result => {
 						result.map(location => {
-							sqlDb("locations").where("id",location.id).update("img", (production?serverUrl[1]:serverUrl[0])+location.img).then(()=>{console.log("fixed",location.id);})
+							sqlDb("locations").where("id", location.id).update("img", (DEV ? serverUrl[0] : serverUrl[1]) + location.img).then(() => { console.log("fixed", location.id); })
 						});
 					})
 				});
@@ -172,9 +182,9 @@ function initDb() {
 					);
 				})
 				.then(() => {
-					let select = sqlDb.select("id","img").from("doctors").then(result =>{
+					let select = sqlDb.select("id", "img").from("doctors").then(result => {
 						result.map(doctor => {
-							sqlDb("doctors").where("id",doctor.id).update("img", (production?serverUrl[1]:serverUrl[0])+doctor.img).then(()=>{console.log("fixed",doctor.id);})
+							sqlDb("doctors").where("id", doctor.id).update("img", (DEV ? serverUrl[0] : serverUrl[1]) + doctor.img).then(() => { console.log("fixed", doctor.id); })
 						});
 					})
 				});
@@ -200,9 +210,9 @@ function initDb() {
 					);
 				})
 				.then(() => {
-					let select = sqlDb.select("id","path").from("locationimages").then(result =>{
+					let select = sqlDb.select("id", "path").from("locationimages").then(result => {
 						result.map(locationimage => {
-							sqlDb("locationimages").where("id",locationimage.id).update("path", (production?serverUrl[1]:serverUrl[0])+locationimage.path).then(()=>{console.log("fixed",locationimage.id);})
+							sqlDb("locationimages").where("id", locationimage.id).update("path", (DEV ? serverUrl[0] : serverUrl[1]) + locationimage.path).then(() => { console.log("fixed", locationimage.id); })
 						});
 					})
 				});
