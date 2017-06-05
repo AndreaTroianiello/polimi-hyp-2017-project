@@ -1,42 +1,11 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const _ = require("lodash");
-const sqlDbFactory = require("knex");
 const process = require("process");
+const dbms = require("./other/database.js");
 
 const app = express();
 const DEV = process.env.DEV;
-let sqlDb;
-if (DEV) {
-	sqlDb = sqlDbFactory({
-		client: "sqlite3",
-		debug: true,
-		connection: {
-			filename: "./other/medicalcenter.sqlite"
-		},
-		useNullAsDefault: true
-	});
-} else {
-	sqlDb = sqlDbFactory({
-		debug: true,
-		client: "pg",
-		connection: process.env.DATABASE_URL,
-		ssl: true
-	});
-}
-
-
-let whoweare = require("./other/json_db/whoweare.json");
-let areas = require("./other/json_db/areas.json");
-let services = require("./other/json_db/services.json");
-let locations = require("./other/json_db/locations.json");
-let doctors = require("./other/json_db/doctors.json");
-let locationsImages = require("./other/json_db/locationimages.json");
-let locationsDirections = require("./other/json_db/locationdirections.json");
-let serviceLocation = require("./other/json_db/servicelocation.json");
-let doctorLocation = require("./other/json_db/doctorlocation.json");
-let curriculums = require("./other/json_db/curriculums.json");
-
 
 app.use(express.static(__dirname + "/public"));
 
@@ -51,265 +20,16 @@ let serverPort = process.env.PORT || 5000;
 app.set("port", serverPort);
 let serverUrl = ["http://localhost:" + serverPort + "/assets/img/", "https://polimi-hyp-2017-team-10459278.herokuapp.com/assets/img/"];
 
-//Start the server on port 5000
+// get the database
+let sqlDb = dbms.getSQLDB(DEV,serverUrl); 
+
+//create DB if it doesn't exist
+dbms.initDB();
+
+//Start the server 
 app.listen(serverPort, function () {
-	console.log(`Your app is ready at port ${serverPort}`);
+	console.log(`Your app is ready at ${serverUrl}`);
 });
-
-/* =========================================================
-============================================================
-	Database APIs
-============================================================
-========================================================== */
-
-function initDb() {
-	sqlDb.schema.hasTable("whoweare").then(exists => {
-		if (!exists) {
-			sqlDb.schema
-				.createTable("whoweare", table => {
-					table.increments('id');
-					table.string('tag');
-					table.string('information');
-				})
-				.then(() => {
-					return Promise.all(
-						_.map(whoweare, a => {
-							return sqlDb("whoweare").insert(a);
-						})
-					);
-				});
-		} else {
-			return true;
-		}
-	});
-	sqlDb.schema.hasTable("areas").then(exists => {
-		if (!exists) {
-			sqlDb.schema
-				.createTable("areas", table => {
-					table.increments('id');
-					table.string('name');
-					table.string('desc');
-				})
-				.then(() => {
-					return Promise.all(
-						_.map(areas, a => {
-							return sqlDb("areas").insert(a);
-						})
-					);
-				});
-		} else {
-			return true;
-		}
-	});
-	sqlDb.schema.hasTable("services").then(exists => {
-		if (!exists) {
-			sqlDb.schema
-				.createTable("services", table => {
-					table.increments('id');
-					table.string('name');
-					table.string('description');
-					table.integer('area');
-					table.foreign('area').references('area.id');
-				})
-				.then(() => {
-					return Promise.all(
-						_.map(services, s => {
-							return sqlDb("services").insert(s);
-						})
-					);
-				});
-		} else {
-			return true;
-		}
-	});
-	sqlDb.schema.hasTable("locations").then(exists => {
-		if (!exists) {
-			sqlDb.schema
-				.createTable("locations", table => {
-					table.increments('id');
-					table.string('name');
-					table.string('city');
-					table.string('address');
-					table.string('phone');
-					table.string('fax');
-					table.string('email');
-					table.string('timetable');
-					table.string('img');
-				})
-				.then(() => {
-					return Promise.all(
-						_.map(locations, l => {
-							return sqlDb("locations").insert(l);
-						})
-					);
-				})
-				.then(() => {
-					let select = sqlDb.select("id", "img").from("locations").then(result => {
-						result.map(location => {
-							sqlDb("locations").where("id", location.id).update("img", (DEV ? serverUrl[0] : serverUrl[1]) + location.img).then(() => { console.log("fixed", location.id); })
-						});
-					})
-				});
-		} else {
-			return true;
-		}
-	});
-	sqlDb.schema.hasTable("doctors").then(exists => {
-		if (!exists) {
-			sqlDb.schema
-				.createTable("doctors", table => {
-					table.increments('id');
-					table.string('surname');
-					table.string('name');
-					table.boolean('male');
-					table.string('phone');
-					table.string('fax');
-					table.string('email');
-					table.string('img');
-					table.integer('operates');
-					table.integer('manages_s').unsigned();
-					table.integer('manages_a').unsigned();
-					table.string('desc');
-					table.foreign('operates').references('services.id');
-					table.foreign('manages_s').references('services.id');
-					table.foreign('manages_a').references('areas.id');
-				})
-				.then(() => {
-					return Promise.all(
-						_.map(doctors, l => {
-							return sqlDb("doctors").insert(l);
-						})
-					);
-				})
-				.then(() => {
-					let select = sqlDb.select("id", "img").from("doctors").then(result => {
-						result.map(doctor => {
-							sqlDb("doctors").where("id", doctor.id).update("img", (DEV ? serverUrl[0] : serverUrl[1]) + doctor.img).then(() => { console.log("fixed", doctor.id); })
-						});
-					})
-				});
-		} else {
-			return true;
-		}
-	});
-	sqlDb.schema.hasTable("locationimages").then(exists => {
-		if (!exists) {
-			sqlDb.schema
-				.createTable("locationimages", table => {
-					table.increments('id');
-					table.string('path');
-					table.integer('inc');
-					table.integer('location');
-					table.foreign('location').references('locations.id');
-				})
-				.then(() => {
-					return Promise.all(
-						_.map(locationsImages, l => {
-							return sqlDb("locationimages").insert(l);
-						})
-					);
-				})
-				.then(() => {
-					let select = sqlDb.select("id", "path").from("locationimages").then(result => {
-						result.map(locationimage => {
-							sqlDb("locationimages").where("id", locationimage.id).update("path", (DEV ? serverUrl[0] : serverUrl[1]) + locationimage.path).then(() => { console.log("fixed", locationimage.id); })
-						});
-					})
-				});
-		} else {
-			return true;
-		}
-	});
-	sqlDb.schema.hasTable("locationdirections").then(exists => {
-		if (!exists) {
-			sqlDb.schema
-				.createTable("locationdirections", table => {
-					table.increments('id');
-					table.string('directions');
-					table.integer('location');
-					table.foreign('location').references('locations.id');
-				})
-				.then(() => {
-					return Promise.all(
-						_.map(locationsDirections, l => {
-							return sqlDb("locationdirections").insert(l);
-						})
-					);
-				});
-		} else {
-			return true;
-		}
-	});
-	sqlDb.schema.hasTable("servicelocation").then(exists => {
-		if (!exists) {
-			sqlDb.schema
-				.createTable("servicelocation", table => {
-					table.increments('id');
-					table.integer('service');
-					table.integer('location');
-					table.foreign('service').references('services.id');
-					table.foreign('location').references('locations.id');
-				})
-				.then(() => {
-					return Promise.all(
-						_.map(serviceLocation, l => {
-							return sqlDb("servicelocation").insert(l);
-						})
-					);
-				});
-		} else {
-			return true;
-		}
-	});
-	sqlDb.schema.hasTable("doctorlocation").then(exists => {
-		if (!exists) {
-			sqlDb.schema
-				.createTable("doctorlocation", table => {
-					table.increments('id');
-					table.integer('doctor');
-					table.integer('location');
-					table.foreign('doctor').references('doctors.id');
-					table.foreign('location').references('locations.id');
-				})
-				.then(() => {
-					return Promise.all(
-						_.map(doctorLocation, l => {
-							return sqlDb("doctorlocation").insert(l);
-						})
-					);
-				});
-		} else {
-			return true;
-		}
-	});
-	sqlDb.schema.hasTable("curriculums").then(exists => {
-		if (!exists) {
-			sqlDb.schema
-				.createTable("curriculums", table => {
-					table.increments('id');
-					table.integer('doctor');
-					table.string('desc');
-					table.foreign('doctor').references('doctors.id');
-				})
-				.then(() => {
-					return Promise.all(
-						_.map(curriculums, c => {
-							return sqlDb("curriculums").insert(c);
-						})
-					);
-				});
-		} else {
-			return true;
-		}
-	});
-}
-
-/* =========================================================
-============================================================
-	RESTful APIs
-============================================================
-========================================================== */
-
 
 
 /* =========================================================
@@ -391,7 +111,6 @@ function filterDoctor(req, query) {
 	return query;
 }
 
-
 app.get("/doctors/:doctor_id/curriculum", function (req, res) {
 	sqlDb("curriculums").where("doctor", req.params.doctor_id).then(result => {
 		if (result.length === 0) {
@@ -403,7 +122,6 @@ app.get("/doctors/:doctor_id/curriculum", function (req, res) {
 		}
 	});
 });
-
 
 /* =========================================================
  Services APIs
@@ -550,9 +268,6 @@ app.get("/locations/:location_id/directions", function (req, res) {
 		})
 });
 
-
-
-
 /* =========================================================
  About us APIs
 ========================================================== */
@@ -562,12 +277,3 @@ app.get("/aboutus", function (req, res) {
 		res.json(result);
 	});
 });
-
-/*====================================================
-======================================================
-	/ RESTful APIs
-======================================================
-====================================================*/
-
-
-initDb();
