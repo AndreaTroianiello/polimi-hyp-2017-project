@@ -6,7 +6,8 @@
 		"phone": "+39 02 29366678",
 		"fax": "+39 02 29366678",
 		"email": "info.leccocorsoitalia@medicalcenter.it",
-		"timetable": "Lun-Sab 08:30-13:00 14:00-18:00"
+		"timetable": "Lun-Sab 08:30-13:00 14:00-18:00",
+		"img": "locations/Clinica Riva.jpg"
 	},
 	{
 		"name": "Clinica Brambilla",
@@ -15,7 +16,8 @@
 		"phone": "+39 02 29367775",
 		"fax": "+39 02 29367775",
 		"email": "info.milanoviavallazze@medicalcenter.it",
-		"timetable": "Lun-Ven 09:00-12:00 13:00-15:00 Sab 08:30-12:30"
+		"timetable": "Lun-Ven 09:00-12:00 13:00-15:00 Sab 08:30-12:30",
+		"img": "locations/Clinica Brambilla.jpg"
   },
 	{
 		"name": "Clinica Nava",
@@ -24,6 +26,7 @@
 		"phone": "+39 02 29366855",
 		"fax": "+39 02 29366855",
 		"email": "info.milanoviaripamonti@medicalcenter.it",
-		"timetable": "Lun-Ven 08:00-12:00 13:00-16:00"
+		"timetable": "Lun-Ven 08:00-12:00 13:00-16:00",
+		"img": "locations/Clinica Nava.jpg"
   }
 ]
