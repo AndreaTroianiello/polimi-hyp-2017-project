@@ -2,47 +2,42 @@
     {
         "inc": 0,
         "location": 1,
-        "path": "locations/Clinica Riva-0.jpg"
+        "path": "locations/clinicariva1.jpg"
     },
     {
         "inc": 1,
         "location": 1,
-        "path": "locations/Clinica Riva-1.jpg"
+        "path": "locations/clinicariva2.jpg"
+    },
+	{
+        "inc": 2,
+        "location": 1,
+        "path": "locations/clinicariva3.jpg"
     },
     {
         "inc": 0,
         "location": 2,
-        "path": "locations/Clinica Brambilla-0.jpg"
+        "path": "locations/clinicabrambilla1.jpg"
     },
     {
         "inc": 1,
         "location": 2,
-        "path": "locations/Clinica Brambilla-1.jpg"
-    },
-    {
-        "inc": 2,
-        "location": 2,
-        "path": "locations/Clinica Brambilla-2.jpg"
-    },
-    {
-        "inc": 3,
-        "location": 2,
-        "path": "locations/Clinica Brambilla-3.jpg"
+        "path": "locations/clinicabrambilla2.jpg"
     },
     {
         "inc": 0,
         "location": 3,
-        "path": "locations/Clinica Nava-0.jpg"
+        "path": "locations/clinicanava1.jpg"
     },
     {
         "inc": 1,
         "location": 3,
-        "path": "locations/Clinica Nava-1.jpg"
+        "path": "locations/clinicanava2.jpg"
     },
     {
         "inc": 2,
         "location": 3,
-        "path": "locations/Clinica Nava-2.jpg"
+        "path": "locations/clinicanava3.jpg"
     }
 
 ]

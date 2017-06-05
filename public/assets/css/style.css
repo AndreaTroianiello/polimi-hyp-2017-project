@@ -67,10 +67,10 @@
 	}
 
 	.doc-image {
-    border: 1px solid #e6e6e6;
-    border-radius: 15px;
-    margin-bottom:10px;
-  }
+		border: 1px solid #e6e6e6;
+		border-radius: 15px;
+		margin-bottom: 10px;
+	}
 
 	.doc-info {
 		font-size: 1.2em;
@@ -115,33 +115,46 @@
 		color: #000;
 	}
 
-	@media (max-width: 768px){
-		.list-doc h3{
+	@media (max-width: 768px) {
+		.list-doc h3 {
 			font-size: 20px;
 		}
 	}
-	@media (max-width: 360px){
-		.list-doc h3{
+
+	@media (max-width: 360px) {
+		.list-doc h3 {
 			font-size: 17px;
 		}
 	}
 
-.pager .next button{
-  float: right;
-}
-.pager .previous button{
-  float: left;
-}
+	.pager .next button {
+		float: right;
+	}
 
-.btn-default:focus, .btn-default:active{
-	outline: 0 none;
-}
+	.pager .previous button {
+		float: left;
+	}
 
-#service-desc{
-	margin-bottom:15px;
-	font-size: 1.2em;
-}
+	.btn-default:focus,
+	.btn-default:active {
+		outline: 0 none;
+	}
 
-#mobile-nav ul .menu-has-children i.fa-chevron-down:hover {
-  color: #03C4EB;
-}
+	#service-desc {
+		margin-bottom: 15px;
+		font-size: 1.2em;
+	}
+
+	#mobile-nav ul .menu-has-children i.fa-chevron-down:hover {
+		color: #03C4EB;
+	}
+
+	@font-face {
+		font-family: 'antro';
+		src: local("antro"), url(../fonts/antro-vectra.otf ) format("opentype");
+	}
+
+	#header #logo h1 {
+		font-family: 'antro';
+		text-transform: none;
+	}
