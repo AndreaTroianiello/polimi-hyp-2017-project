@@ -100,7 +100,7 @@ function setAreaService(doctor) {
     if (doctor.manages_a !== null) {
         var m_a = "<a href='./area.html?id=" + doctor.manages_a + "'></a>";
         $('#manages_a').html(m_a);
-        setServiceName($('#manages_a a:first'), doctor.manages_a);
+        setAreaName($('#manages_a a:first'), doctor.manages_a);
     } else {
         $('#manages_a').html("-");
     }
