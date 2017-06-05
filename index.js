@@ -4,7 +4,7 @@ const bodyParser = require("body-parser");
 const _ = require("lodash");
 const sqlDbFactory = require("knex");
 
-let production = true;
+let production = false;
 
 const sqlDb = sqlDbFactory({
 	client: "sqlite3",
@@ -202,7 +202,7 @@ function initDb() {
 				.then(() => {
 					let select = sqlDb.select("id","path").from("locationimages").then(result =>{
 						result.map(locationimage => {
-							sqlDb("locationimages").where("id",locationimage.id).update("path", (production?serverUrl[1]:serverUrl[0])+locationimage.img).then(()=>{console.log("fixed",locationimage.id);})
+							sqlDb("locationimages").where("id",locationimage.id).update("path", (production?serverUrl[1]:serverUrl[0])+locationimage.path).then(()=>{console.log("fixed",locationimage.id);})
 						});
 					})
 				});
