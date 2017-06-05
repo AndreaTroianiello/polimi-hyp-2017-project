@@ -1,9 +1,10 @@
-//Call the packages
 const express = require("express");
 const app = express();
 const bodyParser = require("body-parser");
 const _ = require("lodash");
 const sqlDbFactory = require("knex");
+
+let production = true;
 
 const sqlDb = sqlDbFactory({
 	client: "sqlite3",
@@ -38,6 +39,7 @@ app.use(bodyParser.urlencoded({
 //Set the server's port
 let serverPort = process.env.PORT || 5000;
 app.set("port", serverPort);
+let serverUrl = ["http://localhost:"+serverPort+"/assets/img/", "https://polimi-hyp-2017-team-10459278.herokuapp.com/assets/img/"];
 
 //Start the server on port 5000
 app.listen(serverPort, function () {
@@ -122,6 +124,7 @@ function initDb() {
 					table.string('fax');
 					table.string('email');
 					table.string('timetable');
+					table.string('img');
 				})
 				.then(() => {
 					return Promise.all(
@@ -129,6 +132,13 @@ function initDb() {
 							return sqlDb("locations").insert(l);
 						})
 					);
+				})
+				.then(() => {
+					let select = sqlDb.select("id","img").from("locations").then(result =>{
+						result.map(location => {
+							sqlDb("locations").where("id",location.id).update("img", (production?serverUrl[1]:serverUrl[0])+location.img).then(()=>{console.log("fixed",location.id);})
+						});
+					})
 				});
 		} else {
 			return true;
@@ -160,6 +170,13 @@ function initDb() {
 							return sqlDb("doctors").insert(l);
 						})
 					);
+				})
+				.then(() => {
+					let select = sqlDb.select("id","img").from("doctors").then(result =>{
+						result.map(doctor => {
+							sqlDb("doctors").where("id",doctor.id).update("img", (production?serverUrl[1]:serverUrl[0])+doctor.img).then(()=>{console.log("fixed",doctor.id);})
+						});
+					})
 				});
 		} else {
 			return true;
@@ -181,6 +198,13 @@ function initDb() {
 							return sqlDb("locationimages").insert(l);
 						})
 					);
+				})
+				.then(() => {
+					let select = sqlDb.select("id","path").from("locationimages").then(result =>{
+						result.map(locationimage => {
+							sqlDb("locationimages").where("id",locationimage.id).update("path", (production?serverUrl[1]:serverUrl[0])+locationimage.img).then(()=>{console.log("fixed",locationimage.id);})
+						});
+					})
 				});
 		} else {
 			return true;
@@ -358,9 +382,6 @@ function filterDoctor(req, query) {
 }
 
 
-
-
-
 app.get("/doctors/:doctor_id/curriculum", function (req, res) {
 	sqlDb("curriculums").where("doctor", req.params.doctor_id).then(result => {
 		if (result.length === 0) {
@@ -500,10 +521,10 @@ app.get("/locations/:location_id", function (req, res) {
 
 app.get("/locations/:location_id/images", function (req, res) {
 	sqlDb("locationimages")
-		.innerJoin("locations","locations.id","locationimages.location")
+		.innerJoin("locations", "locations.id", "locationimages.location")
 		.where("location", req.params.location_id)
 		.orderBy("inc", "asc")
-		.select("name","inc","path")
+		.select("name", "inc", "path")
 		.then(result => {
 			res.json(result);
 		})
@@ -511,9 +532,9 @@ app.get("/locations/:location_id/images", function (req, res) {
 
 app.get("/locations/:location_id/directions", function (req, res) {
 	sqlDb("locationdirections")
-		.innerJoin("locations","locations.id","locationdirections.location")
+		.innerJoin("locations", "locations.id", "locationdirections.location")
 		.where("location", req.params.location_id)
-		.select("name","address","city","directions")
+		.select("name", "address", "city", "directions")
 		.then(result => {
 			res.json(result);
 		})
