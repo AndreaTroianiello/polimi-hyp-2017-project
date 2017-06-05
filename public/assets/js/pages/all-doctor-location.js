@@ -86,7 +86,7 @@ function addLetterToList(letter) {
 
 function addDoctorToList(doctor) {
     $('#doctorsList').append(
-        "<a href='doctor.html?id=" + doctor.id + "&filter=location&value=" + URL.filter + "' class='list-doc' ><div class='col-xs-12 col-sm-6'><div class='row'><div class='col-xs-4 col-sm-3'><img class='img-responsive list-img center-block' src='" + doctor.img + "' alt='" + doctor.surname + "'></div><div class='col-xs-8 col-sm-9'><h3>" + doctor.surname + " " + doctor.name + "</h3><p></p></div></div></div></a>"
+        "<a href='doctor.html?id=" + doctor.id + "&filter=location&value=" + URL.filter + "' class='list-doc' ><div class='col-xs-12 col-sm-6'><div class='row'><div class='col-xs-4 col-sm-3'><img class='img-responsive list-img center-block' src='" + doctor.img + "' alt='" + doctor.surname + "'></div><div class='col-xs-8 col-sm-9'><h3>" + doctor.surname + " " + doctor.name + "</h3><p>"+doctor.email+"</p></div></div></div></a>"
     );
 }
 
