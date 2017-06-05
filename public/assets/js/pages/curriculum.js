@@ -1,91 +1,104 @@
-var previous;
-var next;
-var serverapi = "/doctors/";
-var previous_url;
-var previous_label;
+var doctorapi = "/doctors/";
+var nextDoctor;
+var previousDoctor;
+var previousUrl;
+var previousLabel;
 
 $(document).ready(function () {
-    getSideMenu();
-    if (URL.id == null) {
-        URL.id = 0;
-    }
-    var docUrl = "./doctor.html?id=" + URL.id;
-    if (URL.filter != null) {
-        docUrl += "&filter=" + URL.filter + "&value=" + URL.value;
-    }
-    $('#doctor').attr("href", docUrl);
-    $('#doctor-breadcrumb').attr("href", docUrl);
-    
-    getCV(URL.id);
+    addDynamicLink();
+    cvLoaders();
+
+    /* The following are events */
 
     $('#doctor').click(function () {
         setSideMenu();
     });
 
-     $(".next").click(function () {
-        URL.id= next;
-        getCV(next);
+    $(".next").click(function () {
+        URL.id = next;
+        cvLoaders();
     });
 
     $(".previous").click(function () {
-        URL.id=previous;
-        getCV(previous);
+        URL.id = previous;
+        cvLoaders();
     });
-
 });
 
+function cvLoaders() {
+    setDoctorURL();
+    getDoctor();
+    getCV();
+    setNext();
+    setPrevious();
+    fixURL();
+}
 
-function getSideMenu() {
-    previous_label = window.sessionStorage.getItem("label");
-    previous_url = window.sessionStorage.getItem("url");
-    if (previous_label !== null) {
-        $('#sidemenu').append("<a href='" + previous_url + "' class='list-group-item'>Torna a " + previous_label + "</a>");
+
+function getCV() {
+    $.ajax({
+        method: "GET",
+        dataType: "json",
+        crossDomain: true,
+        url: doctorapi + URL.id + "/curriculum",
+        success: function (response) {
+            setCV(response);
+        },
+        error: function (request, error) {
+        }
+    });
+}
+
+
+function setCV(cv) {
+    $('#cvcontent').html(cv.desc);
+    $('#cvcontent').addClass("text-justify");
+}
+
+
+function getDoctor() {
+    $.ajax({
+        method: "GET",
+        dataType: "json",
+        crossDomain: true,
+        url: doctorapi + URL.id,
+        success: function (response) {
+            setDoctor(response);
+        },
+        error: function (request, error) {
+            $('title').text("Errore - Impossibile caricare informazioni richieste.");
+            $('#title-doc-name').text("Errore - Impossibile caricare informazioni.");
+        }
+    });
+}
+
+
+function setDoctor(doctor) {
+    $('title').text("CV " + doctor.surname + " " + doctor.name);
+    $('#title-doc-name').text("Curriculum " + doctor.surname + " " + doctor.name);
+}
+
+
+function addDynamicLink() {
+    previousLabel = window.sessionStorage.getItem("label");
+    previousUrl = window.sessionStorage.getItem("url");
+
+    if (previousLabel !== null) {
+        $('#sidemenu').append("<a href='" + previousUrl + "' class='list-group-item'>" + previousLabel + "</a>");
     }
     window.sessionStorage.clear();
 }
 
-function setSideMenu() {
-    if (previous_label !== null) {
-        window.sessionStorage.setItem("label", previous_label);
-        window.sessionStorage.setItem("url", previous_url);
+
+function setSessionInfo() {
+    if (previousLabel !== null) {
+        window.sessionStorage.setItem("label", previousLabel);
+        window.sessionStorage.setItem("url", previousUrl);
     }
 }
 
-function getCV(id) {
-    $.ajax({
-        method: "GET",
-        dataType: "json",
-        crossDomain: true,
-        url: serverapi + id + "/curriculum",
-        success: function (response) {
-            $('#cvcontent').html(response.cv);
-            getDoctor(id);
 
-            setNext(id);
-            setPrevious(id);
-            fixURL(URL);
-        },
-        error: function (request, error) {
-        }
-    });
-}
-
-function getDoctor(id) {
-    $.ajax({
-        method: "GET",
-        dataType: "json",
-        crossDomain: true,
-        url: serverapi + id,
-        success: function (response) {
-            $('title').text("CV "+response.surname+ " "+response.name);
-            $('#title-doc-name').text("Curriculum "+response.surname+ " "+response.name);
-        },
-        error: function (request, error) {
-        }
-    });
-}
-
-function fixURL(URL) {
+function fixURL() {
     fixString = "/pages/curriculum.html?id=" + URL.id;
     if (URL.filter != null) {
         fixString += "&filter=" + URL.filter + "&value=" + URL.value;
@@ -93,12 +106,23 @@ function fixURL(URL) {
     window.history.pushState("Curriculum", "Curriculum", fixString);
 }
 
-function setNext(id) {
+
+function setDoctorURL() {
+    var doctor = "./doctor.html?id=" + URL.id;
+    if (URL.filter != null) {
+        doctor += "&filter=" + URL.filter + "&value=" + URL.value;
+    }
+    $('#doctor').attr("href", doctor);
+    $('#doctor-breadcrumb').attr("href", doctor);
+}
+
+
+function setNext() {
     $.ajax({
         method: "GET",
         dataType: "json",
         crossDomain: true,
-        url: serverapi + id + "/next",
+        url: doctorapi + URL.id + "/next",
         data: {
             "filter": URL.filter,
             "value": URL.value
@@ -107,16 +131,18 @@ function setNext(id) {
             next = response.id;
         },
         error: function (request, error) {
+            $(".next").hide();
         }
     });
 }
 
-function setPrevious(id) {
+
+function setPrevious() {
     $.ajax({
         method: "GET",
         dataType: "json",
         crossDomain: true,
-        url: serverapi + id + "/previous",
+        url: doctorapi + URL.id + "/previous",
         data: {
             "filter": URL.filter,
             "value": URL.value
@@ -125,14 +151,13 @@ function setPrevious(id) {
             previous = response.id;
         },
         error: function (request, error) {
-
+            $(".previous").hide();
         }
     });
 }
 
+
 var URL = function () {
-    // This function is anonymous, is executed immediately and 
-    // the return value is assigned to QueryString!
     var query_string = {};
     var query = window.location.search.substring(1);
     var vars = query.split("&");
@@ -149,6 +174,9 @@ var URL = function () {
         } else {
             query_string[pair[0]].push(decodeURIComponent(pair[1]));
         }
+    }
+    if (query_string.id == null) {
+        query_string.id = 1;
     }
     return query_string;
 }();

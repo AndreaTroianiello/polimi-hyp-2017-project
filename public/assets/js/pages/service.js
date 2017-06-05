@@ -1,92 +1,114 @@
-var serverapiservice = "/services/";
-var serverapiarea = "/areas/";
-var serverapidoctor = "/doctors/";
+var serviceapi = "/services/";
+var areaapi = "/areas/";
+var doctorapi = "/doctors/";
 
 $(document).ready(function () {
-    if (URL.id == null) {
-        URL.id = 0;
-    }
-    setSideBarURLs(URL.id);
-    getService(URL.id);
-    getSideMenu();
+    setSideBarURLs();
+    addDynamicLink();
+    getService();
 
 });
 
-function getService(id) {
+function getService() {
     $.ajax({
         method: "GET",
         dataType: "json",
         crossDomain: true,
-        url: serverapiservice + id,
+        url: serviceapi + URL.id,
         success: function (response) {
-            $('#title-service-name').text(response.name);
-            $('title').text(response.name);
-            $('#service-desc').html(response.description);
-            setArea(response.area);
-            setResponsible(response.responsible);
+            setService(response);
+            getArea(response.area);
+            getResponsible(response.responsible);
         },
         error: function (request, error) {
-            $('title').text("Servizio " + id);
-            $('#title-service-name').text("Servizio " + id);
-            $('#service-desc').html("<p class='text-center'>Impossibile ottenere le informazioni richieste.</p>");
-            setArea(response.area);
-            setResponsible(response.responsible);
+            setErrorService();
         }
     });
 }
 
-function setSideBarURLs(id) {
-    $('#docOpServ').attr("href", "./doctor-operating-service.html?id=" + id);
-    $('#where').attr("href", "./where.html?id=" + id);
 
+function setService(service) {
+    $('#title-service-name').text(service.name);
+    $('title').text(service.name);
+    $('#service-desc').html(service.description);
 }
 
-function setArea(id) {
+
+function setErrorService() {
+    $('title').text("Servizio " + URL.id);
+    $('#title-service-name').text("Servizio " + URL.id);
+    $('#service-desc').html("<p class='text-center'>Impossibile ottenere le informazioni richieste.</p>");
+}
+
+
+function getArea(id) {
     $.ajax({
         method: "GET",
         dataType: "json",
         crossDomain: true,
-        url: serverapiarea + id,
+        url: areaapi + id,
         success: function (response) {
-            area = "<a href='./area.html?id=" + id + "' alt='area'>" + response.name + "</a>";
-            $('#area').html(area);
+            setArea(response);
         },
         error: function (request, error) {
-            area = "<a href='./area.html?id=" + id + "' alt='area'>Area " + id + "</a>";
-            $('#area').html(area);
+            setAreaError(id);
         }
     });
 }
 
-function setResponsible(id) {
+function setArea(area) {
+    htmlArea = "<a href='./area.html?id=" + area.id + "' alt='area'>" + area.name + "</a>";
+    $('#area').html(htmlArea);
+}
+
+function setAreaError(id) {
+    areaHtml = "<a href='./area.html?id=" + id + "' alt='area'>Area " + id + "</a>";
+    $('#area').html(areaHtml);
+}
+
+
+function getResponsible(id) {
     $.ajax({
         method: "GET",
         dataType: "json",
         crossDomain: true,
-        url: serverapidoctor + id,
+        url: doctorapi + id,
         success: function (response) {
-            resp = "<a href='./doctor.html?id=" + id + "'>" + response.surname + " " + response.name + "</a>";
-            $('#responsible').html(resp);
+            setResponsible(response);
         },
         error: function (request, error) {
-            resp = "<a href='./doctor.html?id=" + id + "'>Dottor " + id + "</a>";
-            $('#responsible').html(respo);
+            setResponsibleError(id);
         }
     });
 }
 
-function getSideMenu() {
-    previous_label = window.sessionStorage.getItem("label");
-    previous_url = window.sessionStorage.getItem("url");
-    if (previous_label !== null) {
-        $('#sidemenu').append("<a href='" + previous_url + "' class='list-group-item'>" + previous_label + "</a>");
+function setResponsible(doctor) {
+    doctorHtml = "<a href='./doctor.html?id=" + doctor.id + "'>" + doctor.surname + " " + doctor.name + "</a>";
+    $('#responsible').html(doctorHtml);
+}
+
+function setResponsibleError(id) {
+    doctorHtml = "<a href='./doctor.html?id=" + id + "'>Dottor " + id + "</a>";
+    $('#responsible').html(doctorHtml);
+}
+
+
+function setSideBarURLs() {
+    $('#docOpServ').attr("href", "./doctor-operating-service.html?id=" + URL.id);
+    $('#where').attr("href", "./where.html?id=" + URL.id);
+}
+
+
+function addDynamicLink() {
+    previousLabel = window.sessionStorage.getItem("label");
+    previousUrl = window.sessionStorage.getItem("url");
+    if (previousLabel !== null) {
+        $('#sidemenu').append("<a href='" + previousUrl + "' class='list-group-item'>" + previousLabel + "</a>");
     }
     window.sessionStorage.clear();
 }
 
 var URL = function () {
-    // This function is anonymous, is executed immediately and 
-    // the return value is assigned to QueryString!
     var query_string = {};
     var query = window.location.search.substring(1);
     var vars = query.split("&");
@@ -103,6 +125,9 @@ var URL = function () {
         } else {
             query_string[pair[0]].push(decodeURIComponent(pair[1]));
         }
+    }
+    if (query_string.id == null) {
+        query_string = 1;
     }
     return query_string;
 }();

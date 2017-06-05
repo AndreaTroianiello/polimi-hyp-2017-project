@@ -1,53 +1,41 @@
-var serverapi = "/doctors/";
-var serverapiservice = "/services/";
-var serverapiarea = "/areas/";
-var thisPage= "doctor.html";
-var next;
-var previous;
-var previous_url;
-var previous_label;
+var doctorapi = "/doctors/";
+var serviceapi = "/services/";
+var areaapi = "/areas/";
+var nextDoctor;
+var previousDoctor;
+var previousUrl;
+var previousLabel;
 
 $(document).ready(function () {
+    addDynamicLink();
+    doctorLoaders();
 
-    getSideMenu();
-
-
-    if (URL.id == null) {
-        URL.id = 0;
-    }
-
-    var currUrl = "./curriculum.html?id=" + URL.id;
-     if(URL.filter != null){
-        currUrl+="&filter="+URL.filter+"&value="+URL.value;
-    }
-    $('#curriculum').attr("href", currUrl);
-    
-    getDoctor(URL.id);
-
+    /* the following are events */
 
     $(".next").click(function () {
-        URL.id= next;
-        getDoctor(next);
+        URL.id = nextDoctor;
+        doctorLoaders();
     });
 
     $(".previous").click(function () {
-        URL.id=previous;
-        getDoctor(previous);
+        URL.id = previousDoctor;
+        doctorLoaders();
     });
 
-    $('#curriculum').click(function(){
-        setSideMenu();
+    $('#curriculum').click(function () {
+        setSessionInfo();
     });
-
 });
 
-/* ==========================
-    The following are methods used 
-===========================*/
+function doctorLoaders() {
+    setCurriculumURL();
+    getDoctor();
+    setNext();
+    setPrevious();
+    fixURL();
+}
 
 var URL = function () {
-    // This function is anonymous, is executed immediately and 
-    // the return value is assigned to QueryString!
     var query_string = {};
     var query = window.location.search.substring(1);
     var vars = query.split("&");
@@ -65,154 +53,177 @@ var URL = function () {
             query_string[pair[0]].push(decodeURIComponent(pair[1]));
         }
     }
+    if (query_string.id == null) {
+        query_string.id = 1;
+    }
     return query_string;
 }();
 
 
-function getDoctor(id) {
+function getDoctor() {
     $.ajax({
         method: "GET",
         dataType: "json",
         crossDomain: true,
-        url: serverapi + id,
+        url: doctorapi + URL.id,
         success: function (response) {
-            $('title').text(getDoctorName(response));
-            $('#title-doc-name').text(getDoctorName(response));
-            $('#phone').text(response.phone);
-            $('#phone').attr("href", "tel:" + response.phone);
-            $('#fax').text(response.fax);
-            $('#fax').attr("href", "tel:" + response.fax);
-            $('#email').text(response.email);
-            $('#email').attr("href", "mailto:" + response.email);
-            $('.doc-image').attr("src", response.img);
-            $('.doc-info').text(response.desc);
-
-            var op = "<a href='./service.html?id=" + response.operates + "'></a>";
-            $('#operates').html(op);
-            getServiceName($('#operates a:first'),response.operates);
-
-            if (response.manages_a !== null) {
-                m_a = "<a href='./area.html?id=" + response.manages_a + "'></a>";
-                $('#manages_a').html(m_a);
-                getServiceName($('#manages_a a:first'),response.manages_a);
-            }else{
-                $('#manages_a').html("-");
-            }
-
-            if (response.manages_s !== null) {
-                m_s = "<a href='./service.html?id=" + response.manages_s + "'></a>";
-                $('#manages_s').html(m_s);
-                getServiceName($('#manages_s a:first'),response.manages_s);
-            }else{
-                $('#manages_s').html("-");
-            }
-            
-
-            setNext(id);
-            setPrevious(id);
-            fixURL(URL);
+            setDoctorInfo(response);
+            setAreaService(response);
         },
         error: function (request, error) {
-        }
-    });
-}
-
-function capitalizeFirstLetter(temp) {
-    return temp.charAt(0).toUpperCase() + temp.slice(1);
-}
-
-function getDoctorName(obj) {
-    return "Dr." + (obj.male ? " " : "ssa ") + obj.surname + " " + obj.name;
-}
-
-function getServiceName(a,id) {
-    $.ajax({
-        method: "GET",
-        dataType: "json",
-        crossDomain: true,
-        url: serverapiservice + id,
-        success: function (response) {
-            $(a).text(response.name);
-        },
-        error: function (request, error) {
-            $(a).text("Servizio "+ id);
+            $('title').text("Errore - Impossibile caricare le informazioni richieste.");
+            $('#title-doc-name').text("Errore - Impossibile caricare le informazioni.");
         }
     });
 }
 
 
-function getAreaName(a,id) {
-    $.ajax({
-        method: "GET",
-        dataType: "json",
-        crossDomain: true,
-        url: serverapiarea + id,
-        success: function (response) {
-            $(a).text(response.name);
-        },
-        error: function (request, error) {
-            $(a).text("Area "+ id);
-        }
-    });
+function setDoctorInfo(doctor) {
+    $('title').text(getDoctorName(doctor));
+    $('#title-doc-name').text(getDoctorName(doctor));
+    $('#phone').text(doctor.phone);
+    $('#phone').attr("href", "tel:" + doctor.phone);
+    $('#fax').text(doctor.fax);
+    $('#fax').attr("href", "tel:" + doctor.fax);
+    $('#email').text(doctor.email);
+    $('#email').attr("href", "mailto:" + doctor.email);
+    $('.doc-image').attr("src", doctor.img);
+    $('.doc-info').text(doctor.desc);
 }
 
-function fixURL(URL){
-    fixString = "/pages/doctor.html?id="+URL.id;
-    if(URL.filter != null){
-        fixString+="&filter="+URL.filter+"&value="+URL.value;
+
+function setAreaService(doctor) {
+    var op = "<a href='./service.html?id=" + doctor.operates + "'></a>";
+    $('#operates').html(op);
+    setServiceName($('#operates a:first'), doctor.operates);
+
+    if (doctor.manages_a !== null) {
+        var m_a = "<a href='./area.html?id=" + doctor.manages_a + "'></a>";
+        $('#manages_a').html(m_a);
+        setAreaName($('#manages_a a:first'), doctor.manages_a);
+    } else {
+        $('#manages_a').html("-");
     }
-    window.history.pushState("Dottore","Dottore",fixString);
+
+    if (doctor.manages_s !== null) {
+        var m_s = "<a href='./service.html?id=" + doctor.manages_s + "'></a>";
+        $('#manages_s').html(m_s);
+        setServiceName($('#manages_s a:first'), doctor.manages_s);
+    } else {
+        $('#manages_s').html("-");
+    }
 }
 
-function setNext(id) {
+
+function getDoctorName(doc) {
+    return "Dr." + (doc.male ? " " : "ssa ") + doc.surname + " " + doc.name;
+}
+
+
+function setServiceName(a, id) {
     $.ajax({
         method: "GET",
         dataType: "json",
         crossDomain: true,
-        url: serverapi + id + "/next",
+        url: serviceapi + id,
+        success: function (response) {
+            $(a).text(response.name);
+        },
+        error: function (request, error) {
+            $(a).text("Servizio " + id);
+        }
+    });
+}
+
+
+function setAreaName(a, id) {
+    $.ajax({
+        method: "GET",
+        dataType: "json",
+        crossDomain: true,
+        url: areaapi + id,
+        success: function (response) {
+            $(a).text(response.name);
+        },
+        error: function (request, error) {
+            $(a).text("Area " + id);
+        }
+    });
+}
+
+
+function fixURL() {
+    fixString = "/pages/doctor.html?id=" + URL.id;
+    if (URL.filter != null) {
+        fixString += "&filter=" + URL.filter + "&value=" + URL.value;
+    }
+    window.history.pushState("Dottore", "Dottore", fixString);
+}
+
+
+function setNext() {
+    $.ajax({
+        method: "GET",
+        dataType: "json",
+        crossDomain: true,
+        url: doctorapi + URL.id + "/next",
         data: {
             "filter": URL.filter,
             "value": URL.value
         },
         success: function (response) {
-            next = response.id;
+            nextDoctor = response.id;
         },
         error: function (request, error) {
+            $(".next").hide();
         }
     });
 }
 
-function setPrevious(id) {
+
+function setPrevious() {
+    console.log(doctorapi + URL.id + "/previous");
     $.ajax({
         method: "GET",
         dataType: "json",
         crossDomain: true,
-        url: serverapi + id + "/previous",
+        url: doctorapi + URL.id + "/previous",
         data: {
             "filter": URL.filter,
             "value": URL.value
         },
         success: function (response) {
-            previous = response.id;
+            previousDoctor = response.id;
         },
         error: function (request, error) {
-
+            $(".previous").hide();
         }
     });
 }
 
-function getSideMenu(){
-    previous_label = window.sessionStorage.getItem("label");
-    previous_url = window.sessionStorage.getItem("url");
-    if(previous_label!==null){
-        $('#sidemenu').append("<a href='"+previous_url+"' class='list-group-item'>"+previous_label+"</a>");
+
+function addDynamicLink() {
+    previousLabel = window.sessionStorage.getItem("label");
+    previousUrl = window.sessionStorage.getItem("url");
+    if (previousLabel !== null) {
+        $('#sidemenu').append("<a href='" + previousUrl + "' class='list-group-item'>" + previousLabel + "</a>");
     }
     window.sessionStorage.clear();
 }
 
-function setSideMenu(){
-    if(previous_label!==null){
-        window.sessionStorage.setItem("label",previous_label);
-        window.sessionStorage.setItem("url", previous_url);
+
+function setSessionInfo() {
+    if (previousLabel !== null) {
+        window.sessionStorage.setItem("label", previousLabel);
+        window.sessionStorage.setItem("url", previousUrl);
     }
+}
+
+
+function setCurriculumURL() {
+    var curriculum = "./curriculum.html?id=" + URL.id;
+    if (URL.filter != null) {
+        curriculum += "&filter=" + URL.filter + "&value=" + URL.value;
+    }
+    $('#curriculum').attr("href", curriculum);
 }
