@@ -27,7 +27,7 @@ function updateImages(response) {
 	for (var i = 0; i < response.length; ++i) {
 		if (i != 0)
 			x = "item";
-		$('.carousel-inner').append('<div class="' + x + '" data-slide-number="' + i + '"><img src="../assets/img/locations/' + response[i].path + '"></div>');
+		$('.carousel-inner').append('<div class="' + x + '" data-slide-number="' + i + '"><img src="' + response[i].path + '"></div>');
 	}
 }
 

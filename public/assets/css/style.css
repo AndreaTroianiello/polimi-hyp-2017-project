@@ -105,16 +105,6 @@
 		padding-top: 15px;
 	}
 
-	#filler {
-		background-color: orange;
-	}
-
-	.test {
-		background-color: orange;
-		z-index: 99;
-		height: 435px;
-	}
-
 	#map {
 		background-color: grey;
 		height: 200px;
