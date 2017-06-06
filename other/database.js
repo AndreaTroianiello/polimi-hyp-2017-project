@@ -57,8 +57,8 @@ function whoWeAreTable() {
                 db.schema
                     .createTable("whoweare", table => {
                         table.increments('id');
-                        table.string('tag');
-                        table.string('information');
+                        table.text('tag');
+                        table.text('information');
                     })
                     .then(() => {
                         return Promise.all(
@@ -84,7 +84,7 @@ function areasTable() {
                     .createTable("areas", table => {
                         table.increments('id');
                         table.string('name');
-                        table.string('desc');
+                        table.text('desc');
                     })
                     .then(() => {
                         return Promise.all(
@@ -109,9 +109,9 @@ function servicesTable() {
                     .createTable("services", table => {
                         table.increments('id');
                         table.string('name');
-                        table.string('description');
+                        table.text('description');
                         table.integer('area');
-                        table.foreign('area').references('area.id');
+                        table.foreign('area').references('areas.id');
                     })
                     .then(() => {
                         return Promise.all(
@@ -142,7 +142,7 @@ function locationsTable() {
                         table.string('fax');
                         table.string('email');
                         table.string('timetable');
-                        table.string('img');
+                        table.text('img');
                     })
                     .then(() => {
                         return Promise.all(
@@ -172,11 +172,11 @@ function doctorsTable() {
                         table.string('phone');
                         table.string('fax');
                         table.string('email');
-                        table.string('img');
+                        table.text('img');
                         table.integer('operates');
                         table.integer('manages_s').unsigned();
                         table.integer('manages_a').unsigned();
-                        table.string('desc');
+                        table.text('desc');
                         table.foreign('operates').references('services.id');
                         table.foreign('manages_s').references('services.id');
                         table.foreign('manages_a').references('areas.id');
@@ -203,7 +203,7 @@ function locationImageTable() {
                 db.schema
                     .createTable("locationimages", table => {
                         table.increments('id');
-                        table.string('path');
+                        table.text('path');
                         table.integer('inc');
                         table.integer('location');
                         table.foreign('location').references('locations.id');
@@ -230,7 +230,7 @@ function locationDirectionsTable() {
                 db.schema
                     .createTable("locationdirections", table => {
                         table.increments('id');
-                        table.string('directions');
+                        table.text('directions');
                         table.integer('location');
                         table.foreign('location').references('locations.id');
                     })
@@ -311,7 +311,7 @@ function curriculumsTable() {
                     .createTable("curriculums", table => {
                         table.increments('id');
                         table.integer('doctor');
-                        table.string('desc');
+                        table.text('desc');
                         table.foreign('doctor').references('doctors.id');
                     })
                     .then(() => {
