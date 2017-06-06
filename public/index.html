@@ -2,117 +2,159 @@
 <html lang="it">
 
 <head>
-    <meta charset="utf-8">
-    <title></title>
-    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+	<meta charset="utf-8">
+	<title>Home</title>
+	<meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-    <!-- Place your favicon.ico and apple-touch-icon.png in the template root directory -->
-    <link href="./assets/img/favicon.ico" rel="shortcut icon">
+	<!-- Place your favicon.ico and apple-touch-icon.png in the template root directory -->
+	<link href="./assets/img/favicon.ico" rel="shortcut icon">
 
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700,700i|Raleway:300,400,500,700,800" rel="stylesheet">
+	<!-- Google Fonts -->
+	<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700,700i|Raleway:300,400,500,700,800" rel="stylesheet">
 
-    <!-- Bootstrap CSS File -->
-    <link href="./assets/css/bootstrap.min.css" rel="stylesheet">
+	<!-- Bootstrap CSS File -->
+	<link href="./assets/css/bootstrap.min.css" rel="stylesheet">
 
-    <!-- Libraries CSS Files -->
-    <link href="./assets/css/font-awesome.min.css" rel="stylesheet">
-    <link href="./assets/css/animate.min.css" rel="stylesheet">
+	<!-- Libraries CSS Files -->
+	<link href="./assets/css/font-awesome.min.css" rel="stylesheet">
+	<link href="./assets/css/animate.min.css" rel="stylesheet">
 
 
-    <!-- Main Stylesheet File -->
-    <link href="./assets/css/imperial.css" rel="stylesheet">
-    <link href="./assets/css/style.css" rel="stylesheet">
+	<!-- Main Stylesheet File -->
+	<link href="./assets/css/imperial.css" rel="stylesheet">
+	<link href="./assets/css/flexslider.css" rel="stylesheet">
+	<link href="./assets/css/slider.css" rel="stylesheet">
+	<link href="./assets/css/style.css" rel="stylesheet">
 
 </head>
 
 <body>
 
-    <!--==========================
+	<!--==========================
   Header Section
 ============================-->
-    <header id="header">
-        <div class="container">
+	<header id="header">
 
-            <div id="logo" class="pull-left">
-                <h1><a href="./index.html">Medical Center</a></h1>
-            </div>
-            <nav id="nav-menu-container">
-                <ul class="nav-menu">
-                    <li><a href="#">Servizi</a></li>
-                    <li><a href="./pages/locations.html">Strutture</a></li>
-                    <li class="menu-has-children"><a href="#">Dottori</a>
-                        <ul>
-                            <li><a href="./pages/doctors.html">Ordine alfabetico</a></li>
-                            <li><a href="#">Per area</a></li>
-                            <li><a href="#">Per servizi</a></li>
-                            <li><a href="./pages/doctor-by-location.html">Per strutture</a></li>
-                        </ul>
-                    </li>
-                    <li><a href="#">Aree</a></li>
-                    <li><a href="#">Info utili</a></li>
-                    <li><a href="./pages/who-we-are.html">Chi siamo</a></li>
-                    <li><a href="#">News</a></li>
-                    <li><a href="#">FAQ</a></li>
-                </ul>
-            </nav>
-            <!-- #nav-menu-container -->
-        </div>
-    </header>
-    <!-- /header -->
+		<!-- #nav-menu-container -->
+		<div class="container">
 
-    <!-- ===================
+			<div id="logo" class="pull-left">
+				<h1><a href="./index.html">Medical Center</a></h1>
+			</div>
+			<nav id="nav-menu-container">
+				<ul class="nav-menu">
+					<li><a href="#">Servizi</a></li>
+					<li><a href="./pages/locations.html">Strutture</a></li>
+					<li class="menu-has-children"><a href="#">Dottori</a>
+						<ul>
+							<li><a href="./pages/doctors.html">Ordine alfabetico</a></li>
+							<li><a href="#">Per area</a></li>
+							<li><a href="#">Per servizi</a></li>
+							<li><a href="./pages/doctor-by-location.html">Per strutture</a></li>
+						</ul>
+					</li>
+					<li><a href="#">Aree</a></li>
+					<li><a href="#">Info utili</a></li>
+					<li><a href="./pages/who-we-are.html">Chi siamo</a></li>
+					<li><a href="#">News</a></li>
+					<li><a href="#">FAQ</a></li>
+				</ul>
+			</nav>
+		</div>
+	</header>
+	<!-- /header -->
+	<!-- ===================
         Main section>
         ===================-->
 
-    <section>
-        <div class="container">
-            <div class="row">
-                <div class="col-xs-12 col-sm-9"><h1>LOL</h1>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- //end main section-->
+	<section>
+		<div class="container">
+			<div class="row">
+				<div id="slider" class="flexslider col-md-12">
+					<ul class="slides">
+						<li>
+							<img src="./assets/img/doctors1.png">
+							<div class="caption">
+							</div>
+						</li>
+						<li>
+							<img src="./assets/img/doctors2.jpg">
+							<div class="caption">
+							</div>
+						</li>
+						<li>
+							<img src="./assets/img/doctors3.jpg">
+							<div class="caption">
+							</div>
+						</li>
+					</ul>
+				</div>
+			</div>
+			<div class="footerfix"></div>
+			<div class="row">
+				<div class="col-xs-12 col-sm-4">
+					<h2 class="section-title">Strutture</h2>
+					<div class="section-title-divider"></div>
+					<p>La salute è accessibile! Le nostre sedi sono facilmente raggiungibili anche con i mezzi pubblici, e gli orari sono concepiti per andare incontro alle tue esigenze.</p>
+					<button class="home-button btn btn-default"><span aria-hidden="true">Visita la pagina</span></button>
+				</div>
+				<div class="col-xs-12 col-sm-4 ">
+					<h2 class="section-title">Medici</h2>
+					<div class="section-title-divider"></div>
+					<p>Gli specialisti del nostro centro medico provengono da importanti realtà ospedaliere e universitarie. Scoprili!</p>
+					<button class="home-button btn btn-default"><span aria-hidden="true">Visita la pagina</span></button>
+				</div>
+				<div class="col-xs-12 col-sm-4 ">
+					<h2 class="section-title">Chi siamo</h2>
+					<div class="section-title-divider"></div>
+					<p>Il nostro centro medico è una realtà sanitaria innovativa, che offre salute accessibile e di qualità. Scoprici!</p>
+					<button class="home-button btn btn-default"><span aria-hidden="true">Visita la pagina</span></button>
+				</div>
+			</div>
+		</div>
+	</section>
+	<!-- //end main section-->
 
-    <div class="footerfix"></div>
-    
-    <!--==========================
+	<div class="footerfix"></div>
+
+	<!--==========================
   Footer
 ============================-->
-    <footer id="footer">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="copyright">
-                        &copy; Copyright <strong>Medical Center</strong>. All Rights Reserved
-                    </div>
-                    <div class="credits">
-                        <!-- 
+	<footer id="footer">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12">
+					<div class="copyright">
+						&copy; Copyright <strong>Medical Center</strong>. All Rights Reserved
+					</div>
+					<div class="credits">
+						<!-- 
                 All the links in the footer should remain intact. 
                 You can delete the links only if you purchased the pro version.
                 Licensing information: https://bootstrapmade.com/license/
                 Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/buy/?theme=Imperial
               -->
-                        Bootstrap Themes by <a href="https://bootstrapmade.com/">BootstrapMade</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </footer>
-    <!-- #footer -->
+						Bootstrap Themes by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</footer>
+	<!-- #footer -->
 
-    <!-- Back to Top button -->
-    <a href="#" class="back-to-top"><i class="fa fa-chevron-up"></i></a>
-    <!-- /back to top -->
+	<!-- Back to Top button -->
+	<a href="#" class="back-to-top"><i class="fa fa-chevron-up"></i></a>
+	<!-- /back to top -->
 
-    
-    <!-- Script -->
-    <script src="./assets/js/jquery.min.js"></script>
-    <script src="./assets/js/bootstrap.min.js"></script>
-    <script src="./assets/js/superfish.min.js"></script>
+
+	<!-- Script -->
+	<script src="./assets/js/jquery.min.js"></script>
+	<script src="./assets/js/bootstrap.min.js"></script>
+	<script src="./assets/js/superfish.min.js"></script>
 	<script src="./assets/js/easing.min.js"></script>
-    <script src="./assets/js/imperial.js"></script>
+	<script src="./assets/js/imperial.js"></script>
+	<script src="./assets/js/jquery.flexslider.js"></script>
+	<script src="./assets/js/pages/home.js"></script>
 </body>
 
 </html>

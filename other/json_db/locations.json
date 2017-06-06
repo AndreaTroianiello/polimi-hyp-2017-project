@@ -2,30 +2,30 @@
 	{
 		"name": "Clinica Riva",
 		"city": "Lecco",
-		"address": "Corso Italia 7",
+		"address": "Via Previati 1",
 		"phone": "+39 02 29366678",
 		"fax": "+39 02 29366678",
-		"email": "info.leccocorsoitalia@medicalcenter.it",
+		"email": "info.clinicarivalecco@medicalcenter.it",
 		"timetable": "Lun-Sab 08:30-13:00 14:00-18:00",
 		"img": "locations/clinicariva.jpg"
 	},
 	{
 		"name": "Clinica Brambilla",
 		"city": "Milano",
-		"address": "Via Vallazze 15",
+		"address": "Via Mercadante 16",
 		"phone": "+39 02 29367775",
 		"fax": "+39 02 29367775",
-		"email": "info.milanoviavallazze@medicalcenter.it",
+		"email": "info.clinicabrambillamilano@medicalcenter.it",
 		"timetable": "Lun-Ven 09:00-12:00 13:00-15:00 Sab 08:30-12:30",
 		"img": "locations/clinicabrambilla.jpg"
   },
 	{
 		"name": "Clinica Nava",
 		"city": "Milano",
-		"address": "Via Ripamonti 30",
+		"address": "Viale Veneto 10",
 		"phone": "+39 02 29366855",
 		"fax": "+39 02 29366855",
-		"email": "info.milanoviaripamonti@medicalcenter.it",
+		"email": "info.clinicanavamilano@medicalcenter.it",
 		"timetable": "Lun-Ven 08:00-12:00 13:00-16:00",
 		"img": "locations/clinicanava.jpg"
   }

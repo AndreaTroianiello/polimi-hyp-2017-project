@@ -1,23 +1,32 @@
 [
     {
         "location": 1,
-        "directions": "Prendere la metro, scendere, entrare."
+        "directions": "da Milano linea ferroviaria Milano – Sondrio – Tirano. Treni diretti e locali dalle stazioni di Milano Centrale e Porta Garibaldi. Tempo di percorrenza: 40 minuti per il diretto con frequenza di circa ogni ora."
     },
     {
         "location": 2,
-        "directions": "Prendere la metro, scendere, entrare."
+        "directions": "M2-M1 Loreto, uscita p.zza Argentina."
     },
     {
-        "location": 3,
-        "directions": "Prendere la metro, scendere, entrare."
+        "location": 2,
+        "directions": "Bus 39, 90, 91, 92."
     },
 	{
         "location": 3,
-        "directions": "dfghfmjg,hjjgfhdffdsghm."
+        "directions": "M1 Porta Venezia."
     },
+	{
+        "location": 3,
+        "directions": "Tram 1, 33, 9 ."
+    },
+	{
+        "location": 3,
+        "directions": "Passante Porta Venezia."
+    }
+	,
 	{
         "location": 1,
-        "directions": "dsfhjfkh,mnvcdfhfxgjm dgzh fdsghm."
+        "directions": "da Bergamo linea Brescia – Bergamo – Lecco. Frequenti treni collegano i due capoluoghi di provincia. Tempo di percorrenza: 40 minuti per il diretto"
     }
 	
 ]
