@@ -41,6 +41,7 @@ app.get("/doctors", function (req, res) {
 	query
 		.orderBy("surname", "asc").orderBy("name", "asc")
 		.then(result => {
+			result.map(o => { o.img = makeURLsAbsolute(o.img, true) });
 			res.json(result);
 		});
 });
@@ -52,6 +53,7 @@ app.get("/doctors/:doctor_id", function (req, res) {
 				error: "Invalid doctor ID"
 			});
 		} else {
+			result[0].img = makeURLsAbsolute(result[0].img, true);
 			res.json(result[0]);
 		}
 	});
@@ -79,7 +81,9 @@ function getPrevNext(req, res, next) {
 				});
 			} else {
 				let diff = next ? 1 : -1;
-				res.json(result[(i + result.length + diff) % result.length]);
+				let doc = result[(i + result.length + diff) % result.length];
+				doc.img = makeURLsAbsolute(doc.img, true);
+				res.json(doc);
 			}
 		});
 }
@@ -196,7 +200,7 @@ app.get("/areas/:area_id", function (req, res) {
 	sqlDb("areas")
 		.where("id", req.params.area_id)
 		.then(result => {
-			if (result.lenght === 0) {
+			if (result.length === 0) {
 				res.json({
 					error: "Invalid area ID"
 				});
@@ -227,6 +231,7 @@ app.get("/locations", function (req, res) {
 		}
 	}
 	query.orderBy("locations.city", "asc").then(result => {
+		result.map(o => { o.img = makeURLsAbsolute(o.img, true) });
 		res.json(result);
 	});
 });
@@ -235,12 +240,14 @@ app.get("/locations/:location_id", function (req, res) {
 	sqlDb("locations")
 		.where('id', req.params.location_id)
 		.then(result => {
-			if (result.lenght === 0)
+			if (result.length === 0)
 				res.json({
 					error: "Invalid location ID"
 				});
 			else {
-				res.json(result[0]);
+				let loc = result[0];
+				loc.img = makeURLsAbsolute(loc.img, true);
+				res.json(loc);
 			}
 		});
 });
@@ -252,6 +259,7 @@ app.get("/locations/:location_id/images", function (req, res) {
 		.orderBy("inc", "asc")
 		.select("name", "inc", "path")
 		.then(result => {
+			result.map(o => { o.path = makeURLsAbsolute(o.path, true) });
 			res.json(result);
 		})
 });
@@ -278,7 +286,7 @@ app.get("/aboutus", function (req, res) {
 
 
 
-function makeURLsAbsolute(path,img){
-	let URL = DEV?serverUrl[0]:serverUrl[1] + img?"/assets/img":"";
-	return URL+path;
+function makeURLsAbsolute(path, img) {
+	let URL = (DEV ? serverUrl[0] : serverUrl[1]) + (img ? "/assets/img/" : "");
+	return URL + path;
 }

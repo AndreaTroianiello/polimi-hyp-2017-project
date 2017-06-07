@@ -1,7 +1,8 @@
 const knex = require("knex");
 const _ = require("lodash");
+//get the db schema 
+let schema = require("./schema.json");
 
-let schema;
 let db;
 
 var getSQLDB = function (DEV) {
@@ -27,9 +28,6 @@ var getSQLDB = function (DEV) {
 }
 
 var initDB = function () {
-    //get the db schema 
-    schema = require("./json_db/schema.json");
-
     let schemaPromises = [];
     //add promises in the array, every promise checks if a table exist in the db
     for (let i = 0; i < schema.length; i++) {
@@ -123,7 +121,7 @@ function createDatabase() {
 //Populate the db using information from the JSONs
 function populateDatabase() {
     // A promise that has to be returned
-    let result; 
+    let result;
     for (let i = 0; i < schema.length; i++) {
         //Load the array of object from the JSON specified in the schema JSON
         let json = require(schema[i].file);
