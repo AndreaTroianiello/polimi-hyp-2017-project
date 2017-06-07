@@ -1,6 +1,7 @@
 $(document).ready(function () {
 	console.log("I'm ready");
 	$('.slider').slick({
+		autoplay:true,
 		dots: true,
 		arrows: true,
 		infinite: true,

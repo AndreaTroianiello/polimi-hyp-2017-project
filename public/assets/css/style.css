@@ -176,9 +176,15 @@
 		}
 	}
 
+	.p-home {
+		margin: 0;
+	}
+
 	.home-button {
 		display: block;
 		margin: auto;
+		margin-bottom: 10px;
+		margin-top: 10px;
 	}
 
 	.icon1 {
@@ -193,3 +199,8 @@
 		display: block;
 		margin: auto;
 	}
+
+.home-info {
+	margin-top: 50px;
+	margin-bottom: 50px;
+}
