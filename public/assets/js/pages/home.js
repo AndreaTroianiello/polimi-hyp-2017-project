@@ -1,15 +1,10 @@
-$(document).ready(function() {
-	//Slider
-	$('.flexslider').flexslider({
-		animation: "fade",
-		directionNav: false,
-		pauseOnAction: false,
+$(document).ready(function () {
+	$('.slider').slick({
+		dots: true,
+		arrows: false,
+		infinite: true,
+		speed: 500,
+		fade: true,
+		cssEase: 'linear'
 	});
-	/*var containerPosition = $('.container').offset();
-	var positionPad = containerPosition.left + 15;
-
-	$('#slider').find('.caption').css({
-		left: positionPad + 'px',
-		marginTop: '-' + $('.caption').height() / 2 + 'px'
-	});*/
 });

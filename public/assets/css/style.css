@@ -150,13 +150,30 @@
 	}
 
 	@font-face {
-		font-family: 'antro';
-		src: local("antro"), url(../fonts/antro-vectra.otf ) format("opentype");
+		font-family: 'rainbow';
+		src: local("rainbow"), url(../fonts/rainbow-bridge.ttf ) format("truetype");
 	}
 
 	#header #logo h1 {
-		font-family: 'antro';
+		font-family: 'rainbow';
 		text-transform: none;
+	}
+
+	.slider .slide img {
+		width: 100%;
+		height: auto;
+	}
+
+	.slick-prev:before,
+	.slick-next:before {
+		color: black;
+	}
+
+	@media (max-width: 768px) {
+		.slick-prev,
+		.slick-next {
+			display: none;
+		}
 	}
 
 	.home-button {
