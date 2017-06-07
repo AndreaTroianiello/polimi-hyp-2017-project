@@ -46,6 +46,7 @@ var initDB = function () {
         .then(() => {
             console.log("Database already exists!");
         })
+        //If at least one table doesn't exist, DROP ALL and recreate the DB
         .catch(function () {
             console.log("Database doesn't exist!");
             return deleteDatabase()
