@@ -1,0 +1,311 @@
+[
+    {
+        "name": "whoweare",
+        "file": "./json_db/whoweare.json",
+        "columns": [
+            {
+                "name": "id",
+                "type": "id"
+            },
+            {
+                "name": "tag",
+                "type": "string"
+            },
+            {
+                "name": "information",
+                "type": "text"
+            }
+        ],
+        "foreign":[]
+    },
+    {
+        "name": "areas",
+        "file": "./json_db/areas.json",
+        "columns": [
+            {
+                "name": "id",
+                "type": "id"
+            },
+            {
+                "name": "name",
+                "type": "string"
+            },
+            {
+                "name": "desc",
+                "type": "text"
+            }
+        ],
+        "foreign":[]
+    },
+    {
+        "name": "services",
+        "file": "./json_db/services.json",
+        "columns": [
+            {
+                "name": "id",
+                "type": "id"
+            },
+            {
+                "name": "name",
+                "type": "string"
+            },
+            {
+                "name": "description",
+                "type": "text"
+            },
+            {
+                "name": "area",
+                "type": "integer"
+            }
+        ],
+        "foreign": [
+            {
+                "name": "area",
+                "references": "areas.id"
+            }
+        ]
+    },
+    {
+        "name": "locations",
+        "file": "./json_db/locations.json",
+        "columns": [
+            {
+                "name": "id",
+                "type": "id"
+            },
+            {
+                "name": "name",
+                "type": "string"
+            },
+            {
+                "name": "address",
+                "type": "string"
+            },
+             {
+                "name": "city",
+                "type": "string"
+            },
+            {
+                "name": "phone",
+                "type": "string"
+            },
+            {
+                "name": "fax",
+                "type": "string"
+            },
+            {
+                "name": "email",
+                "type": "string"
+            },
+            {
+                "name": "timetable",
+                "type": "text"
+            },
+            {
+                "name": "img",
+                "type": "text"
+            }
+        ],
+        "foreign":[]
+    },
+    {
+        "name": "doctors",
+        "file": "./json_db/doctors.json",
+        "columns": [
+            {
+                "name": "id",
+                "type": "id"
+            },
+            {
+                "name": "surname",
+                "type": "string"
+            },
+            {
+                "name": "name",
+                "type": "string"
+            },
+            {
+                "name": "male",
+                "type": "boolean"
+            },
+            {
+                "name": "phone",
+                "type": "string"
+            },
+            {
+                "name": "fax",
+                "type": "string"
+            },
+            {
+                "name": "email",
+                "type": "string"
+            },
+             {
+                "name": "desc",
+                "type": "text"
+            },
+            {
+                "name": "img",
+                "type": "text"
+            },
+            {
+                "name":"operates",
+                "type":"integer"
+            },
+            {
+                "name":"manages_s",
+                "type":"integer"
+            },
+            {
+                "name":"manages_a",
+                "type":"integer"
+            }
+        ],
+        "foreign": [
+            {
+                "name": "operates",
+                "references": "services.id"
+            },
+            {
+                "name": "manages_s",
+                "references": "services.id"
+            },
+            {
+                "name": "manages_a",
+                "references": "areas.id"
+            }
+        ]
+    },
+    {
+        "name": "locationimages",
+        "file": "./json_db/locationimages.json",
+        "columns": [
+            {
+                "name": "id",
+                "type": "id"
+            },
+            {
+                "name": "path",
+                "type": "text"
+            },
+            {
+                "name": "inc",
+                "type": "integer"
+            },
+            {
+                "name": "location",
+                "type": "integer"
+            }
+        ],
+        "foreign":[
+            {
+                "name":"location",
+                "references": "locations.id"
+            }
+        ]
+    },
+     {
+        "name": "locationdirections",
+        "file": "./json_db/locationdirections.json",
+        "columns": [
+            {
+                "name": "id",
+                "type": "id"
+            },
+            {
+                "name": "directions",
+                "type": "text"
+            },
+            {
+                "name": "location",
+                "type": "integer"
+            }
+        ],
+        "foreign":[
+            {
+                "name":"location",
+                "references": "locations.id"
+            }
+        ]
+    },
+    {
+        "name": "servicelocation",
+        "file": "./json_db/servicelocation.json",
+        "columns": [
+            {
+                "name": "id",
+                "type": "id"
+            },
+            {
+                "name": "service",
+                "type": "integer"
+            },
+            {
+                "name": "location",
+                "type": "integer"
+            }
+        ],
+        "foreign":[
+            {
+                "name":"location",
+                "references": "locations.id"
+            },
+            {
+                "name":"service",
+                "references": "services.id"
+            }
+        ]
+    },
+    {
+        "name": "doctorlocation",
+        "file": "./json_db/doctorlocation.json",
+        "columns": [
+            {
+                "name": "id",
+                "type": "id"
+            },
+            {
+                "name": "doctor",
+                "type": "integer"
+            },
+            {
+                "name": "location",
+                "type": "integer"
+            }
+        ],
+        "foreign":[
+            {
+                "name":"location",
+                "references": "locations.id"
+            },
+            {
+                "name":"doctor",
+                "references": "doctors.id"
+            }
+        ]
+    },
+    {
+        "name": "curriculums",
+        "file": "./json_db/curriculums.json",
+        "columns": [
+            {
+                "name": "id",
+                "type": "id"
+            },
+            {
+                "name": "doctor",
+                "type": "integer"
+            },
+            {
+                "name": "desc",
+                "type": "text"
+            }
+        ],
+        "foreign":[
+            {
+                "name":"doctor",
+                "references": "doctors.id"
+            }
+        ]
+    }
+]

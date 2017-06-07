@@ -1,21 +1,12 @@
 const knex = require("knex");
 const _ = require("lodash");
 
-let whoweare = require("./json_db/whoweare.json");
-let areas = require("./json_db/areas.json");
-let services = require("./json_db/services.json");
-let locations = require("./json_db/locations.json");
-let doctors = require("./json_db/doctors.json");
-let locationsImages = require("./json_db/locationimages.json");
-let locationsDirections = require("./json_db/locationdirections.json");
-let serviceLocation = require("./json_db/servicelocation.json");
-let doctorLocation = require("./json_db/doctorlocation.json");
-let curriculums = require("./json_db/curriculums.json");
+let schema;
 let db;
-let server;
 
-var getSQLDB = function (DEV, serverUrl) {
-    server = DEV ? serverUrl[0] : serverUrl[1];
+var getSQLDB = function (DEV) {
+
+    //if DEV use sqlite, otherwise use postgresql
     if (DEV) {
         db = knex({
             client: "sqlite3",
@@ -27,7 +18,6 @@ var getSQLDB = function (DEV, serverUrl) {
         });
     } else {
         db = knex({
-            debug: true,
             client: "pg",
             connection: process.env.DATABASE_URL,
             ssl: true
@@ -37,309 +27,121 @@ var getSQLDB = function (DEV, serverUrl) {
 }
 
 var initDB = function () {
-    fixImgURLs();
-    whoWeAreTable()
-        .then(areasTable)
-        .then(servicesTable)
-        .then(locationsTable)
-        .then(doctorsTable)
-        .then(locationImageTable)
-        .then(locationDirectionsTable)
-        .then(serviceLocationTable)
-        .then(doctorLocationTable)
-        .then(curriculumsTable);
-}
+    //get the db schema 
+    schema = require("./json_db/schema.json");
 
-function whoWeAreTable() {
-    return new Promise((resolve, reject) => {
-        db.schema.hasTable("whoweare").then(exists => {
-            if (!exists) {
-                db.schema
-                    .createTable("whoweare", table => {
-                        table.increments('id');
-                        table.text('tag');
-                        table.text('information');
-                    })
-                    .then(() => {
-                        return Promise.all(
-                            _.map(whoweare, a => {
-                                return db("whoweare").insert(a);
-                            })
-                        );
-                    });
-                resolve("whoweare created");
-            } else {
-                resolve("whoweare already exists");
-            }
+    let schemaPromises = [];
+    //add promises in the array, every promise checks if a table exist in the db
+    for (let i = 0; i < schema.length; i++) {
+        schemaPromises[i] = new Promise((resolve, reject) => {
+            db.schema.hasTable(schema[i].name).then(exists => {
+                if (!exists) {
+                    reject(schema[i].name + " doesn't exist");
+                } else {
+                    resolve(schema[i].name + " exists");
+                }
+            });
+        });
+    }
+    //if ALL table exist, then proceed. Otherwise drop the db and regenerate
+    Promise.all(schemaPromises)
+        .then(() => {
+            console.log("Database already exists!");
+        })
+        .catch(function () {
+            console.log("Database doesn't exist!");
+            return deleteDatabase()
+                .then(function () {
+                    // returns the promise
+                    return createDatabase()
+                }).then(function () {
+                    // returns the promise 
+                    return populateDatabase();
+                });
         });
 
-    });
 }
 
-function areasTable() {
-    return new Promise((resolve, reject) => {
-        db.schema.hasTable("areas").then(exists => {
-            if (!exists) {
-                db.schema
-                    .createTable("areas", table => {
-                        table.increments('id');
-                        table.string('name');
-                        table.text('desc');
-                    })
-                    .then(() => {
-                        return Promise.all(
-                            _.map(areas, a => {
-                                return db("areas").insert(a);
-                            })
-                        );
-                    });
-                resolve("area created");
-            } else {
-                resolve("area already exists");
-            }
+//Drops all the tables specified in the Schema JSON
+function deleteDatabase() {
+    let result;
+    for (let i = 0; i < schema.length; i++) {
+        if (i === 0) {
+            result = db.schema.dropTableIfExists(schema[i].name);
+        } else {
+            result = result.then(function () {
+                return db.schema.dropTableIfExists(schema[i].name);
+            });
+        }
+    }
+    return result;
+}
+
+function createDatabase() {
+    //Assigns the variable to a stupid promise
+    let result = db.schema.dropTableIfExists("dumb_query");
+    //Loops for every table specified in the Schema json
+    for (let i = 0; i < schema.length; i++) {
+        //get the current table object
+        let table = schema[i];
+        result = result.then(function () {
+            //Create tables, then calls a callback
+            return db.schema.createTable(table.name, function (t) {
+                let cols = table.columns;
+                //Reads name and datatype of the column, then adds it
+                for (let j = 0; j < cols.length; j++) {
+                    switch (cols[j].type) {
+                        case "id":
+                            t.increments(cols[j].name);
+                            break;
+                        case "integer":
+                            t.integer(cols[j].name);
+                            break;
+                        case "string":
+                            t.string(cols[j].name);
+                            break;
+                        case "text":
+                            t.text(cols[j].name);
+                            break;
+                        case "boolean":
+                            t.boolean(cols[j].name);
+                            break;
+                    }
+                }
+                //Reads which column is a foreign key and the key it makes reference to, then adds the relation
+                let foreign = table.foreign;
+                for (let j = 0; j < foreign.length; j++) {
+                    t.foreign(foreign[j].name).references(foreign[j].references);
+                }
+            });
         });
-    });
-}
+    }
+    return result;
+};
 
-function servicesTable() {
-    return new Promise((resolve, reject) => {
-        db.schema.hasTable("services").then(exists => {
-            if (!exists) {
-                db.schema
-                    .createTable("services", table => {
-                        table.increments('id');
-                        table.string('name');
-                        table.text('description');
-                        table.integer('area');
-                        table.foreign('area').references('areas.id');
-                    })
-                    .then(() => {
-                        return Promise.all(
-                            _.map(services, s => {
-                                return db("services").insert(s);
-                            })
-                        );
-                    });
-                resolve("services created");
+
+//Populate the db using information from the JSONs
+function populateDatabase() {
+    // A promise that has to be returned
+    let result; 
+    for (let i = 0; i < schema.length; i++) {
+        //Load the array of object from the JSON specified in the schema JSON
+        let json = require(schema[i].file);
+        //Insert, if it's the first element it make result equal to a promise, otherwise appends another promise in a then()
+        for (let j = 0; j < json.length; j++) {
+            if (i === 0 && j === 0) {
+                result = db(schema[i].name).insert(json[j]);
             } else {
-                resolve("services already exists");
+                result = result.then(() => {
+                    return db(schema[i].name).insert(json[j]);
+                });
             }
-        });
-    });
-}
+        }
+    }
+    return result;
+};
 
-function locationsTable() {
-    return new Promise((resolve, reject) => {
-        db.schema.hasTable("locations").then(exists => {
-            if (!exists) {
-                db.schema
-                    .createTable("locations", table => {
-                        table.increments('id');
-                        table.string('name');
-                        table.string('city');
-                        table.string('address');
-                        table.string('phone');
-                        table.string('fax');
-                        table.string('email');
-                        table.string('timetable');
-                        table.text('img');
-                    })
-                    .then(() => {
-                        return Promise.all(
-                            _.map(locations, l => {
-                                return db("locations").insert(l);
-                            })
-                        );
-                    });
-                resolve("locations created");
-            } else {
-                resolve("locations already exists");
-            }
-        });
-    });
-}
 
-function doctorsTable() {
-    return new Promise((resolve, reject) => {
-        db.schema.hasTable("doctors").then(exists => {
-            if (!exists) {
-                db.schema
-                    .createTable("doctors", table => {
-                        table.increments('id');
-                        table.string('surname');
-                        table.string('name');
-                        table.boolean('male');
-                        table.string('phone');
-                        table.string('fax');
-                        table.string('email');
-                        table.text('img');
-                        table.integer('operates');
-                        table.integer('manages_s').unsigned();
-                        table.integer('manages_a').unsigned();
-                        table.text('desc');
-                        table.foreign('operates').references('services.id');
-                        table.foreign('manages_s').references('services.id');
-                        table.foreign('manages_a').references('areas.id');
-                    })
-                    .then(() => {
-                        return Promise.all(
-                            _.map(doctors, l => {
-                                return db("doctors").insert(l);
-                            })
-                        );
-                    });
-                resolve("doctors created");
-            } else {
-                resolve("doctors already exists");
-            }
-        });
-    });
-}
-
-function locationImageTable() {
-    return new Promise((resolve, reject) => {
-        db.schema.hasTable("locationimages").then(exists => {
-            if (!exists) {
-                db.schema
-                    .createTable("locationimages", table => {
-                        table.increments('id');
-                        table.text('path');
-                        table.integer('inc');
-                        table.integer('location');
-                        table.foreign('location').references('locations.id');
-                    })
-                    .then(() => {
-                        return Promise.all(
-                            _.map(locationsImages, l => {
-                                return db("locationimages").insert(l);
-                            })
-                        );
-                    });
-                resolve("location image created");
-            } else {
-                resolve("location image already exists");
-            }
-        });
-    });
-}
-
-function locationDirectionsTable() {
-    return new Promise((resolve, reject) => {
-        db.schema.hasTable("locationdirections").then(exists => {
-            if (!exists) {
-                db.schema
-                    .createTable("locationdirections", table => {
-                        table.increments('id');
-                        table.text('directions');
-                        table.integer('location');
-                        table.foreign('location').references('locations.id');
-                    })
-                    .then(() => {
-                        return Promise.all(
-                            _.map(locationsDirections, l => {
-                                return db("locationdirections").insert(l);
-                            })
-                        );
-                    });
-                resolve("location directions created");
-            } else {
-                resolve("location directions created");
-            }
-        });
-    });
-}
-
-function serviceLocationTable() {
-    return new Promise((resolve, reject) => {
-        db.schema.hasTable("servicelocation").then(exists => {
-            if (!exists) {
-                db.schema
-                    .createTable("servicelocation", table => {
-                        table.increments('id');
-                        table.integer('service');
-                        table.integer('location');
-                        table.foreign('service').references('services.id');
-                        table.foreign('location').references('locations.id');
-                    })
-                    .then(() => {
-                        return Promise.all(
-                            _.map(serviceLocation, l => {
-                                return db("servicelocation").insert(l);
-                            })
-                        );
-                    });
-                resolve("serviceLocation created");
-            } else {
-                resolve("service location already exists");
-            }
-        });
-    });
-}
-
-function doctorLocationTable() {
-    return new Promise((resolve, reject) => {
-        db.schema.hasTable("doctorlocation").then(exists => {
-            if (!exists) {
-                db.schema
-                    .createTable("doctorlocation", table => {
-                        table.increments('id');
-                        table.integer('doctor');
-                        table.integer('location');
-                        table.foreign('doctor').references('doctors.id');
-                        table.foreign('location').references('locations.id');
-                    })
-                    .then(() => {
-                        return Promise.all(
-                            _.map(doctorLocation, l => {
-                                return db("doctorlocation").insert(l);
-                            })
-                        );
-                    });
-                resolve("doctor location created");
-            } else {
-                resolve("doctor location already exists");
-            }
-        });
-    });
-}
-
-function curriculumsTable() {
-    return new Promise((resolve, reject) => {
-        db.schema.hasTable("curriculums").then(exists => {
-            if (!exists) {
-                db.schema
-                    .createTable("curriculums", table => {
-                        table.increments('id');
-                        table.integer('doctor');
-                        table.text('desc');
-                        table.foreign('doctor').references('doctors.id');
-                    })
-                    .then(() => {
-                        return Promise.all(
-                            _.map(curriculums, c => {
-                                return db("curriculums").insert(c);
-                            })
-                        );
-                    });
-                resolve("curriculums created");
-            } else {
-                resolve("curriculums already exists");
-            }
-        });
-    });
-}
-
-function fixImgURLs() {
-    doctors.map(doctor => {
-        doctor.img = server + doctor.img;
-    });
-    locations.map(location => {
-        location.img = server + location.img;
-    });
-    locationsImages.map(li => {
-        li.path = server + li.path;
-    });
-}
-
+//Export module
 exports.initDB = initDB;
 exports.getSQLDB = getSQLDB;

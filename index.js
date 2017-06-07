@@ -3,7 +3,6 @@ const bodyParser = require("body-parser");
 const _ = require("lodash");
 const process = require("process");
 const dbms = require("./other/database.js");
-
 const app = express();
 const DEV = process.env.DEV;
 
@@ -18,10 +17,10 @@ app.use(bodyParser.urlencoded({
 //Set the server's port
 let serverPort = process.env.PORT || 5000;
 app.set("port", serverPort);
-let serverUrl = ["http://localhost:" + serverPort + "/assets/img/", "https://polimi-hyp-2017-team-10459278.herokuapp.com/assets/img/"];
+let serverUrl = ["http://localhost:" + serverPort, "https://polimi-hyp-2017-team-10459278.herokuapp.com"];
 
 // get the database
-let sqlDb = dbms.getSQLDB(DEV,serverUrl); 
+let sqlDb = dbms.getSQLDB(DEV);
 
 //create DB if it doesn't exist
 dbms.initDB();
@@ -43,8 +42,7 @@ app.get("/doctors", function (req, res) {
 		.orderBy("surname", "asc").orderBy("name", "asc")
 		.then(result => {
 			res.json(result);
-		}
-		);
+		});
 });
 
 app.get("/doctors/:doctor_id", function (req, res) {
@@ -277,3 +275,10 @@ app.get("/aboutus", function (req, res) {
 		res.json(result);
 	});
 });
+
+
+
+function makeURLsAbsolute(path,img){
+	let URL = DEV?serverUrl[0]:serverUrl[1] + img?"/assets/img":"";
+	return URL+path;
+}
