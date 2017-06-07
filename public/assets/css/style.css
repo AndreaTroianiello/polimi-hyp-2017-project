@@ -177,5 +177,19 @@
 	}
 
 	.home-button {
-		float: right;
+		display: block;
+		margin: auto;
+	}
+
+	.icon1 {
+		color: black;
+	}
+
+	.icon2 {
+		color: white;
+	}
+
+	.icon-home {
+		display: block;
+		margin: auto;
 	}
