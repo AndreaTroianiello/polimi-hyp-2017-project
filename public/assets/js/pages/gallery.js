@@ -2,6 +2,7 @@ $(document).ready(function () {
 	console.log("I'm ready");
 	$('.slider').slick({
 		autoplay:true,
+		autoplaySpeed: 4500,
 		dots: true,
 		arrows: true,
 		infinite: true,

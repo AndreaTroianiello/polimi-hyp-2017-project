@@ -183,8 +183,8 @@
 	.home-button {
 		display: block;
 		margin: auto;
-		margin-bottom: 10px;
-		margin-top: 10px;
+		margin-bottom: 20px;
+		margin-top: 20px;
 	}
 
 	.icon1 {
@@ -198,9 +198,18 @@
 	.icon-home {
 		display: block;
 		margin: auto;
+		margin-bottom: 20px;
 	}
 
-.home-info {
-	margin-top: 50px;
-	margin-bottom: 50px;
+	.home-info {
+		margin-top: 50px;
+		margin-bottom: 50px;
+	}
+@media (max-width: 768px){
+	.home-button {
+		display: block;
+		margin: auto;
+		margin-bottom: 50px;
+		margin-top: 20px;
+	}
 }
