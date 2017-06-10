@@ -350,10 +350,6 @@
             {
                 "name": "buttontext",
                 "type": "string"
-            },
-            {
-                "name": "buttonpath",
-                "type": "text"
             }
         ],
         "foreign":[]
