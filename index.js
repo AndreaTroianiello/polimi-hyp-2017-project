@@ -30,6 +30,16 @@ app.listen(serverPort, function () {
 	console.log(`Your app is ready at ${serverUrl}`);
 });
 
+/*JSON home! to CANCEL*/
+let homeslider = require("./other/slider-home.json");
+let homedivs = require("./other/div-home.json");
+_.forEach(homeslider, o => {
+		o.path=makeURLsAbsolute(o.path,true);
+	});
+	console.log(homeslider);
+_.forEach(homedivs, o => {
+		o.path=makeURLsAbsolute(o.path,false);
+	});
 
 /* =========================================================
  Doctors APIs
@@ -283,6 +293,15 @@ app.get("/aboutus", function (req, res) {
 		res.json(result);
 	});
 });
+
+/* =========================================================
+ Home APIs
+========================================================== */
+app.get("/home", function (req, res) {
+	let home={slider:homeslider,divs:homedivs};
+	res.json(home);
+});
+
 
 
 
