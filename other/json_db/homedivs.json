@@ -17,7 +17,7 @@
         "title": "Chi siamo",
 		"icon":"fa-heartbeat",
 		"paragraph":"Il nostro centro medico è una realtà sanitaria innovativa, che offre salute accessibile e di qualità.",
-        "path": "/pages/aboutus.html",
+        "path": "/pages/who-we-are.html",
 		"buttontext":"Scoprici!"
     }
 ]

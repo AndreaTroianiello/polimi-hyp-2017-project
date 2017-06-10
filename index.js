@@ -30,17 +30,6 @@ app.listen(serverPort, function () {
 	console.log(`Your app is ready at ${serverUrl}`);
 });
 
-/*JSON home! to CANCEL*/
-let homeslider = require("./other/slider-home.json");
-let homedivs = require("./other/div-home.json");
-_.forEach(homeslider, o => {
-		o.path=makeURLsAbsolute(o.path,true);
-	});
-	console.log(homeslider);
-_.forEach(homedivs, o => {
-		o.path=makeURLsAbsolute(o.path,false);
-	});
-
 /* =========================================================
  Doctors APIs
 ========================================================== */
@@ -298,12 +287,27 @@ app.get("/aboutus", function (req, res) {
  Home APIs
 ========================================================== */
 app.get("/home", function (req, res) {
-	let home={slider:homeslider,divs:homedivs};
-	res.json(home);
+	sqlDb("homeslider")
+		.select("path")
+		.then(result => {
+			result.map(o => {
+				o.path = makeURLsAbsolute(o.path, true)
+			});
+			let home = {
+				slider: result,
+				divs: undefined
+			};
+			sqlDb("homedivs")
+				.select("title", "icon", "paragraph", "path", "buttontext")
+				.then(result => {
+					result.map(o => {
+						o.path = makeURLsAbsolute(o.path, false)
+					});
+					home.divs=result;
+					res.json(home);
+				})
+		});
 });
-
-
-
 
 function makeURLsAbsolute(path, img) {
 	let URL = (DEV ? serverUrl[0] : serverUrl[1]) + (img ? "/assets/img/" : "");

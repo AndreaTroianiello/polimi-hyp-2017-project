@@ -324,8 +324,8 @@
         "foreign":[]
     },
     {
-        "name": "homediv",
-        "file": "./json_db/homediv.json",
+        "name": "homedivs",
+        "file": "./json_db/homedivs.json",
         "columns": [
             {
                 "name": "id",
