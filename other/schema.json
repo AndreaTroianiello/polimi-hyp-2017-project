@@ -307,5 +307,55 @@
                 "references": "doctors.id"
             }
         ]
+    },
+     {
+        "name": "homeslider",
+        "file": "./json_db/homeslider.json",
+        "columns": [
+            {
+                "name": "id",
+                "type": "id"
+            },
+            {
+                "name": "path",
+                "type": "text"
+            }
+        ],
+        "foreign":[]
+    },
+    {
+        "name": "homediv",
+        "file": "./json_db/homediv.json",
+        "columns": [
+            {
+                "name": "id",
+                "type": "id"
+            },
+            {
+                "name": "title",
+                "type": "string"
+            },
+            {
+                "name": "icon",
+                "type": "string"
+            },
+            {
+                "name": "paragraph",
+                "type": "text"
+            },
+            {
+                "name": "path",
+                "type": "text"
+            },
+            {
+                "name": "buttontext",
+                "type": "string"
+            },
+            {
+                "name": "buttonpath",
+                "type": "text"
+            }
+        ],
+        "foreign":[]
     }
 ]
