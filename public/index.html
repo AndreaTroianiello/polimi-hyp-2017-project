@@ -25,7 +25,6 @@
 	<link href="./assets/css/slick.css" rel="stylesheet">
 	<link href="./assets/css/slick-theme.css" rel="stylesheet">
 	<link href="./assets/css/style.css" rel="stylesheet">
-
 </head>
 
 <body>
@@ -34,10 +33,7 @@
   Header Section
 ============================-->
 	<header id="header">
-
-		<!-- #nav-menu-container -->
-		<div class="container">
-
+		<div class="container" id="landmark">
 			<div id="logo" class="pull-left">
 				<h1><a href="./index.html">Medical Center</a></h1>
 			</div>
@@ -66,49 +62,13 @@
 	<!-- ===================
         Main section>
         ===================-->
-	<section>
+	<section id="principal">
 		<div class="slider">
-			<div class="slide">
-				<img src="./assets/img/doctors1.jpg">
-			</div>
-			<div class="slide">
-				<img src="./assets/img/doctors2.jpg">
-			</div>
-			<div class="slide">
-				<img src="./assets/img/doctors3.jpg">
-			</div>
 		</div>
 	</section>
 	<section>
 		<div class="container">
-			<div class="row home-info text-justify">
-				<div class="col-xs-12 col-sm-4">
-					<h2 class="section-title">Strutture</h2>
-					<span class="fa-stack fa-2x icon-home">
-                    	<i class="fa fa-circle fa-stack-2x icon1"></i>
-                    	<i class="fa fa-hospital-o fa-stack-1x text-primary icon2"></i>
-                    </span>
-					<p class="p-home">Le nostre sedi sono facilmente raggiungibili  e gli orari sono concepiti per andare incontro alle tue esigenze.</p>
-					<button class="home-button btn btn-default">Scoprile!</button>
-				</div>
-				<div class="col-xs-12 col-sm-4 ">
-					<h2 class="section-title">Medici</h2>
-					<span class="fa-stack fa-2x icon-home">
-                    	<i class="fa fa-circle fa-stack-2x icon1"></i>
-                    	<i class="fa fa-user-md fa-stack-1x text-primary icon2"></i>
-                    </span>
-					<p class="p-home">Gli specialisti del nostro centro medico provengono da importanti realtà ospedaliere e universitarie.</p>
-					<button class="home-button btn btn-default">Scoprili!</button>
-				</div>
-				<div class="col-xs-12 col-sm-4 ">
-					<h2 class="section-title">Chi siamo</h2>
-					<span class="fa-stack fa-2x icon-home">
-                    	<i class="fa fa-circle fa-stack-2x icon1"></i>
-                    	<i class="fa fa-heartbeat fa-stack-1x text-primary icon2"></i>
-                    </span>
-					<p class="p-home">Il nostro centro medico è una realtà sanitaria innovativa, che offre salute accessibile e di qualità.</p>
-					<button class="home-button btn btn-default">Scoprici!</button>
-				</div>
+			<div class="row text-justify" id="home-info">
 			</div>
 		</div>
 	</section>
@@ -127,12 +87,6 @@
 						&copy; Copyright <strong>Medical Center</strong>. All Rights Reserved
 					</div>
 					<div class="credits">
-						<!-- 
-                All the links in the footer should remain intact. 
-                You can delete the links only if you purchased the pro version.
-                Licensing information: https://bootstrapmade.com/license/
-                Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/buy/?theme=Imperial
-              -->
 						Bootstrap Themes by <a href="https://bootstrapmade.com/">BootstrapMade</a>
 					</div>
 				</div>
@@ -151,9 +105,10 @@
 	<script src="./assets/js/bootstrap.min.js"></script>
 	<script src="./assets/js/superfish.min.js"></script>
 	<script src="./assets/js/easing.min.js"></script>
-	<script src="./assets/js/imperial.js"></script>
-	<script type="text/javascript" src="./assets/js/slick.min.js"></script>
+	<script src="./assets/js/slick.min.js"></script>
 	<script src="./assets/js/pages/home.js"></script>
+	<script src="./assets/js/imperial.js"></script>
+	
 </body>
 
 </html>

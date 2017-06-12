@@ -1,5 +1,4 @@
 $(document).ready(function () {
-	console.log("I'm ready");
 	clearLocations();
 	$.ajax({
 		method: "GET",
@@ -10,7 +9,6 @@ $(document).ready(function () {
 			updateLocations(response);
 		},
 		error: function (request, error) {
-			console.log(request + ":" + error);
 			errorMessage();
 		}
 	});
@@ -18,7 +16,6 @@ $(document).ready(function () {
 
 function clearLocations() {
 	$('#locations').empty();
-	console.log("list cleaned");
 }
 
 function addLocation(location) {

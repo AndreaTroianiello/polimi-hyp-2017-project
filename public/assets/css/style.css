@@ -107,8 +107,9 @@
 
 	#map {
 		background-color: grey;
-		height: 200px;
+		height: 300px;
 		width: 100%;
+		margin-bottom: 20px;
 	}
 
 	.list-doc {
@@ -201,7 +202,7 @@
 		margin-bottom: 20px;
 	}
 
-	.home-info {
+	#home-info {
 		margin-top: 50px;
 		margin-bottom: 50px;
 	}

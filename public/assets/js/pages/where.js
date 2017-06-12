@@ -1,7 +1,6 @@
 var serverapiservice = "/services/";
 var serverapilocation = "/locations/";
 $(document).ready(function () {
-	console.log("I'm ready");
 	if(URL.id == null){
 		URL.id = 0;
 	}
@@ -29,7 +28,6 @@ function setLocationText(id) {
             $('#pagetitle').text("Strutture in cui è presente "+response.name);
         },
         error: function (request, error) {
-            console.log(request + ":" + error);
 			cleanLocations();
 			errorMessage();
         }
@@ -50,7 +48,6 @@ function getLocations(){
 			updateLocations(response);
         },
         error: function (request, error) {
-        	console.log(request + ":" + error);
 			cleanLocations();
 			errorMessage();
         }
@@ -59,7 +56,6 @@ function getLocations(){
 
 function cleanLocations() {
 	$('#locations').empty();
-	console.log("list cleaned");
 }
 
 function updateLocations(locations) {

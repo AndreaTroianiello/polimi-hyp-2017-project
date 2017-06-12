@@ -30,7 +30,6 @@ app.listen(serverPort, function () {
 	console.log(`Your app is ready at ${serverUrl}`);
 });
 
-
 /* =========================================================
  Doctors APIs
 ========================================================== */
@@ -284,7 +283,31 @@ app.get("/aboutus", function (req, res) {
 	});
 });
 
-
+/* =========================================================
+ Home APIs
+========================================================== */
+app.get("/home", function (req, res) {
+	sqlDb("homeslider")
+		.select("path")
+		.then(result => {
+			result.map(o => {
+				o.path = makeURLsAbsolute(o.path, true)
+			});
+			let home = {
+				slider: result,
+				divs: undefined
+			};
+			sqlDb("homedivs")
+				.select("title", "icon", "paragraph", "path", "buttontext")
+				.then(result => {
+					result.map(o => {
+						o.path = makeURLsAbsolute(o.path, false)
+					});
+					home.divs=result;
+					res.json(home);
+				})
+		});
+});
 
 function makeURLsAbsolute(path, img) {
 	let URL = (DEV ? serverUrl[0] : serverUrl[1]) + (img ? "/assets/img/" : "");

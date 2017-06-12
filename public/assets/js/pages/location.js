@@ -1,5 +1,4 @@
 $(document).ready(function () {
-	console.log("I'm ready");
 	init();
 	$.ajax({
 		method: "GET",
@@ -7,11 +6,9 @@ $(document).ready(function () {
 		crossDomain: true,
 		url: "../locations/" + URL.id,
 		success: function (response) {
-			console.log(response);
 			updateLocation(response);
 		},
 		error: function (request, error) {
-			console.log(request + ":" + error);
 			$('#location-info').empty();
 			errorMessage();
 		}
