@@ -28,7 +28,7 @@ dbms.initDB();
 
 // Start the server 
 app.listen(serverPort, function () {
-	console.log(`Your app is ready at ${DEV?serverURL[0]:serverURL[1]}`);
+	console.log(`Your app is ready at ${DEV ? serverURL[0] : serverURL[1]}`);
 });
 
 /*Converts a relative path to an absolute path
@@ -308,26 +308,42 @@ app.get("/locations/:location_id", function (req, res) {
 		});
 });
 
+/* Returns a JSON object that contains an array listing all images of the location specified by location_id.
+If the location ID is invalid returns a JSON object containing an error message.*/
 app.get("/locations/:location_id/images", function (req, res) {
-	sqlDb("locationimages")
-		.innerJoin("locations", "locations.id", "locationimages.location")
-		.where("location", req.params.location_id)
-		.orderBy("inc", "asc")
-		.select("name", "inc", "path")
-		.then(result => {
-			result.map(o => { o.path = makeURLsAbsolute(o.path, true) });
-			res.json(result);
-		})
+	sqlDb("locations").where("id", req.params.location_id).then(result => {
+		if (result.length == 1) {
+			sqlDb("locationimages")
+				.innerJoin("locations", "locations.id", "locationimages.location")
+				.where("location", req.params.location_id)
+				.orderBy("inc", "asc")
+				.select("name", "inc", "path")
+				.then(result => {
+					result.map(o => { o.path = makeURLsAbsolute(o.path, true) });
+					res.json(result);
+				});
+		} else {
+			res.json({ message: "Invalid location ID." });
+		}
+	});
 });
 
+/* Returns a JSON object that contains an array listing the directions to reach the location specified by location_id.
+If the location ID is invalid returns a JSON object containing an error message.*/
 app.get("/locations/:location_id/directions", function (req, res) {
-	sqlDb("locationdirections")
-		.innerJoin("locations", "locations.id", "locationdirections.location")
-		.where("location", req.params.location_id)
-		.select("name", "address", "city", "directions")
-		.then(result => {
-			res.json(result);
-		})
+	sqlDb("locations").where("id", req.params.location_id).then(result => {
+		if (result.length == 1) {
+			sqlDb("locationdirections")
+				.innerJoin("locations", "locations.id", "locationdirections.location")
+				.where("location", req.params.location_id)
+				.select("name", "address", "city", "directions")
+				.then(result => {
+					res.json(result);
+				});
+		} else {
+			res.json({ message: "Invalid location ID." });
+		}
+	});
 });
 
 
