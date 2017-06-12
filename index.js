@@ -28,7 +28,7 @@ dbms.initDB();
 
 // Start the server 
 app.listen(serverPort, function () {
-	console.log(`Your app is ready at ${DEV ? serverURL[0] : serverURL[1]}`);
+	console.log("Your app is ready at " + (DEV ? serverUrl[0] : serverUrl[1]));
 });
 
 /*Converts a relative path to an absolute path
@@ -308,7 +308,8 @@ app.get("/locations/:location_id", function (req, res) {
 		});
 });
 
-/* Returns a JSON object that contains an array listing all images of the location specified by location_id.
+/* Returns a JSON array in which every object contains the location name, 
+the image incremental id and the image absolute URI, for all images of the location specified by location_id.
 If the location ID is invalid returns a JSON object containing an error message.*/
 app.get("/locations/:location_id/images", function (req, res) {
 	sqlDb("locations").where("id", req.params.location_id).then(result => {
@@ -349,6 +350,7 @@ app.get("/locations/:location_id/directions", function (req, res) {
 
 /* =========================================================
  About us API
+
  Returns a JSON composed by an array of objects. 
  Each object contains the title and the corresponding information 
 ========================================================== */
@@ -360,6 +362,7 @@ app.get("/aboutus", function (req, res) {
 
 /* =========================================================
  Home APIs
+
  Returns a JSON object that contains the absolute paths to the images that can be used in the carousel,
  and the information and the url for the information DIVs that are shown in the homepage of the website.
 ========================================================== */
