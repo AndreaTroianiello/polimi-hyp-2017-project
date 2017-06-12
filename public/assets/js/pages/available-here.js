@@ -1,7 +1,6 @@
 var serverapilocation = "/locations/";
 var serverapiservice = "/services/";
 $(document).ready(function () {
-	console.log("I'm ready");
 	if(URL.id == null){
 		URL.id = 0;
 	}
@@ -60,7 +59,6 @@ function getLocations(){
 
 function clearServices() {
 	$('#services-info').empty();
-	console.log("list cleaned");
 }
 
 function updateServices(services) {

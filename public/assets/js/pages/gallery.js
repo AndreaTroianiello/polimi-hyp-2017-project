@@ -1,5 +1,4 @@
 $(document).ready(function () {
-	console.log("I'm ready");
 	$('.slider').slick({
 		autoplay:true,
 		autoplaySpeed: 4500,
@@ -18,12 +17,10 @@ $(document).ready(function () {
 		crossDomain: true,
 		url: "../locations/" + URL.id + "/images",
 		success: function (response) {
-			console.log(response);
 			init(response);
 			updateImages(response);
 		},
 		error: function (request, error) {
-			console.log(request + ":" + error);
 			$('#galley-info').empty();
 			errorMessage();
 		}

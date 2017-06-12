@@ -1,5 +1,4 @@
 $(document).ready(function () {
-	console.log("I'm ready");
 	init();
 	var geocoder = new google.maps.Geocoder();
 	var map=initMap();
@@ -27,7 +26,6 @@ $(document).ready(function () {
 			})
 		},
 		error: function (request, error) {
-			console.log(request + ":" + error);
 			$('#info-map').empty();
 			errorMessage();
 		}
@@ -57,7 +55,7 @@ function initMap() {
 
 function setDirections(directions){
 	for(var i = 0; i < directions.length; ++i)
-		$('#indications').append('<li>' + directions[i].directions + '</li>');
+		$('#indications').append('<li class="text-justify">' + directions[i].directions + '</li>');
 }
 
 function errorMessage() {
