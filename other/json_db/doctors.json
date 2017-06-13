@@ -10,7 +10,7 @@
     "operates": 2,
     "manages_s": null,
     "manages_a": null,
-    "desc": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque gravida vulputate facilisis. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; "
+    "desc": "Pur essendo molto giovane, la dottoressa Franca Abbriti è un medico molto esperto e si occupa di effettuare e analizzare ecocardiogrammi."
   },
   {
     "surname": "Cannata",
@@ -23,7 +23,7 @@
     "operates": 1,
     "manages_s": 1,
     "manages_a": null,
-    "desc": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque gravida vulputate facilisis. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; "
+    "desc": "Medico di grande esperienza, la dottoressa Letizia Cannata si occupa di effettuare visite cardiologiche, servizio di cui è anche responsabile."
  
   },
   {
@@ -37,7 +37,7 @@
     "operates": 2,
     "manages_s": 2,
     "manages_a": null,
-    "desc": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque gravida vulputate facilisis. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; "
+    "desc": "Il dottor Stefano Cattabeni ha molta esperienza nel settore cardiologico e ha lavorato in alcuni dei maggiori ospedali milanesi. Nella nostra struttura si occupa degli ecocardiogrammi, servizio di cui è responsabile."
    },
   {
     "surname": "Galimberti",
@@ -50,7 +50,7 @@
     "operates": 3,
     "manages_s": null,
     "manages_a": null,
-    "desc": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque gravida vulputate facilisis. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; "
+    "desc": "Il dottor Fabio Galimberti è uno dei nostri migliori medici; ha conseguito una laurea in chirurgia negli Stati Uniti e ora si occupa di chirugia cardiovascolare."
   },
   {
     "surname": "Gargantini",
@@ -63,7 +63,7 @@
     "operates": 5,
     "manages_s": null,
     "manages_a": 2,
-    "desc": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque gravida vulputate facilisis. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; "
+    "desc": "Il dottor Andrea Gargantini è il maggior esperto di oculistica della nostra clinica e gestisce l'intera area. Quotidianamente si occupa di effetturare esami del campo visivo."
 
   },
   {
@@ -77,7 +77,7 @@
     "operates": 3,
     "manages_s": 3,
     "manages_a": null,
-    "desc": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque gravida vulputate facilisis. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; "
+    "desc": "Il Dottor Marco Gazzola è uno dei maggiori esperti italiani di chirurgia cardiovascolare, pertanto nella nostra clinica lavora nel servizio e ne è anche il responsabile."
   },
   {
     "surname": "Lovati",
@@ -90,7 +90,7 @@
     "operates": 2,
     "manages_s": null,
     "manages_a": 1,
-    "desc": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque gravida vulputate facilisis. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; "
+    "desc": "La dottoressa Chiara Lovati, nonostante l'eta, è una delle maggiori esperte italiane dell'area cardiologica, per questo motivo si occupa di ecocardiogrammi ed è responsabile dell'intera area cardiologica delle nostre strutture."
   },
   {
     "surname": "Marzi",
@@ -103,7 +103,7 @@
     "operates": 4,
     "manages_s": 4,
     "manages_a": null,
-    "desc": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque gravida vulputate facilisis. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; "
+    "desc": "Pur essendo molto giovane, la dottoressa Martina Marzi è una dei nostri migliori medici oculisti. Si occupa di effettuare visite oculistiche, servizio di cui è anche responsabile."
   },
   {
     "surname": "Mennea",
@@ -113,10 +113,10 @@
     "fax": "+39 02 12345678",
     "email": "mennea@medicalcenter.it",
     "img": "doctors/doc-8.jpg",
-    "operates": 5,
+    "operates": 4,
     "manages_s": null,
     "manages_a": null,
-    "desc": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque gravida vulputate facilisis. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; "
+    "desc": "Medico di grande esperienza, la dottoressa Anna Mennea si occupa di effettuare visite oculistiche."
   },
   {
     "surname": "Zumbo",
@@ -129,6 +129,6 @@
     "operates": 5,
     "manages_s": 5,
     "manages_a": null,
-    "desc": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque gravida vulputate facilisis. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; "
+    "desc": "Pur essendo molto giovane, il dottor Gaetano Zumbo è uno dei nostri migliori medici oculisti. Si occupa di effettuare esami del campo visivo, servizio di cui è anche responsabile."
   }
 ]
