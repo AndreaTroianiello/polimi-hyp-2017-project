@@ -56,7 +56,9 @@ app.get("/doctors", function (req, res) {
 	filterDoctor(req, query);
 	orderDoctor(req, query);
 	query.then(result => {
-		result.map(o => { o.img = makeURLsAbsolute(o.img, true) });
+		result.map(o => {
+			o.img = makeURLsAbsolute(o.img, true)
+		});
 		res.json(result);
 	});
 });
@@ -106,8 +108,8 @@ app.get("/doctors/:doctor_id/curriculum", function (req, res) {
 
 function orderDoctor(req, query) {
 	let sort = _.get(req, "query.sort", null);
-	let asc = sort!==null?sort.charAt(0) !== "-":true;
-	
+	let asc = sort !== null ? sort.charAt(0) !== "-" : true;
+
 	if (!asc) {
 		sort = sort.substr(1, sort.length - 1);
 	}
@@ -201,7 +203,7 @@ app.get("/services", function (req, res) {
 				break;
 		}
 	}
-	orderService(req,query);
+	orderService(req, query);
 	query.then(result => {
 		res.json(result);
 	});
@@ -228,12 +230,12 @@ app.get("/services/:service_id", function (req, res) {
 
 function orderService(req, query) {
 	let sort = _.get(req, "query.sort", null);
-	let asc = sort!==null?sort.charAt(0) !== "-":true;
-	
+	let asc = sort !== null ? sort.charAt(0) !== "-" : true;
+
 	if (!asc) {
 		sort = sort.substr(1, sort.length - 1);
 	}
-	
+
 	switch (sort) {
 		case "name":
 			query.orderBy("services.name", asc ? "asc" : "desc");
@@ -279,10 +281,10 @@ app.get("/areas", function (req, res) {
 				break;
 		}
 	}
-	orderArea(req,query);
+	orderArea(req, query);
 	query.then(result => {
-			res.json(result);
-		});
+		res.json(result);
+	});
 });
 
 
@@ -304,12 +306,12 @@ app.get("/areas/:area_id", function (req, res) {
 
 function orderArea(req, query) {
 	let sort = _.get(req, "query.sort", null);
-	let asc = sort!==null?sort.charAt(0) !== "-":true;
-	
+	let asc = sort !== null ? sort.charAt(0) !== "-" : true;
+
 	if (!asc) {
 		sort = sort.substr(1, sort.length - 1);
 	}
-	
+
 	switch (sort) {
 		case "name":
 			query.orderBy("areas.name", asc ? "asc" : "desc");
@@ -352,7 +354,9 @@ app.get("/locations", function (req, res) {
 		}
 	}
 	query.orderBy("locations.city", "asc").then(result => {
-		result.map(o => { o.img = makeURLsAbsolute(o.img, true) });
+		result.map(o => {
+			o.img = makeURLsAbsolute(o.img, true)
+		});
 		res.json(result);
 	});
 });
@@ -387,11 +391,15 @@ app.get("/locations/:location_id/images", function (req, res) {
 				.orderBy("inc", "asc")
 				.select("name", "inc", "path")
 				.then(result => {
-					result.map(o => { o.path = makeURLsAbsolute(o.path, true) });
+					result.map(o => {
+						o.path = makeURLsAbsolute(o.path, true)
+					});
 					res.json(result);
 				});
 		} else {
-			res.json({ message: "Invalid location ID." });
+			res.json({
+				message: "Invalid location ID."
+			});
 		}
 	});
 });
@@ -409,19 +417,21 @@ app.get("/locations/:location_id/directions", function (req, res) {
 					res.json(result);
 				});
 		} else {
-			res.json({ message: "Invalid location ID." });
+			res.json({
+				message: "Invalid location ID."
+			});
 		}
 	});
 });
 
 function orderLocations(req, query) {
 	let sort = _.get(req, "query.sort", null);
-	let asc = sort!==null?sort.charAt(0) !== "-":true;
-	
+	let asc = sort !== null ? sort.charAt(0) !== "-" : true;
+
 	if (!asc) {
 		sort = sort.substr(1, sort.length - 1);
 	}
-	
+
 	switch (sort) {
 		case "name":
 			query.orderBy("locations.name", asc ? "asc" : "desc");
@@ -445,7 +455,13 @@ function orderLocations(req, query) {
 ========================================================== */
 app.get("/aboutus", function (req, res) {
 	sqlDb('whoweare').orderBy("id", "asc").then(result => {
-		res.json(result);
+		if (result.length === 0) {
+			res.json({
+				error: "Invalid service ID"
+			});
+		} else {
+			res.json(result);
+		}
 	});
 });
 
@@ -492,7 +508,7 @@ app.post("/genreq", function (req, res) {
 		object: req.body.object,
 		message: req.body.message
 	};
-	
+
 
 	//sendEmail(request);
 

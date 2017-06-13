@@ -10,6 +10,9 @@ function getServices(){
 		method: "GET",
 		dataType: "json",
 		crossDomain: true,
+		data:{
+			sort: "name"
+		},
 		url: serviceapi,
 		success: function (response) {
 			setServices(response);
