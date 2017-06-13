@@ -1,5 +1,6 @@
 const knex = require("knex");
 const _ = require("lodash");
+
 //get the db schema 
 let schema = require("./schema.json");
 
@@ -11,6 +12,7 @@ var getSQLDB = function (DEV) {
     if (DEV) {
         db = knex({
             client: "sqlite3",
+            //debug messages are enabled for developer environment
             debug: true,
             connection: {
                 filename: "./other/medicalcenter.sqlite"
@@ -29,18 +31,9 @@ var getSQLDB = function (DEV) {
 
 var initDB = function () {
     let schemaPromises = [];
-    //add promises in the array, every promise checks if a table exist in the db
-    for (let i = 0; i < schema.length; i++) {
-        schemaPromises[i] = new Promise((resolve, reject) => {
-            db.schema.hasTable(schema[i].name).then(exists => {
-                if (!exists) {
-                    reject(schema[i].name + " doesn't exist");
-                } else {
-                    resolve(schema[i].name + " exists");
-                }
-            });
-        });
-    }
+   
+    addPromises(schemaPromises);
+    
     //if ALL table exist, then proceed. Otherwise drop the db and regenerate
     Promise.all(schemaPromises)
         .then(() => {
@@ -59,6 +52,21 @@ var initDB = function () {
                 });
         });
 
+}
+
+//add promises in the array, every promise checks if a table exist in the db
+function addPromises(schemaPromises){
+     for (let i = 0; i < schema.length; i++) {
+        schemaPromises[i] = new Promise((resolve, reject) => {
+            db.schema.hasTable(schema[i].name).then(exists => {
+                if (!exists) {
+                    reject(schema[i].name + " doesn't exist");
+                } else {
+                    resolve(schema[i].name + " exists");
+                }
+            });
+        });
+    }
 }
 
 //Drops all the tables specified in the Schema JSON
