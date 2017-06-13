@@ -1,11 +1,11 @@
 var doctorapi = "/doctors/";
-var locationapi = "/locations/";
+var areaapi = "/areas/";
 var serviceapi = "/services/";
 
 
 $(document).ready(function () {
     getDoctors();
-    getLocationName();
+    getAreaName();
     clearSession();
 });
 
@@ -42,7 +42,7 @@ function getDoctors() {
         crossDomain: true,
         url: doctorapi,
         data: {
-            "filter": "location",
+            "filter": "area",
             "value": URL.filter
         },
         success: function (response) {
@@ -86,37 +86,37 @@ function addLetterToList(letter) {
 
 function addDoctorToList(doctor) {
     $('#doctorsList').append(
-        "<a href='doctor.html?id=" + doctor.id + "&filter=location&value=" + URL.filter + "' class='list-doc' ><div class='col-xs-12 col-sm-6'><div class='row'><div class='col-xs-4 col-sm-3'><img class='img-responsive list-img center-block' src='" + doctor.img + "' alt='" + doctor.surname + "'></div><div class='col-xs-8 col-sm-9'><h3>" + doctor.surname + " " + doctor.name + "</h3><p></p></div></div></div></a>"
+        "<a href='doctor.html?id=" + doctor.id + "&filter=area&value=" + URL.filter + "' class='list-doc' ><div class='col-xs-12 col-sm-6'><div class='row'><div class='col-xs-4 col-sm-3'><img class='img-responsive list-img center-block' src='" + doctor.img + "' alt='" + doctor.surname + "'></div><div class='col-xs-8 col-sm-9'><h3>" + doctor.surname + " " + doctor.name + "</h3><p></p></div></div></div></a>"
     );
 }
 
 
 
-function getLocationName() {
+function getAreaName() {
     $.ajax({
         method: "GET",
         dataType: "json",
         crossDomain: true,
-        url: locationapi + URL.filter,
+        url: areaapi + URL.filter,
         success: function (response) {
-            setLocationName(response);
+            setAreaName(response);
         },
         error: function (request, error) {
-            setErrorLocation();
+            setErrorArea();
         }
     });
 }
 
 
-function setLocationName(location) {
-    $('#pagetitle').text("Dottori di " + location.name);
-    $('title').text("Dottori di " + location.name);
+function setAreaName(area) {
+    $('#pagetitle').text("Dottori di " + area.name);
+    $('title').text("Dottori di " + area.name);
 }
 
 
-function setErrorLocation() {
-    $('#pagetitle').text("Dottori della struttura");
-    $('title').text("Dottori della struttura");
+function setErrorArea() {
+    $('#pagetitle').text("Dottori dell'area");
+    $('title').text("Dottori dell'area");
 }
 
 
@@ -127,7 +127,6 @@ function getServiceName(p, operates) {
         crossDomain: true,
         url: serviceapi + operates,
         success: function (response) {
-            console.log(response.name);
             setServiceName(p,response);
         },
         error: function (request, error) {
