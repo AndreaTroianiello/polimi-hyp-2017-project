@@ -1,11 +1,10 @@
 var doctorapi = "/doctors/";
-var locationapi = "/locations/";
 var serviceapi = "/services/";
 
 
 $(document).ready(function () {
     getDoctors();
-    getLocationName();
+    getServiceName();
     clearSession();
 });
 
@@ -42,7 +41,7 @@ function getDoctors() {
         crossDomain: true,
         url: doctorapi,
         data: {
-            "filter": "location",
+            "filter": "service",
             "value": URL.filter
         },
         success: function (response) {
@@ -72,7 +71,6 @@ function parseDoctors(doctors) {
         }
 
         addDoctorToList(doctor);
-        getServiceName($('#doctorsList p:last'), doctor.operates);
     }
 }
 
@@ -86,63 +84,37 @@ function addLetterToList(letter) {
 
 function addDoctorToList(doctor) {
     $('#doctorsList').append(
-        "<a href='doctor.html?id=" + doctor.id + "&filter=location&value=" + URL.filter + "' class='list-doc' ><div class='col-xs-12 col-sm-6'><div class='row'><div class='col-xs-4 col-sm-3'><img class='img-responsive list-img center-block' src='" + doctor.img + "' alt='" + doctor.surname + "'></div><div class='col-xs-8 col-sm-9'><h3>" + doctor.surname + " " + doctor.name + "</h3><p></p></div></div></div></a>"
+        "<a href='doctor.html?id=" + doctor.id + "&filter=service&value=" + URL.filter + "' class='list-doc' ><div class='col-xs-12 col-sm-6'><div class='row'><div class='col-xs-4 col-sm-3'><img class='img-responsive list-img center-block' src='" + doctor.img + "' alt='" + doctor.surname + "'></div><div class='col-xs-8 col-sm-9'><h3>" + doctor.surname + " " + doctor.name + "</h3><p>"+doctor.email+"</p></div></div></div></a>"
     );
 }
 
 
 
-function getLocationName() {
+function getServiceName() {
     $.ajax({
         method: "GET",
         dataType: "json",
         crossDomain: true,
-        url: locationapi + URL.filter,
+        url: serviceapi + URL.filter,
         success: function (response) {
-            setLocationName(response);
+            setServiceName(response);
         },
         error: function (request, error) {
-            setErrorLocation();
+            setErrorService();
         }
     });
 }
 
 
-function setLocationName(location) {
-    $('#pagetitle').text("Dottori di " + location.name);
-    $('title').text("Dottori di " + location.name);
+function setServiceName(service) {
+    $('#pagetitle').text("Dottori di " + service.name);
+    $('title').text("Dottori di " + service.name);
 }
 
 
-function setErrorLocation() {
-    $('#pagetitle').text("Dottori della struttura");
-    $('title').text("Dottori della struttura");
-}
-
-
-function getServiceName(p, operates) {
-    $.ajax({
-        method: "GET",
-        dataType: "json",
-        crossDomain: true,
-        url: serviceapi + operates,
-        success: function (response) {
-            console.log(response.name);
-            setServiceName(p,response);
-        },
-        error: function (request, error) {
-            setErrorService(p);
-        }
-    });
-}
-
-
-function setServiceName(p,service) {
-    $(p).text(service.name);
-}
-
-function setErrorService(p) {
-    $(p).text("Servizio " + operates);
+function setErrorService() {
+    $('#pagetitle').text("Dottori del servizio");
+    $('title').text("Dottori del servizio");
 }
 
 
