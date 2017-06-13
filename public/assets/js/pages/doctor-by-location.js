@@ -15,7 +15,7 @@ function getLocations(){
 			setLocations(response);
 		},
 		error: function (request, error) {
-			$('#page-title').text("Errore - Impossibile caricare i dati richiesti.");
+			errorMessage();
 		}
 	});
 }
@@ -29,6 +29,10 @@ function addLocationToList(location) {
 function addCityToList(city) {
 	$('#locations').append('<h4 class="list-index">' + city + '</h4>');
 	$('#locations').append('<div class="list-group locations-list" id="' + city + '"></div>');
+}
+
+function errorMessage() {
+    $('#locations').append("<div class='col-xs-12 text-center'><p>Impossibile ottenere le informazioni richieste.</p></div>");
 }
 
 

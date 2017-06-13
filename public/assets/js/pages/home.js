@@ -46,5 +46,5 @@ function parseDivs(divs) {
 
 function setErrorHome(){
 	$('section').empty();
-	$('#principal').append('<h3 class="error">Impossibile caricare la pagina.</h3>');
+	$('#principal').append('<div class="col-xs-12 text-center"><p>Impossibile ottenere le informazioni richieste.</p></div>');
 }

@@ -15,7 +15,7 @@ function getAreas(){
 			setAreas(response);
 		},
 		error: function (request, error) {
-			$('#page-title').text("Errore - Impossibile caricare i dati richiesti.");
+			errorMessage();
 		}
 	});
 }
@@ -31,6 +31,9 @@ function addLetterToList(letter) {
 	$('#areas').append('<div class="list-group locations-list" id="' + letter + '"></div>');
 }
 
+function errorMessage() {
+    $('#areas').append("<div class='col-xs-12 text-center'><p>Impossibile ottenere le informazioni richieste.</p></div>");
+}
 
 function setAreas(areas) {
 	var currentInitialLetter;

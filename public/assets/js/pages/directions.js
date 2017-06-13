@@ -26,7 +26,8 @@ $(document).ready(function () {
 			})
 		},
 		error: function (request, error) {
-			$('#info-map').empty();
+			$('#map').remove();
+			$('#indications').remove();
 			errorMessage();
 		}
 	});
@@ -59,7 +60,8 @@ function setDirections(directions){
 }
 
 function errorMessage() {
-	$('#info-map').append('<h3 class="error">Impossibile le informazioni della struttura.</h3>');
+	$('#info-map').append("<div class='col-xs-12 text-center'><p>Impossibile ottenere le informazioni richieste.</p></div>");
+
 }
 
 function getSideMenu() {

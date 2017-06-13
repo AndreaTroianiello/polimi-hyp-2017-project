@@ -1,5 +1,5 @@
 $(document).ready(function () {
-	init();
+	getSideMenu();
 	$.ajax({
 		method: "GET",
 		dataType: "json",
@@ -9,7 +9,7 @@ $(document).ready(function () {
 			updateLocation(response);
 		},
 		error: function (request, error) {
-			$('#location-info').empty();
+			$('.loc-info').remove();
 			errorMessage();
 		}
 	});
@@ -35,19 +35,8 @@ function updateLocation(location) {
 	$('#available-services').attr("href","./available-here.html?id="+location.id);
 }
 
-function init() {
-	$('#location-building').empty();
-	$('#location-title').text('');
-	$('#location-address').text('');
-	$('#location-telephone').text('');
-	$('#location-fax').text('');
-	$('#location-email').text('');
-	$('#location-timetable').text('');
-	getSideMenu();
-}
-
 function errorMessage() {
-	$('#location-info').append('<h3 class="error">Impossibile le informazione della struttura.</h3>');
+	$('#location-info').append("<div class='col-xs-12 text-center'><p>Impossibile ottenere le informazioni richieste.</p></div>");
 }
 
 

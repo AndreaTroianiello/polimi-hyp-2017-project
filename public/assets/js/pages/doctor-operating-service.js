@@ -38,9 +38,9 @@ function setServiceText(service) {
 
 
 function setErrorService() {
-    $('#side-service').text("Servizio " + URL.id);
-    $('title').text("Dottori servizio " + URL.id);
-    $('#pagetitle').text("Dottori operanti in servizio " + URL.id);
+    $('#side-service').text("Servizio");
+    $('title').text("Dottori servizio");
+    $('#pagetitle').text("Dottori operanti nel servizio");
 }
 
 
@@ -59,13 +59,13 @@ function getDoctors() {
             setClickListener();
         },
         error: function (request, error) {
-            setErrorDoctor();
+            errorMessage();
         }
     });
 }
 
 
-function setErrorDoctor() {
+function errorMessage() {
     $('#doctorsList').append("<div class='col-xs-12 text-center'><p>Impossibile ottenere le informazioni richieste.</p></div>");
 }
 

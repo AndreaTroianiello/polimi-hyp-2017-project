@@ -21,7 +21,7 @@ function getService() {
             getResponsible(response.responsible);
         },
         error: function (request, error) {
-            setErrorService();
+            errorMessage();
         }
     });
 }
@@ -34,10 +34,11 @@ function setService(service) {
 }
 
 
-function setErrorService() {
-    $('title').text("Servizio " + URL.id);
-    $('#title-service-name').text("Servizio " + URL.id);
-    $('#service-desc').html("<p class='text-center'>Impossibile ottenere le informazioni richieste.</p>");
+function errorMessage() {
+    $('title').text("Servizio");
+    $('#title-service-name').text("Servizio");
+	$('.serv-info').empty();
+    $('#service-desc').append("<div class='col-xs-12 text-center'><p>Impossibile ottenere le informazioni richieste.</p></div>");
 }
 
 
