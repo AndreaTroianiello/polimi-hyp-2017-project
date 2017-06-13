@@ -389,3 +389,33 @@ app.get("/home", function (req, res) {
 		});
 });
 
+/* =========================================================
+ Information FORM APIs
+
+ Receives a general information request, stores it in the database and sends it via email (function not implemented).
+ A JSON object with a message is returned either in case of success or in case of failure.
+========================================================== */
+
+app.post("/genreq", function (req, res) {
+	let request = {
+		name: req.params.name,
+		surname: req.params.surname,
+		email: req.params.email,
+		object: req.params.object,
+		message: req.params.message
+	}
+
+	//sendEmail(request);
+
+	knex("general_requests").insert(request)
+		.then(function () {
+			res.json({
+				message: "Request received."
+			});
+		})
+		.catch(function () {
+			res.json({
+				message: "There was an error with you request. Please, try again later."
+			});
+		});
+});
