@@ -1,27 +1,27 @@
 [
   {
-    "name": "Visita dermatologica",
-    "description": "<p>La visita dermatologica è impiegata per escludere, diagnosticare o monitorare un disturbo di carattere dermatologico. A questa visita vengono sottoposti i soggetti con malattie legate alla cute già note e che devono sottoporsi a controlli periodici; è però possibile che il medico curante consigli di recarsi da un dermatologo al fine di accertare la natura di alcuni sintomi, quali anomalie di un neo, presenza di eruzioni cutanee di diverso tipo, comparsa di pomfi e/o angiodemi con dolore o senza, prurito persistente e cambiamento del colore o della consistenza della pelle.</p>",
+    "name": "Visita cardiologica",
+    "description": "<p>Con la visita cardiologica è possibile escludere, diagnosticare o monitorare un disturbo di carattere cardiologico. Possono essere sottoposti alla visita cardiologica per accertare la natura dei sintomi ed il possibile legame con i disturbi di tipo cardiaco i paziente che soffrono di malattia cardiovascolare e coloro che accusano dolore toracico, affanno, sincope, capogiri e palpitazioni.</p><p>La visita cardiologica viene prescritta quando è necessario diagnosticare e curare le principali malattie cardiovascolari, come ad esempio l’ipertensione arteriosa, la cardiopatia ischemica, lo scompenso cardiaco, le cardiomiopatie, le malattie della valvole cardiache e, inoltre, tale consulto può essere necessario per pazienti portatori di protesi valvolari.</p>",
     "area": 1
   },
   {
-    "name": "Visita venereologica",
-    "description": "",
+    "name": "Ecocardiogramma",
+    "description": "<p>Con l’elettrocardiogramma si è in grado si registrare e visualizzare graficamente l’attività elettrica del cuore: ciò avviene tramite il monitoraggio dell’attività di pompaggio del sangue che il cuore effettua con contrazioni e rilasciamenti. Tale esame inoltre è utile per individuare l’eventuale presenza di una malattia cardiaca o di un disturbo del ritmo , ad esempio l’aritmia. L’elettrocardiogramma può essere effettuato a riposo con il paziente sdraiato supino sul lettino, oppure sotto sforzo con il paziente che cammina su un tapis roulant o pedala su di una cyclette.</p><p>L’elettrocardiogramma sotto sforzo può essere utile per diagnosticare le patologie cardiache nascoste. L’elettrocardiogramma a riposo invece consente la misurazione del ritmo del cuore o l’eventuale aumento della dimensione delle camere cardiache, diviene quindi utile per scovare eventuali aritmie.</p>",
     "area": 1	
   },
   {
-    "name": "Chirurgia dermatologica",
-    "description": "",
+    "name": "Chirurgia cardiovascolare",
+    "description": "<p>La visita di chirurgia vascolare è un passaggio fondamentale per la preparazione del paziente cui è stata diagnosticata una patologia vascolare (in particolare restringimenti, dilatazioni o deterioramenti causati da ateriosclerosi, insufficienza venosa cronica, aneurismi, malformazioni, diabete) per la cui soluzione è necessario un intervento chirurgico. È utile a stabilire l'indicazione, la pianificazione degli esami pre-operatori, dei tempi e delle modalità dell'intervento.</p>",
     "area": 1	
   },
   {
-    "name": "Visita cardiologica",
-    "description": "Con la visita cardiologica è possibile escludere, diagnosticare o monitorare un disturbo di carattere cardiologico. Possono essere sottoposti alla visita cardiologica per accertare la natura dei sintomi ed il possibile legame con i disturbi di tipo cardiaco i paziente che soffrono di malattia cardiovascolare e coloro che accusano dolore toracico, affanno, sincope, capogiri e palpitazioni.",
+    "name": "Visita oculistica",
+    "description": "<p>Per poter escludere, diagnosticare o controllare una patologia che interessa gli occhi, viene eseguita la visita oculistica: tale consulto viene effettuato da un medico specialista in oculistica. Sono sottoposti a questa controllo coloro che hanno già una malattia diagnosticata oppure a chi è stata consigliato un incontro medico per chiarire la natura di sintomi (come ad esempio l’abbassamento dell’acutezza visiva, l’annebbiamento della vista, la presenza nel campo visivo di macchie colorate, di aureole o aloni, di puntini, l’oscuramento di parte del campo visivo, la comparsa di lesioni oculari di diversa natura).</p><p>La visita oculistica è utile per valutare le condizioni di salute degli occhi e quindi diagnosticare o escludere la presenza di patologie oculari. Inoltre consente di stabilire la terapia più adatta. </p>",
     "area": 2
   },
   {
-    "name": "Chirurgia cardiologica",
-    "description": "",
+    "name": "Esame del campo visivo",
+    "description": "<p>L’esame del campo visivo è un test che consente di rappresentare graficamente la porzione di spazio che si è in grado di vedere tenendo lo sguardo dritto in avanti; in altri termini è un metodo che serve a misurare la visione dello spazio che circonda l’occhio.</p><p>L’esame del campo visivo è un test fondamentale nella diagnosi e nella valutazione del glaucoma, ma può risultare di notevole utilità anche nello studio di alcune patologie a carico di retina, nervo ottico e sistema nervoso centrale; talvolta può essere utile anche nell’individuazione di alcuni tumori cerebrali.</p>",
     "area": 2
   }
 ]

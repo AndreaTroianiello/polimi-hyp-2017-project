@@ -1,10 +1,10 @@
 [
     {
-        "name": "Dermatologia",
-        "desc": ""
+        "name": "Cardiologia",
+        "desc": "<p>La cardiologia si occupa della diagnosi e cura di tutte le malattie relative al sistema cardiovascolare, siano esse congenite o no.</p>"
     },
     {
-        "name": "Cardiologia",
-        "desc": ""
+        "name": "Oculistica",
+        "desc": "<p>L’oculistica è una specialità medica orientata alla diagnosi e cura delle malattie che possono colpire gli occhi di adulti e bambini.</p>"
     }
 ]
