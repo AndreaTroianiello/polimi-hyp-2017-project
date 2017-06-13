@@ -49,17 +49,16 @@ Filtering is supported, parameters:
 - filter: the type of the filter, it can be equal to area|location|service
 - value: the ID of an 'object' of the same type specified by the filter parameter 
 		(e.g the ID of the service you may want to know which doctors operates in)
-Doctor are alphabetically ordered by surname and name.
+- sort: Default sorting is done by doctor surname asc. Sort can be equal to surname|service|id, prepend "-" for descending sort
 The function "filterDoctor" is used for filtering */
 app.get("/doctors", function (req, res) {
 	let query = sqlDb("doctors");
 	filterDoctor(req, query);
-	query
-		.orderBy("surname", "asc").orderBy("name", "asc")
-		.then(result => {
-			result.map(o => { o.img = makeURLsAbsolute(o.img, true) });
-			res.json(result);
-		});
+	orderDoctor(req, query);
+	query.then(result => {
+		result.map(o => { o.img = makeURLsAbsolute(o.img, true) });
+		res.json(result);
+	});
 });
 
 /* Returns a JSON object that corresponds to the doctor specified by "doctor_id" and all his information.
@@ -105,6 +104,29 @@ app.get("/doctors/:doctor_id/curriculum", function (req, res) {
 	});
 });
 
+function orderDoctor(req, query) {
+	let sort = _.get(req, "query.sort", null);
+	let asc = sort!==null?sort.charAt(0) !== "-":true;
+	
+	if (!asc) {
+		sort = sort.substr(1, sort.length - 1);
+	}
+
+	switch (sort) {
+		case "surname":
+			query.orderBy("doctors.surname", asc ? "asc" : "desc").orderBy("doctors.id", asc ? "asc" : "desc");
+			break;
+		case "id":
+			query.orderBy("doctors.id", asc ? "asc" : "desc");
+			break;
+		case "service":
+			query.orderBy("doctors.operates", asc ? "asc" : "desc");
+			break;
+		default:
+			query.orderBy("doctors.surname", "asc").orderBy("doctors.name", "asc");
+	}
+}
+
 function filterDoctor(req, query) {
 	let filter = _.get(req, "query.filter", null);
 	let value = _.get(req, "query.value", null);
@@ -127,28 +149,27 @@ function filterDoctor(req, query) {
 				break;
 		}
 	}
-	return query;
 }
 
 function getPrevNext(req, res, next) {
 	let query = sqlDb("doctors");
-	query = filterDoctor(req, query);
-	query.orderBy("surname", "asc").orderBy("name", "asc")
-		.then(result => {
-			let i = _.findIndex(result, (r) => {
-				return req.params.doctor_id == r.id;
-			});
-			if (i === -1) {
-				res.json({
-					error: "No doctor found for the given parameters."
-				});
-			} else {
-				let diff = next ? 1 : -1;
-				let doc = result[(i + result.length + diff) % result.length];
-				doc.img = makeURLsAbsolute(doc.img, true);
-				res.json(doc);
-			}
+	filterDoctor(req, query);
+	orderDoctor(req, query);
+	query.then(result => {
+		let i = _.findIndex(result, (r) => {
+			return req.params.doctor_id == r.id;
 		});
+		if (i === -1) {
+			res.json({
+				error: "No doctor found for the given parameters."
+			});
+		} else {
+			let diff = next ? 1 : -1;
+			let doc = result[(i + result.length + diff) % result.length];
+			doc.img = makeURLsAbsolute(doc.img, true);
+			res.json(doc);
+		}
+	});
 }
 
 /* =========================================================
@@ -161,7 +182,7 @@ Filtering is supported, parameters:
 - filter: the type of the filter, it can be equal to area|location
 - value: the ID of an 'object' of the same type specified by the filter parameter 
 		(e.g the ID of the area you may want to know which services belong to)
-Services are ordered by id. */
+- sort: Default sorting is done by service id asc. Sort can be equal to name|id|area, prepend "-" for descending sort*/
 app.get("/services", function (req, res) {
 	let filter = _.get(req, "query.filter", null);
 	let value = _.get(req, "query.value", null);
@@ -180,10 +201,12 @@ app.get("/services", function (req, res) {
 				break;
 		}
 	}
-	query.orderBy("services.id", "asc").then(result => {
+	orderService(req,query);
+	query.then(result => {
 		res.json(result);
 	});
 });
+
 
 /* Returns a JSON object that corresponds to the service specified by "service_id" and all his information.
 If the service ID is invalid, a JSON object containing an error message is returned. */
@@ -203,6 +226,30 @@ app.get("/services/:service_id", function (req, res) {
 		});
 });
 
+function orderService(req, query) {
+	let sort = _.get(req, "query.sort", null);
+	let asc = sort!==null?sort.charAt(0) !== "-":true;
+	
+	if (!asc) {
+		sort = sort.substr(1, sort.length - 1);
+	}
+	
+	switch (sort) {
+		case "name":
+			query.orderBy("services.name", asc ? "asc" : "desc");
+			break;
+		case "id":
+			query.orderBy("services.id", asc ? "asc" : "desc");
+			break;
+		case "area":
+			query.orderBy("services.area", asc ? "asc" : "desc");
+			break;
+		default:
+			query.orderBy("services.id", "asc");
+	}
+}
+
+
 /* =========================================================
  Areas APIs
 ========================================================== */
@@ -214,7 +261,7 @@ Parameters:
 - filter: the type of the filter, in this case it can only be equal to area (or null)
 - value: the ID of an 'object' of the same type specified by the filter parameter 
 		(e.g the ID of the location you may want to know which areas serves)
-Areas are ordered by ID.*/
+- sort: Default sorting is done by ID asc. Sort can be equal to name|id , prepend "-" for descending sort*/
 app.get("/areas", function (req, res) {
 	let filter = _.get(req, "query.filter", null);
 	let value = _.get(req, "query.value", null);
@@ -232,12 +279,12 @@ app.get("/areas", function (req, res) {
 				break;
 		}
 	}
-	query
-		.orderBy("areas.id", "asc")
-		.then(result => {
+	orderArea(req,query);
+	query.then(result => {
 			res.json(result);
 		});
 });
+
 
 /* Returns a JSON object that corresponds to the area specified by "area_id" and all his information.
 If the area ID is invalid, a JSON object containing an error message is returned. */
@@ -255,6 +302,26 @@ app.get("/areas/:area_id", function (req, res) {
 		});
 });
 
+function orderArea(req, query) {
+	let sort = _.get(req, "query.sort", null);
+	let asc = sort!==null?sort.charAt(0) !== "-":true;
+	
+	if (!asc) {
+		sort = sort.substr(1, sort.length - 1);
+	}
+	
+	switch (sort) {
+		case "name":
+			query.orderBy("areas.name", asc ? "asc" : "desc");
+			break;
+		case "id":
+			query.orderBy("areas.id", asc ? "asc" : "desc");
+			break;
+		default:
+			query.orderBy("areas.id", "asc");
+	}
+}
+
 
 /* =========================================================
  Location APIs
@@ -267,7 +334,7 @@ Parameters:
 - filter: the type of the filter, in this case can only be equal to "service" (or null)
 - value: the ID of an 'object' of the same type specified by the filter parameter 
 		(e.g the ID of the service you may want to know in which locations is served)
-Locations are ordered by city name */
+- sort: Default sorting is done by city name asc. Sort can be equal to name|id|city, prepend "-" for descending sort */
 app.get("/locations", function (req, res) {
 	let filter = _.get(req, "query.filter", null);
 	let value = _.get(req, "query.value", null);
@@ -347,6 +414,28 @@ app.get("/locations/:location_id/directions", function (req, res) {
 	});
 });
 
+function orderLocations(req, query) {
+	let sort = _.get(req, "query.sort", null);
+	let asc = sort!==null?sort.charAt(0) !== "-":true;
+	
+	if (!asc) {
+		sort = sort.substr(1, sort.length - 1);
+	}
+	
+	switch (sort) {
+		case "name":
+			query.orderBy("locations.name", asc ? "asc" : "desc");
+			break;
+		case "id":
+			query.orderBy("locations.id", asc ? "asc" : "desc");
+			break;
+		case "city":
+			query.orderBy("locations.city", asc ? "asc" : "desc");
+			break;
+		default:
+			query.orderBy("locations.city", "asc");
+	}
+}
 
 /* =========================================================
  About us API
@@ -389,3 +478,33 @@ app.get("/home", function (req, res) {
 		});
 });
 
+/* =========================================================
+ Information FORM APIs
+
+ Receives a general information request, stores it in the database and sends it via email (function not implemented).
+ A JSON object with a message is returned either in case of success or in case of failure.
+========================================================== */
+app.post("/genreq", function (req, res) {
+	let request = {
+		name: req.body.name,
+		surname: req.body.surname,
+		email: req.body.email,
+		object: req.body.object,
+		message: req.body.message
+	};
+	
+
+	//sendEmail(request);
+
+	sqlDb("general_requests").insert(request)
+		.then(function () {
+			res.json({
+				message: "Request received."
+			});
+		})
+		.catch(function () {
+			res.json({
+				message: "There was an error with you request. Please, try again later."
+			});
+		});
+});

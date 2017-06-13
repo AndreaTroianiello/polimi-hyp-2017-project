@@ -133,6 +133,9 @@ function populateDatabase() {
     let result;
     for (let i = 0; i < schema.length; i++) {
         //Load the array of object from the JSON specified in the schema JSON
+        if(schema[i].file === null){
+            continue;
+        }
         let json = require(schema[i].file);
         //Insert, if it's the first element it make result equal to a promise, otherwise appends another promise in a then()
         for (let j = 0; j < json.length; j++) {

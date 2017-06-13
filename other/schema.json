@@ -353,5 +353,36 @@
             }
         ],
         "foreign":[]
+    },
+    {
+        "name":"general_requests",
+        "file": null,
+        "columns":[
+            {
+                "name":"id",
+                "type":"id"
+            },
+            {
+                "name":"name",
+                "type":"string"
+            },
+            {
+                "name":"surname",
+                "type":"string"
+            },
+            {
+                "name":"email",
+                "type":"string"
+            },
+            {
+                "name":"object",
+                "type":"string"
+            },
+            {
+                "name":"message",
+                "type":"text"
+            }      
+        ],
+        "foreign":[]
     }
 ]
