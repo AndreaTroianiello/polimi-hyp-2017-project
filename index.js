@@ -354,13 +354,10 @@ app.get("/locations", function (req, res) {
 		}
 	}
 	orderLocations(req, query);
-<<<<<<< HEAD
- 	query.then(result => {
- 		result.map(o => { o.img = makeURLsAbsolute(o.img, true) });
-=======
 	query.then(result => {
-		result.map(o => { o.img = makeURLsAbsolute(o.img, true) });
->>>>>>> master
+		result.map(o => { 
+			o.img = makeURLsAbsolute(o.img, true) 
+		});
 		res.json(result);
 	});
 });
@@ -512,21 +509,6 @@ app.post("/genreq", function (req, res) {
 		object: req.body.object,
 		message: req.body.message
 	};
-<<<<<<< HEAD
-
-
-	//sendEmail(request);
-
-	sqlDb("general_requests").insert(request)
-		.then(function () {
-			res.json({
-				message: "Request received."
-			});
-		})
-		.catch(function () {
-			res.json({
-				message: "There was an error with you request. Please, try again later."
-=======
 	
 	if (checkInfo(request)) {
 		/* Function not implemented
@@ -542,7 +524,6 @@ app.post("/genreq", function (req, res) {
 				res.json({
 					message: "There was an error with you request. Please, try again later."
 				});
->>>>>>> master
 			});
 	} else {
 		res.json({
