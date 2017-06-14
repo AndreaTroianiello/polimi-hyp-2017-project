@@ -16,7 +16,7 @@ Team Member n.2: Andrea Troianiello, 10455250, polimi-hyp-2017-10455250
 
 The environmente variable TEST must be set equal to "true"
 On Windows:
-- From CMD: 
+From CMD: 
 
 ```
 #!sh
@@ -24,7 +24,7 @@ On Windows:
 set TEST=true
 
 ```
-- From powershell: 
+From powershell: 
 ```
 #!sh
 
@@ -50,6 +50,7 @@ The project uses SQLite in local and PostgreSQL in production.
 The database is exported in another module called "database.js" located in the /other directory.
 
 Database creation and population works in the following way:
+
 1. A function checks if all the tables already exist
 2. If at least a table doesnt' exist, the entire database is deleted and recreated
 3. The database is created using a json file called "schema.json" located in /other
