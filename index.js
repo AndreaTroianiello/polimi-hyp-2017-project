@@ -56,7 +56,9 @@ app.get("/doctors", function (req, res) {
 	filterDoctor(req, query);
 	orderDoctor(req, query);
 	query.then(result => {
-		result.map(o => { o.img = makeURLsAbsolute(o.img, true) });
+		result.map(o => {
+			o.img = makeURLsAbsolute(o.img, true)
+		});
 		res.json(result);
 	});
 });
@@ -352,8 +354,13 @@ app.get("/locations", function (req, res) {
 		}
 	}
 	orderLocations(req, query);
+<<<<<<< HEAD
+ 	query.then(result => {
+ 		result.map(o => { o.img = makeURLsAbsolute(o.img, true) });
+=======
 	query.then(result => {
 		result.map(o => { o.img = makeURLsAbsolute(o.img, true) });
+>>>>>>> master
 		res.json(result);
 	});
 });
@@ -388,11 +395,15 @@ app.get("/locations/:location_id/images", function (req, res) {
 				.orderBy("inc", "asc")
 				.select("name", "inc", "path")
 				.then(result => {
-					result.map(o => { o.path = makeURLsAbsolute(o.path, true) });
+					result.map(o => {
+						o.path = makeURLsAbsolute(o.path, true)
+					});
 					res.json(result);
 				});
 		} else {
-			res.json({ message: "Invalid location ID." });
+			res.json({
+				message: "Invalid location ID."
+			});
 		}
 	});
 });
@@ -410,7 +421,9 @@ app.get("/locations/:location_id/directions", function (req, res) {
 					res.json(result);
 				});
 		} else {
-			res.json({ message: "Invalid location ID." });
+			res.json({
+				message: "Invalid location ID."
+			});
 		}
 	});
 });
@@ -446,7 +459,13 @@ function orderLocations(req, query) {
 ========================================================== */
 app.get("/aboutus", function (req, res) {
 	sqlDb('whoweare').orderBy("id", "asc").then(result => {
-		res.json(result);
+		if (result.length === 0) {
+			res.json({
+				error: "Invalid service ID"
+			});
+		} else {
+			res.json(result);
+		}
 	});
 });
 
@@ -493,6 +512,21 @@ app.post("/genreq", function (req, res) {
 		object: req.body.object,
 		message: req.body.message
 	};
+<<<<<<< HEAD
+
+
+	//sendEmail(request);
+
+	sqlDb("general_requests").insert(request)
+		.then(function () {
+			res.json({
+				message: "Request received."
+			});
+		})
+		.catch(function () {
+			res.json({
+				message: "There was an error with you request. Please, try again later."
+=======
 	
 	if (checkInfo(request)) {
 		/* Function not implemented
@@ -508,6 +542,7 @@ app.post("/genreq", function (req, res) {
 				res.json({
 					message: "There was an error with you request. Please, try again later."
 				});
+>>>>>>> master
 			});
 	} else {
 		res.json({

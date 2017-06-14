@@ -71,8 +71,7 @@ function getDoctor() {
             setAreaService(response);
         },
         error: function (request, error) {
-            $('title').text("Errore - Impossibile caricare le informazioni richieste.");
-            $('#title-doc-name').text("Errore - Impossibile caricare le informazioni.");
+            errorMessage();
         }
     });
 }
@@ -219,6 +218,11 @@ function setSessionInfo() {
     }
 }
 
+function errorMessage(){
+	$('.info').empty();
+	$('#title-doc-name').text("Dottore");
+    $('#doc-info').append("<div class='col-xs-12 text-center'><p>Impossibile ottenere le informazioni richieste.</p></div>");
+}
 
 function setCurriculumURL() {
     var curriculum = "./curriculum.html?id=" + URL.id;

@@ -10,12 +10,15 @@ function getServices(){
 		method: "GET",
 		dataType: "json",
 		crossDomain: true,
+		data:{
+			sort: "name"
+		},
 		url: serviceapi,
 		success: function (response) {
 			setServices(response);
 		},
 		error: function (request, error) {
-			$('#page-title').text("Errore - Impossibile caricare i dati richiesti.");
+			errorMessage();
 		}
 	});
 }
@@ -31,6 +34,9 @@ function addLetterToList(letter) {
 	$('#service').append('<div class="list-group locations-list" id="' + letter + '"></div>');
 }
 
+function errorMessage() {
+    $('#service').append("<div class='col-xs-12 text-center'><p>Impossibile ottenere le informazioni richieste.</p></div>");
+}
 
 function setServices(services) {
 	var currentInitialLetter;

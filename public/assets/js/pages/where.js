@@ -79,7 +79,7 @@ function addLocation(location) {
 }
 
 function errorMessage(){
-	$('#locations').append('<h3 class="error">Impossibile caricare la lista.</h3>');
+	$('#locations').append("<div class='col-xs-12 text-center'><p>Impossibile ottenere le informazioni richieste.</p></div>");
 }
 
 

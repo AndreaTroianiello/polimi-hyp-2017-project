@@ -66,8 +66,7 @@ function getDoctor() {
             setDoctor(response);
         },
         error: function (request, error) {
-            $('title').text("Errore - Impossibile caricare informazioni richieste.");
-            $('#title-doc-name').text("Errore - Impossibile caricare informazioni.");
+            errorMessage();
         }
     });
 }
@@ -136,6 +135,10 @@ function setNext() {
     });
 }
 
+function errorMessage(){
+	$('#title-doc-name').text("Curriculum del dottore");
+    $('#cvcontent').append("<div class='col-xs-12 text-center'><p>Impossibile ottenere le informazioni richieste.</p></div>");
+}
 
 function setPrevious() {
     $.ajax({

@@ -28,7 +28,6 @@ function setLocationText(id) {
             $('#pagetitle').text("Servizi presenti nella "+response.name);
         },
         error: function (request, error) {
-            console.log(request + ":" + error);
 			cleanServices();
 			errorMessage();
         }
@@ -50,14 +49,13 @@ function getLocations(){
 			updateServices(response);
         },
         error: function (request, error) {
-        	console.log(request + ":" + error);
 			cleanServices();
 			errorMessage();
         }
     });
 }
 
-function clearServices() {
+function cleanServices() {
 	$('#services-info').empty();
 }
 
@@ -72,7 +70,8 @@ function addService(service) {
 }
 
 function errorMessage(){
-	$('#services-info').append('<h3 class="error">Impossibile caricare la lista.</h3>');
+	$('#pagetitle').text("Servizi presenti nella struttura");
+	$('#services-info').append("<div class='col-xs-12 text-center'><p>Impossibile ottenere le informazioni richieste.</p></div>");
 }
 
 

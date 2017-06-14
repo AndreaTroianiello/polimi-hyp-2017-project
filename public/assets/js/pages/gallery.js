@@ -43,7 +43,7 @@ function init(location) {
 }
 
 function errorMessage() {
-	$('#gallery-info').append('<h3 class="error">Impossibile la gallery.</h3>');
+	$('#gallery-info').append('<div class="col-xs-12 text-center"><p>Impossibile ottenere le informazioni richieste.</p></div>');
 }
 
 function getSideMenu() {

@@ -22,8 +22,6 @@
 
 	<!-- Main Stylesheet File -->
 	<link href="../assets/css/imperial.css" rel="stylesheet">
-	<link href="../assets/css/slick.css" rel="stylesheet">
-	<link href="../assets/css/slick-theme.css" rel="stylesheet">
 	<link href="../assets/css/style.css" rel="stylesheet">
 
 </head>
@@ -35,29 +33,30 @@
 ============================-->
 	<header id="header">
 		<div class="container" id="landmark">
+
 			<div id="logo" class="pull-left">
 				<h1><a href="../index.html">Medical Center</a></h1>
 			</div>
 			<nav id="nav-menu-container">
-                <ul class="nav-menu">
-                    <li><a href="./service-by-area.html">Servizi</a></li>
-                    <li><a href="./locations.html">Strutture</a></li>
-                    <li class="menu-has-children"><a href="#">Dottori</a>
-                        <ul>
+				<ul class="nav-menu">
+					<li><a href="./service-by-area.html">Servizi</a></li>
+					<li><a href="./locations.html">Strutture</a></li>
+					<li class="menu-has-children"><a href="#">Dottori</a>
+						<ul>
 							<li><a href="./doctors.html">Ordine alfabetico</a></li>
 							<li><a href="./doctor-by-area.html">Per area</a></li>
 							<li><a href="./doctor-by-service.html">Per servizi</a></li>
 							<li><a href="./doctor-by-location.html">Per strutture</a></li>
 						</ul>
-                    </li>
-                    <li><a href="#" class="not-active">Aree</a></li>
-                    <li><a href="#" class="not-active">Info utili</a></li>
-                    <li><a href="./who-we-are.html">Chi siamo</a></li>
-                    <li><a href="#" class="not-active">News</a></li>
-                    <li><a href="#" class="not-active">FAQ</a></li>
+					</li>
+					<li><a href="#" class="not-active">Aree</a></li>
+					<li><a href="#" class="not-active">Info utili</a></li>
+					<li><a href="./who-we-are.html">Chi siamo</a></li>
+					<li><a href="#" class="not-active">News</a></li>
+					<li><a href="#" class="not-active">FAQ</a></li>
 					<li><a href="./general-form.html">Richieste</a></li>
-                </ul>
-            </nav>
+				</ul>
+			</nav>
 		</div>
 	</header>
 	<!-- /header -->
@@ -66,9 +65,8 @@
 		<div class="container">
 			<ol class="breadcrumb">
 				<li><a href="../index.html">Home</a></li>
-				<li><a href="./locations.html">Strutture</a></li>
-				<li><a href="#" class="location">Struttura</a></li>
-				<li class="active">Galleria</li>
+				<li><a href="./service-by-area.html">Servizi per area</a></li>
+				<li class="active">Servizi dell'area</li>
 			</ol>
 		</div>
 	</section>
@@ -81,12 +79,11 @@
 	<section>
 		<div class="container">
 			<div class="row">
-				<div class="col-xs-12 col-sm-9" id="gallery-info">
+				<div class="col-xs-12 col-sm-9">
 					<div class="row">
-						<h2 class="section-title">Immagini della struttura</h2>
-						<div class="col-xs-12 col-sm-10 col-sm-offset-1">
-							<div class="slider">
-							</div>
+						<h2 class="section-title" id="pagetitle"></h2>
+						<div class="section-title-divider"></div>
+						<div class="col-xs-12" id="servicesList">
 						</div>
 					</div>
 				</div>
@@ -94,8 +91,7 @@
 					<h2 class="section-title">Navigazione</h2>
 					<div class="section-title-divider"></div>
 					<div class="list-group" id="sidemenu">
-						<a href="#" class="list-group-item other-page location">Struttura</a>
-						<a href="#" class="list-group-item other-page directions">Indicazioni stradali</a>
+						<a href="./service-by-area.html" class="list-group-item">Tutte le aree dei servizi</a>
 					</div>
 				</div>
 			</div>
@@ -103,25 +99,27 @@
 	</section>
 	<!-- //end main section-->
 
+
+
 	<div class="footerfix"></div>
 
 	<!--==========================
   Footer
 ============================-->
 	<footer id="footer">
-        <div class="container" id="footer-container">
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="copyright">
-                        &copy; Copyright <strong>Medical Center</strong>. All Rights Reserved
-                    </div>
-                    <div class="credits">
-                        Bootstrap Themes by <a href="https://bootstrapmade.com/">BootstrapMade</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </footer>
+		<div class="container" id="footer-container">
+			<div class="row">
+				<div class="col-md-12">
+					<div class="copyright">
+						&copy; Copyright <strong>Medical Center</strong>. All Rights Reserved
+					</div>
+					<div class="credits">
+						Bootstrap Themes by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</footer>
 	<!-- #footer -->
 
 	<!-- Back to Top button -->
@@ -135,8 +133,7 @@
 	<script src="../assets/js/superfish.min.js"></script>
 	<script src="../assets/js/easing.min.js"></script>
 	<script src="../assets/js/imperial.js"></script>
-	<script src="../assets/js/slick.min.js"></script>
-	<script src="../assets/js/pages/gallery.js"></script>
+	<script src="../assets/js/pages/all-service-area.js"></script>
 </body>
 
 </html>
