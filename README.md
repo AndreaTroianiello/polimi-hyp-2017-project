@@ -16,12 +16,31 @@ Team Member n.2: Andrea Troianiello, 10455250, polimi-hyp-2017-10455250
 
 The environmente variable TEST must be set equal to "true"
 On Windows:
-- From CMD: set TEST=true
-- From powershell: $env:TEST="true"
+- From CMD: 
+
+```
+#!sh
+
+set TEST=true
+
+```
+- From powershell: 
+```
+#!sh
+
+$env:TEST="true"
+```
+
 
 ## How to start the server
 
+
+```
+#!sh
+
 npm start
+```
+
 
 ## Structure
 The project is structured as suggested in the delivery instructions.
@@ -31,10 +50,10 @@ The project uses SQLite in local and PostgreSQL in production.
 The database is exported in another module called "database.js" located in the /other directory.
 
 Database creation and population works in the following way:
-- A function checks if all the tables already exist
-- If at least a table doesnt' exist, the entire database is deleted and recreated
-- The database is created using a json file called "schema.json" located in /other
-- The database population is done by using several json files, one per table. The json files are located in /other/json_db
+1. A function checks if all the tables already exist
+2. If at least a table doesnt' exist, the entire database is deleted and recreated
+3. The database is created using a json file called "schema.json" located in /other
+4. The database population is done by using several json files, one per table. The json files are located in /other/json_db
 
 The entire database creation is managed with json file and to add/remove a table is sufficient to edit the file schema.json.
 If the path to the table file in the schema.json file is null, the table population is skipped  (e.g. for the general information request table).
