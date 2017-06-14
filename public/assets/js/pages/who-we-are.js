@@ -1,5 +1,4 @@
 $(document).ready(function () {
-	console.log("I'm ready");
 	$.ajax({
 		method: "GET",
 		dataType: "json",

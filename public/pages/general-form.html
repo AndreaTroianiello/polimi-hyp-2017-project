@@ -3,7 +3,7 @@
 
 <head>
 	<meta charset="utf-8">
-	<title>Chi siamo</title>
+	<title>Richieste</title>
 	<meta content="width=device-width, initial-scale=1.0" name="viewport">
 
 	<!-- Place your favicon.ico and apple-touch-icon.png in the template root directory -->
@@ -37,25 +37,25 @@
 				<h1><a href="../index.html">Medical Center</a></h1>
 			</div>
 			<nav id="nav-menu-container">
-                <ul class="nav-menu">
-                    <li><a href="./service-by-area.html">Servizi</a></li>
-                    <li><a href="./locations.html">Strutture</a></li>
-                    <li class="menu-has-children"><a href="#">Dottori</a>
-                        <ul>
+				<ul class="nav-menu">
+					<li><a href="./service-by-area.html">Servizi</a></li>
+					<li><a href="./locations.html">Strutture</a></li>
+					<li class="menu-has-children"><a href="#">Dottori</a>
+						<ul>
 							<li><a href="./doctors.html">Ordine alfabetico</a></li>
 							<li><a href="./doctor-by-area.html">Per area</a></li>
 							<li><a href="./doctor-by-service.html">Per servizi</a></li>
 							<li><a href="./doctor-by-location.html">Per strutture</a></li>
 						</ul>
-                    </li>
-                    <li><a href="#" class="not-active">Aree</a></li>
-                    <li><a href="#" class="not-active">Info utili</a></li>
-                    <li><a href="./who-we-are.html">Chi siamo</a></li>
-                    <li><a href="#" class="not-active">News</a></li>
-                    <li><a href="#" class="not-active">FAQ</a></li>
+					</li>
+					<li><a href="#" class="not-active">Aree</a></li>
+					<li><a href="#" class="not-active">Info utili</a></li>
+					<li><a href="./who-we-are.html">Chi siamo</a></li>
+					<li><a href="#" class="not-active">News</a></li>
+					<li><a href="#" class="not-active">FAQ</a></li>
 					<li><a href="./general-form.html">Richiesta</a></li>
-                </ul>
-            </nav>
+				</ul>
+			</nav>
 		</div>
 	</header>
 	<!-- /header -->
@@ -64,7 +64,7 @@
 		<div class="container">
 			<ol class="breadcrumb">
 				<li><a href="../index.html">Home</a></li>
-				<li class="active">Chi siamo</li>
+				<li class="active">Richieste</li>
 			</ol>
 		</div>
 	</section>
@@ -77,10 +77,34 @@
 	<section>
 		<div class="container">
 			<div class="row">
-				<div class="col-xs-12 col-sm-9">
-					<h2 class="section-title">Chi siamo</h2>
-					<div class="section-title-divider"></div>
-					<div class="panel-group" id="aboutus-info">
+				<div class="col-xs-12 col-sm-9" id="info">
+					<div class="col-xs-12 col-sm-9">
+						<h2 class="section-title" id="pagetitle">Richieste</h2>
+						<div class="section-title-divider"></div>
+						<div class="row">
+							<label>Nome:</label>
+							<input type="text" class="form-control" id="nome">
+						</div>
+						<div class="row">
+							<label>Cognome:</label>
+							<input type="text" class="form-control" id="cognome">
+						</div>
+						<div class="row">
+							<label>Email:</label>
+							<input type="text" class="form-control" id="email">
+						</div>
+						<div class="row">
+							<label>Oggetto:</label>
+							<input type="text" class="form-control" id="oggetto">
+						</div>
+						<div class="row">
+							<label>Messaggio:</label>
+							<textarea class="form-control" rows="5" id="messaggio"></textarea>
+						</div>
+						<div class="row" id="button-div">
+							<button class="btn btn-default btn-lg" id="send">Invia</button>
+							<button class="btn btn-default btn-lg" id="cancel">Cancella</button>
+						</div>
 					</div>
 				</div>
 			</div>
@@ -94,19 +118,19 @@
   Footer
 ============================-->
 	<footer id="footer">
-        <div class="container" id="footer-container">
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="copyright">
-                        &copy; Copyright <strong>Medical Center</strong>. All Rights Reserved
-                    </div>
-                    <div class="credits">
-                        Bootstrap Themes by <a href="https://bootstrapmade.com/">BootstrapMade</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </footer>
+		<div class="container" id="footer-container">
+			<div class="row">
+				<div class="col-md-12">
+					<div class="copyright">
+						&copy; Copyright <strong>Medical Center</strong>. All Rights Reserved
+					</div>
+					<div class="credits">
+						Bootstrap Themes by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</footer>
 	<!-- #footer -->
 
 	<!-- Back to Top button -->
@@ -117,10 +141,10 @@
 	<!-- Script -->
 	<script src="../assets/js/jquery.min.js"></script>
 	<script src="../assets/js/bootstrap.min.js"></script>
-	<script src="../assets/js/superfish.min.js"></script>
+	<script src="../assets/js/superfish.js"></script>
 	<script src="../assets/js/easing.min.js"></script>
 	<script src="../assets/js/imperial.js"></script>
-	<script src="../assets/js/pages/who-we-are.js"></script>
+	<script src="../assets/js/pages/general-form.js"></script>
 </body>
 
 </html>
