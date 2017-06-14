@@ -106,8 +106,8 @@ app.get("/doctors/:doctor_id/curriculum", function (req, res) {
 
 function orderDoctor(req, query) {
 	let sort = _.get(req, "query.sort", null);
-	let asc = sort!==null?sort.charAt(0) !== "-":true;
-	
+	let asc = sort !== null ? sort.charAt(0) !== "-" : true;
+
 	if (!asc) {
 		sort = sort.substr(1, sort.length - 1);
 	}
@@ -201,7 +201,7 @@ app.get("/services", function (req, res) {
 				break;
 		}
 	}
-	orderService(req,query);
+	orderService(req, query);
 	query.then(result => {
 		res.json(result);
 	});
@@ -228,12 +228,12 @@ app.get("/services/:service_id", function (req, res) {
 
 function orderService(req, query) {
 	let sort = _.get(req, "query.sort", null);
-	let asc = sort!==null?sort.charAt(0) !== "-":true;
-	
+	let asc = sort !== null ? sort.charAt(0) !== "-" : true;
+
 	if (!asc) {
 		sort = sort.substr(1, sort.length - 1);
 	}
-	
+
 	switch (sort) {
 		case "name":
 			query.orderBy("services.name", asc ? "asc" : "desc");
@@ -279,10 +279,10 @@ app.get("/areas", function (req, res) {
 				break;
 		}
 	}
-	orderArea(req,query);
+	orderArea(req, query);
 	query.then(result => {
-			res.json(result);
-		});
+		res.json(result);
+	});
 });
 
 
@@ -304,12 +304,12 @@ app.get("/areas/:area_id", function (req, res) {
 
 function orderArea(req, query) {
 	let sort = _.get(req, "query.sort", null);
-	let asc = sort!==null?sort.charAt(0) !== "-":true;
-	
+	let asc = sort !== null ? sort.charAt(0) !== "-" : true;
+
 	if (!asc) {
 		sort = sort.substr(1, sort.length - 1);
 	}
-	
+
 	switch (sort) {
 		case "name":
 			query.orderBy("areas.name", asc ? "asc" : "desc");
@@ -351,7 +351,8 @@ app.get("/locations", function (req, res) {
 				break;
 		}
 	}
-	query.orderBy("locations.city", "asc").then(result => {
+	orderLocations(req, query);
+	query.then(result => {
 		result.map(o => { o.img = makeURLsAbsolute(o.img, true) });
 		res.json(result);
 	});
@@ -416,12 +417,12 @@ app.get("/locations/:location_id/directions", function (req, res) {
 
 function orderLocations(req, query) {
 	let sort = _.get(req, "query.sort", null);
-	let asc = sort!==null?sort.charAt(0) !== "-":true;
-	
+	let asc = sort !== null ? sort.charAt(0) !== "-" : true;
+
 	if (!asc) {
 		sort = sort.substr(1, sort.length - 1);
 	}
-	
+
 	switch (sort) {
 		case "name":
 			query.orderBy("locations.name", asc ? "asc" : "desc");
@@ -493,18 +494,44 @@ app.post("/genreq", function (req, res) {
 		message: req.body.message
 	};
 	
-
-	//sendEmail(request);
-
-	sqlDb("general_requests").insert(request)
-		.then(function () {
-			res.json({
-				message: "Request received."
+	if (checkInfo(request)) {
+		/* Function not implemented
+		sendEmail(request);
+		*/
+		sqlDb("general_requests").insert(request)
+			.then(function () {
+				res.json({
+					message: "Request received."
+				});
+			})
+			.catch(function () {
+				res.json({
+					message: "There was an error with you request. Please, try again later."
+				});
 			});
-		})
-		.catch(function () {
-			res.json({
-				message: "There was an error with you request. Please, try again later."
-			});
+	} else {
+		res.json({
+			message: "Invalid parameters, some parameter is null or wrong."
 		});
+	}
 });
+
+function checkInfo(request) {
+	let keys= _.keys(request);
+	let notNull = true;
+	for(let i = 0; i< keys.length;i++){
+		if(!request[keys[i]]){
+			notNull=false;
+			break;
+		}
+	}
+	return notNull && checkEmail(request.email);
+}
+
+function checkEmail(email) {
+	let re = /^(?!(?:(?:\x22?\x5C[\x00-\x7E]\x22?)|(?:\x22?[^\x5C\x22]\x22?)){255,})(?!(?:(?:\x22?\x5C[\x00-\x7E]\x22?)|(?:\x22?[^\x5C\x22]\x22?)){65,}@)(?:(?:[\x21\x23-\x27\x2A\x2B\x2D\x2F-\x39\x3D\x3F\x5E-\x7E]+)|(?:\x22(?:[\x01-\x08\x0B\x0C\x0E-\x1F\x21\x23-\x5B\x5D-\x7F]|(?:\x5C[\x00-\x7F]))*\x22))(?:\.(?:(?:[\x21\x23-\x27\x2A\x2B\x2D\x2F-\x39\x3D\x3F\x5E-\x7E]+)|(?:\x22(?:[\x01-\x08\x0B\x0C\x0E-\x1F\x21\x23-\x5B\x5D-\x7F]|(?:\x5C[\x00-\x7F]))*\x22)))*@(?:(?:(?!.*[^.]{64,})(?:(?:(?:xn--)?[a-z0-9]+(?:-[a-z0-9]+)*\.){1,126}){1,}(?:(?:[a-z][a-z0-9]*)|(?:(?:xn--)[a-z0-9]+))(?:-[a-z0-9]+)*)|(?:\[(?:(?:IPv6:(?:(?:[a-f0-9]{1,4}(?::[a-f0-9]{1,4}){7})|(?:(?!(?:.*[a-f0-9][:\]]){7,})(?:[a-f0-9]{1,4}(?::[a-f0-9]{1,4}){0,5})?::(?:[a-f0-9]{1,4}(?::[a-f0-9]{1,4}){0,5})?)))|(?:(?:IPv6:(?:(?:[a-f0-9]{1,4}(?::[a-f0-9]{1,4}){5}:)|(?:(?!(?:.*[a-f0-9]:){5,})(?:[a-f0-9]{1,4}(?::[a-f0-9]{1,4}){0,3})?::(?:[a-f0-9]{1,4}(?::[a-f0-9]{1,4}){0,3}:)?)))?(?:(?:25[0-5])|(?:2[0-4][0-9])|(?:1[0-9]{2})|(?:[1-9]?[0-9]))(?:\.(?:(?:25[0-5])|(?:2[0-4][0-9])|(?:1[0-9]{2})|(?:[1-9]?[0-9]))){3}))\]))$/;
+	if (email !== null && re.test(email)) {
+		return true;
+	}
+	return false;
+}
