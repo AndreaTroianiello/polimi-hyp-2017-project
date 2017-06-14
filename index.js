@@ -353,10 +353,9 @@ app.get("/locations", function (req, res) {
 				break;
 		}
 	}
-	query.orderBy("locations.city", "asc").then(result => {
-		result.map(o => {
-			o.img = makeURLsAbsolute(o.img, true)
-		});
+	orderLocations(req, query);
+ 	query.then(result => {
+ 		result.map(o => { o.img = makeURLsAbsolute(o.img, true) });
 		res.json(result);
 	});
 });
