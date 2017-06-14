@@ -354,8 +354,13 @@ app.get("/locations", function (req, res) {
 		}
 	}
 	orderLocations(req, query);
+<<<<<<< HEAD
  	query.then(result => {
  		result.map(o => { o.img = makeURLsAbsolute(o.img, true) });
+=======
+	query.then(result => {
+		result.map(o => { o.img = makeURLsAbsolute(o.img, true) });
+>>>>>>> master
 		res.json(result);
 	});
 });
@@ -507,6 +512,7 @@ app.post("/genreq", function (req, res) {
 		object: req.body.object,
 		message: req.body.message
 	};
+<<<<<<< HEAD
 
 
 	//sendEmail(request);
@@ -520,6 +526,47 @@ app.post("/genreq", function (req, res) {
 		.catch(function () {
 			res.json({
 				message: "There was an error with you request. Please, try again later."
+=======
+	
+	if (checkInfo(request)) {
+		/* Function not implemented
+		sendEmail(request);
+		*/
+		sqlDb("general_requests").insert(request)
+			.then(function () {
+				res.json({
+					message: "Request received."
+				});
+			})
+			.catch(function () {
+				res.json({
+					message: "There was an error with you request. Please, try again later."
+				});
+>>>>>>> master
 			});
+	} else {
+		res.json({
+			message: "Invalid parameters, some parameter is null or wrong."
 		});
+	}
 });
+
+function checkInfo(request) {
+	let keys= _.keys(request);
+	let notNull = true;
+	for(let i = 0; i< keys.length;i++){
+		if(!request[keys[i]]){
+			notNull=false;
+			break;
+		}
+	}
+	return notNull && checkEmail(request.email);
+}
+
+function checkEmail(email) {
+	let re = /^(?!(?:(?:\x22?\x5C[\x00-\x7E]\x22?)|(?:\x22?[^\x5C\x22]\x22?)){255,})(?!(?:(?:\x22?\x5C[\x00-\x7E]\x22?)|(?:\x22?[^\x5C\x22]\x22?)){65,}@)(?:(?:[\x21\x23-\x27\x2A\x2B\x2D\x2F-\x39\x3D\x3F\x5E-\x7E]+)|(?:\x22(?:[\x01-\x08\x0B\x0C\x0E-\x1F\x21\x23-\x5B\x5D-\x7F]|(?:\x5C[\x00-\x7F]))*\x22))(?:\.(?:(?:[\x21\x23-\x27\x2A\x2B\x2D\x2F-\x39\x3D\x3F\x5E-\x7E]+)|(?:\x22(?:[\x01-\x08\x0B\x0C\x0E-\x1F\x21\x23-\x5B\x5D-\x7F]|(?:\x5C[\x00-\x7F]))*\x22)))*@(?:(?:(?!.*[^.]{64,})(?:(?:(?:xn--)?[a-z0-9]+(?:-[a-z0-9]+)*\.){1,126}){1,}(?:(?:[a-z][a-z0-9]*)|(?:(?:xn--)[a-z0-9]+))(?:-[a-z0-9]+)*)|(?:\[(?:(?:IPv6:(?:(?:[a-f0-9]{1,4}(?::[a-f0-9]{1,4}){7})|(?:(?!(?:.*[a-f0-9][:\]]){7,})(?:[a-f0-9]{1,4}(?::[a-f0-9]{1,4}){0,5})?::(?:[a-f0-9]{1,4}(?::[a-f0-9]{1,4}){0,5})?)))|(?:(?:IPv6:(?:(?:[a-f0-9]{1,4}(?::[a-f0-9]{1,4}){5}:)|(?:(?!(?:.*[a-f0-9]:){5,})(?:[a-f0-9]{1,4}(?::[a-f0-9]{1,4}){0,3})?::(?:[a-f0-9]{1,4}(?::[a-f0-9]{1,4}){0,3}:)?)))?(?:(?:25[0-5])|(?:2[0-4][0-9])|(?:1[0-9]{2})|(?:[1-9]?[0-9]))(?:\.(?:(?:25[0-5])|(?:2[0-4][0-9])|(?:1[0-9]{2})|(?:[1-9]?[0-9]))){3}))\]))$/;
+	if (email !== null && re.test(email)) {
+		return true;
+	}
+	return false;
+}
