@@ -557,9 +557,9 @@ function sendEmail(request) {
 	sendmail({
 		from: "no-reply@example.com",
 		to: request.email,
-		subject: "Conferma ricezione richiesta " + request.object,
+		subject: "Conferma ricezione richiesta Medical Center",
 		html: `<p>Gentile ${request.name} ${request.surname},</p>
-			<p>Con questa email ti confermiamo l'avvenuta ricezione del tuo modulo di richiesta generale. Un nostro impiegato si impegnerà a rispondere il prima possibile.</p>
+			<p>Con questa email ti confermiamo l'avvenuta ricezione del tuo modulo di richiesta generale. <br/>Un nostro impiegato si impegnerà a rispondere il prima possibile.</p>
 			<hr>
 			<table>
 			<thead><tr><td colspan=2><strong>Contenuto richiesta</strong>:</td></tr>
