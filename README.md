@@ -66,7 +66,10 @@ All the content of each page, with the exception of the main menu, is loaded via
 
 Furthemore, some extra pages and relations were implemented, for example: services by area, doctors by service, doctors by Area.
 
-The optional page "Form for general request of info" was implemented and can be accessed through the main menu using the link "Richieste"
+## Optional page
+
+The optional page "Form for general request of info" was implemented and can be accessed through the main menu using the link "Richieste".
+When you send a general information inquiry, the request is stored in the database and a confirmation email is sent to the user who made the request.
 
 ## Framework and template
 
