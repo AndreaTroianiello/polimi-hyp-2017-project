@@ -3,6 +3,7 @@ const bodyParser = require("body-parser");
 const _ = require("lodash");
 const process = require("process");
 const dbms = require("./other/database.js");
+const sendmail = require("sendmail")();
 const app = express();
 const DEV = process.env.TEST;
 
@@ -355,8 +356,8 @@ app.get("/locations", function (req, res) {
 	}
 	orderLocations(req, query);
 	query.then(result => {
-		result.map(o => { 
-			o.img = makeURLsAbsolute(o.img, true) 
+		result.map(o => {
+			o.img = makeURLsAbsolute(o.img, true)
 		});
 		res.json(result);
 	});
@@ -498,7 +499,7 @@ app.get("/home", function (req, res) {
 /* =========================================================
  Information FORM APIs
 
- Receives a general information request, stores it in the database and sends it via email (function not implemented).
+ Receives a general information request, stores it in the database and sends it via email to the user who made the request.
  A JSON object with a message is returned either in case of success or in case of failure.
 ========================================================== */
 app.post("/genreq", function (req, res) {
@@ -509,11 +510,11 @@ app.post("/genreq", function (req, res) {
 		object: req.body.object,
 		message: req.body.message
 	};
-	
+
 	if (checkInfo(request)) {
-		/* Function not implemented
+
 		sendEmail(request);
-		*/
+
 		sqlDb("general_requests").insert(request)
 			.then(function () {
 				res.json({
@@ -533,11 +534,11 @@ app.post("/genreq", function (req, res) {
 });
 
 function checkInfo(request) {
-	let keys= _.keys(request);
+	let keys = _.keys(request);
 	let notNull = true;
-	for(let i = 0; i< keys.length;i++){
-		if(!request[keys[i]]){
-			notNull=false;
+	for (let i = 0; i < keys.length; i++) {
+		if (!request[keys[i]]) {
+			notNull = false;
 			break;
 		}
 	}
@@ -550,4 +551,26 @@ function checkEmail(email) {
 		return true;
 	}
 	return false;
+}
+
+function sendEmail(request) {
+	sendmail({
+		from: "no-reply@example.com",
+		to: request.email,
+		subject: "Conferma ricezione richiesta " + request.object,
+		html: `<p>Gentile ${request.name} ${request.surname},</p>
+			<p>Con questa email ti confermiamo l'avvenuta ricezione del tuo modulo di richiesta generale. Un nostro impiegato si impegnerà a rispondere il prima possibile.</p>
+			<hr>
+			<table>
+			<thead><tr><td colspan=2><strong>Contenuto richiesta</strong>:</td></tr>
+			<tr><td>Nome:</td><td> ${request.name}</td></tr>
+			<tr><td>Cognome:</td><td> ${request.surname}</td></tr>
+			<tr><td>Email:</td><td> ${request.email}</td></tr>
+			<tr><td>Oggetto:</td><td> ${request.object}</td></tr>
+			<tr><td>Messaggio:</td><td> ${request.message}</td></tr>
+			</table>`
+	}, function (err, reply) {
+		console.log(err && err.stack);
+		console.dir(reply);
+	});
 }
