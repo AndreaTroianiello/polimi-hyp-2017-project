@@ -216,13 +216,7 @@
 		}
 	}
 
-	.nav-menu .not-active {
-		pointer-events: none;
-		cursor: default;
-		color: dimgrey;
-	}
-
-	#mobile-nav .not-active {
+	.nav-menu .not-active,#mobile-nav .not-active {
 		pointer-events: none;
 		cursor: default;
 		color: dimgrey;
