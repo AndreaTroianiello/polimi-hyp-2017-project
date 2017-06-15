@@ -222,6 +222,12 @@
 		color: dimgrey;
 	}
 
+	#mobile-nav .not-active {
+		pointer-events: none;
+		cursor: default;
+		color: dimgrey;
+	}
+
 	#form {
 		margin-bottom: 10px;
 		margin-top: 10px;
