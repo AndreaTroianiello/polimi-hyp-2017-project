@@ -468,35 +468,6 @@ app.get("/aboutus", function (req, res) {
 });
 
 /* =========================================================
- Home APIs
-
- Returns a JSON object that contains the absolute paths to the images that can be used in the carousel,
- and the information and the url for the information DIVs that are shown in the homepage of the website.
-========================================================== */
-app.get("/home", function (req, res) {
-	sqlDb("homeslider")
-		.select("path")
-		.then(result => {
-			result.map(o => {
-				o.path = makeURLsAbsolute(o.path, true)
-			});
-			let home = {
-				slider: result,
-				divs: undefined
-			};
-			sqlDb("homedivs")
-				.select("title", "icon", "paragraph", "path", "buttontext")
-				.then(result => {
-					result.map(o => {
-						o.path = makeURLsAbsolute(o.path, false)
-					});
-					home.divs = result;
-					res.json(home);
-				})
-		});
-});
-
-/* =========================================================
  Information FORM APIs
 
  Receives a general information request, stores it in the database and sends it via email to the user who made the request.

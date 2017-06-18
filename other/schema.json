@@ -308,52 +308,6 @@
             }
         ]
     },
-     {
-        "name": "homeslider",
-        "file": "./json_db/homeslider.json",
-        "columns": [
-            {
-                "name": "id",
-                "type": "id"
-            },
-            {
-                "name": "path",
-                "type": "text"
-            }
-        ],
-        "foreign":[]
-    },
-    {
-        "name": "homedivs",
-        "file": "./json_db/homedivs.json",
-        "columns": [
-            {
-                "name": "id",
-                "type": "id"
-            },
-            {
-                "name": "title",
-                "type": "string"
-            },
-            {
-                "name": "icon",
-                "type": "string"
-            },
-            {
-                "name": "paragraph",
-                "type": "text"
-            },
-            {
-                "name": "path",
-                "type": "text"
-            },
-            {
-                "name": "buttontext",
-                "type": "string"
-            }
-        ],
-        "foreign":[]
-    },
     {
         "name":"general_requests",
         "file": null,
