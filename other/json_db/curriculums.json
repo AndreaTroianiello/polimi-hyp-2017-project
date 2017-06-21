@@ -1,42 +1,42 @@
 [
     {
         "doctor": 1,
-        "desc": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque gravida vulputate facilisis. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae;</p>"
+        "desc": "<h3>Studi</h3><p>Diplomata al Liceo Scientifico Da Vinci di Milano con 100/100, si Laurea in Medicina e Chirurgia presso l'ospedale San Gerardo di Monza con votazione di 110 e Lode/110.</p><h3>Carriera</h3><p></p>"
     },
     {
         "doctor": 2,
-        "desc": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque gravida vulputate facilisis. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae;</p>"
+        "desc": "<h3>Studi</h3><p>Diplomata al Liceo Scientifico Ignazio Vian di Anguillara Sabazia con 100/100, si Laurea in Medicina e Chirurgia presso l'ospedale Tor Vergata di Roma con votazione di 110 e Lode/110.</p><h3>Carriera</h3><p></p>"
     },
     {
         "doctor": 3,
-        "desc": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque gravida vulputate facilisis. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae;</p>"
+        "desc": "<h3>Studi</h3><p>Diplomato al Liceo Scientifico Galileo Galiei di Legnano con 100/100, si Laurea in Medicina e Chirurgia presso l'ospedale San Gerardo di Monza con votazione di 110 e Lode/110.</p><h3>Carriera</h3><p></p>"
     },
     {
         "doctor": 4,
-        "desc": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque gravida vulputate facilisis. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae;</p>"
+        "desc": "<h3>Studi</h3><p>Diplomato al Liceo Classico Ugo Foscolo di Torino con 100/100, si Laurea in Medicina e Chirurgia presso l'università di Harvard a Cambridge (Stati Uniti) con votazione di 110 e Lode/110.</p></p><h3>Carriera</h3><p></p>"
     },
     {
         "doctor": 5,
-        "desc": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque gravida vulputate facilisis. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae;</p>"
+        "desc": "<h3>Studi</h3><p>Diplomato all'istituto Tecnico Alessandro Greppi di Monticello Brianza con 100/100, si Laurea in Medicina e Chirurgia presso l'ospedale San Gerardo di Monza con votazione di 110 e Lode/110.</p><h3>Carriera</h3><p></p>"
     },
     {
         "doctor": 6,
-        "desc": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque gravida vulputate facilisis. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae;</p>"
+        "desc": "<h3>Studi</h3><p>Diplomato al Liceo Scientifico Da Vinci di Milano con 100/100, si Laurea in Medicina e Chirurgia presso l'Università Cattolica di Milano con votazione di 110 e Lode/110.</p></p><h3>Carriera</h3><p></p>"
     },
     {
         "doctor": 7,
-        "desc": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque gravida vulputate facilisis. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae;</p>"
+        "desc": "<h3>Studi</h3><p>Diplomata al Liceo Linguistico Alessandro Manzoni di Lecco con 100/100, si Laurea in Medicina e Chirurgia presso l'Università La Sapienza di Roma con votazione di 110 e Lode/110.</p></p><h3>Carriera</h3><p></p>"
     },
     {
         "doctor": 8,
-        "desc": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque gravida vulputate facilisis. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae;</p>"
+        "desc": "<h3>Studi</h3><p>Diplomata al Liceo Scientifico Marco Rota di Roma con 100/100, si Laurea in Medicina e Chirurgia presso l'Università Federico II di Napoli con votazione di 110 e Lode/110.</p></p><h3>Carriera</h3><p></p>"
     },
     {
         "doctor": 9,
-        "desc": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque gravida vulputate facilisis. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae;</p>"
+        "desc": "<h3>Studi</h3><p>Diplomata al Liceo Classico Andrea Vitali di Padova con 100/100, si Laurea in Medicina e Chirurgia presso l'Università Cattolica di Milano con votazione di 110 e Lode/110.</p></p><h3>Carriera</h3><p></p>"
     },
     {
         "doctor": 10,
-        "desc": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque gravida vulputate facilisis. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae;</p>"
+        "desc": "<h3>Studi</h3><p>Diplomato al Liceo Scientifico Beccaria di Milano con 100/100, si Laurea in Medicina e Chirurgia presso l'Università degli studi di Milano con votazione di 110 e Lode/110.</p></p><h3>Carriera</h3><p></p>"
     }
 ]
