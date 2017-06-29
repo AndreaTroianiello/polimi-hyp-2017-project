@@ -62,14 +62,14 @@ If the path to the table file in the schema.json file is null, the table populat
 ## Pages and content of the website
 
 Every pages requested by the delivery instructions was implemented with realistic content, following the C/P-IDM schema.
-All the content of each page, with the exception of the main menu, is loaded via Ajax from the database using RESTful APIs.
-
-Furthemore, some extra pages and relations were implemented, for example: services by area, doctors by service, doctors by Area.
+All the content of each page, with the exception of the main menu and the homepage, is loaded via Ajax from the database using RESTful APIs.
 
 ## Optional page
 
 The optional page "Form for general request of info" was implemented and can be accessed through the main menu using the link "Richieste".
 When you send a general information inquiry, the request is stored in the database and a confirmation email is sent to the user who made the request.
+
+*Email may finish in the spam folder*
 
 ## Framework and template
 

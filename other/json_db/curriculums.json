@@ -1,42 +1,42 @@
 [
     {
         "doctor": 1,
-        "desc": "<h3>Studi</h3><p>Diplomata al Liceo Scientifico Da Vinci di Milano con 100/100, si Laurea in Medicina e Chirurgia presso l'ospedale San Gerardo di Monza con votazione di 110 e Lode/110.</p><h3>Carriera</h3><p></p>"
+        "desc": "<h3>Studi</h3><p>Diplomata al Liceo Scientifico Da Vinci di Milano con 100/100, si Laurea in Medicina e Chirurgia presso l'ospedale San Gerardo di Monza con votazione di 110 e Lode/110.</p><h3>Carriera</h3><p>Ha lavorato presso i seguenti ospedali:</p><ul class='list-group'><li class='list-group-item'>Ospedale Sant'Anna di Como</li><li class='list-group-item'>Ospedale Leopoldo Mandic di Merate</li><li class='list-group-item'>Medical Center</li></ul>"
     },
     {
         "doctor": 2,
-        "desc": "<h3>Studi</h3><p>Diplomata al Liceo Scientifico Ignazio Vian di Anguillara Sabazia con 100/100, si Laurea in Medicina e Chirurgia presso l'ospedale Tor Vergata di Roma con votazione di 110 e Lode/110.</p><h3>Carriera</h3><p></p>"
+        "desc": "<h3>Studi</h3><p>Diplomata al Liceo Scientifico Ignazio Vian di Anguillara Sabazia con 100/100, si Laurea in Medicina e Chirurgia presso l'ospedale Tor Vergata di Roma con votazione di 110 e Lode/110.</p><h3>Carriera</h3><p>Ha lavorato presso i seguenti ospedali:</p><ul class='list-group'><li class='list-group-item'>Ospedale San Raffaele di Milano</li><li class='list-group-item'>Medical Center</li></ul>"
     },
     {
         "doctor": 3,
-        "desc": "<h3>Studi</h3><p>Diplomato al Liceo Scientifico Galileo Galiei di Legnano con 100/100, si Laurea in Medicina e Chirurgia presso l'ospedale San Gerardo di Monza con votazione di 110 e Lode/110.</p><h3>Carriera</h3><p></p>"
+        "desc": "<h3>Studi</h3><p>Diplomato al Liceo Scientifico Galileo Galiei di Legnano con 100/100, si Laurea in Medicina e Chirurgia presso l'ospedale San Gerardo di Monza con votazione di 110 e Lode/110.</p><h3>Carriera</h3><p>Ha lavorato presso i seguenti ospedali:</p><ul class='list-group'><li class='list-group-item'>Ospedale Leopoldo Mandic di Merate</li><li class='list-group-item'>Ospedale San Gerardo di Monza</li><li class='list-group-item'>Ospedale San Raffaele di Milano</li><li class='list-group-item'>Medical Center</li></ul>"
     },
     {
         "doctor": 4,
-        "desc": "<h3>Studi</h3><p>Diplomato al Liceo Classico Ugo Foscolo di Torino con 100/100, si Laurea in Medicina e Chirurgia presso l'università di Harvard a Cambridge (Stati Uniti) con votazione di 110 e Lode/110.</p></p><h3>Carriera</h3><p></p>"
+        "desc": "<h3>Studi</h3><p>Diplomato al Liceo Classico Ugo Foscolo di Torino con 100/100, si Laurea in Medicina e Chirurgia presso l'università di Harvard a Cambridge (Stati Uniti) con votazione di 110 e Lode/110.</p></p><h3>Carriera</h3><p>Ha lavorato presso i seguenti ospedali:</p><ul class='list-group'><li class='list-group-item'>Ospedale Pediatrico Bambino Gesù di Roma</li><li class='list-group-item'>Ospedale Niguarda di Milano</li><li class='list-group-item'>Medical Center</li></ul>"
     },
     {
         "doctor": 5,
-        "desc": "<h3>Studi</h3><p>Diplomato all'istituto Tecnico Alessandro Greppi di Monticello Brianza con 100/100, si Laurea in Medicina e Chirurgia presso l'ospedale San Gerardo di Monza con votazione di 110 e Lode/110.</p><h3>Carriera</h3><p></p>"
+        "desc": "<h3>Studi</h3><p>Diplomato all'istituto Tecnico Alessandro Greppi di Monticello Brianza con 100/100, si Laurea in Medicina e Chirurgia presso l'ospedale San Gerardo di Monza con votazione di 110 e Lode/110.</p><h3>Carriera</h3><p>Ha lavorato presso i seguenti ospedali:</p><ul class='list-group'><li class='list-group-item'>Ospedale Papa Giovanni XXIII di Bergamo</li><li class='list-group-item'>Medical Center</li></ul>"
     },
     {
         "doctor": 6,
-        "desc": "<h3>Studi</h3><p>Diplomato al Liceo Scientifico Da Vinci di Milano con 100/100, si Laurea in Medicina e Chirurgia presso l'Università Cattolica di Milano con votazione di 110 e Lode/110.</p></p><h3>Carriera</h3><p></p>"
+        "desc": "<h3>Studi</h3><p>Diplomato al Liceo Scientifico Da Vinci di Milano con 100/100, si Laurea in Medicina e Chirurgia presso l'Università Cattolica di Milano con votazione di 110 e Lode/110.</p></p><h3>Carriera</h3><p>Ha lavorato presso i seguenti ospedali:</p><ul class='list-group'><li class='list-group-item'>Ospedale San Raffaele di Milano</li><li class='list-group-item'>Medical Center</li></ul>"
     },
     {
         "doctor": 7,
-        "desc": "<h3>Studi</h3><p>Diplomata al Liceo Linguistico Alessandro Manzoni di Lecco con 100/100, si Laurea in Medicina e Chirurgia presso l'Università La Sapienza di Roma con votazione di 110 e Lode/110.</p></p><h3>Carriera</h3><p></p>"
+        "desc": "<h3>Studi</h3><p>Diplomata al Liceo Linguistico Alessandro Manzoni di Lecco con 100/100, si Laurea in Medicina e Chirurgia presso l'Università La Sapienza di Roma con votazione di 110 e Lode/110.</p></p><h3>Carriera</h3><p>Ha lavorato presso i seguenti ospedali:</p><ul class='list-group'><li class='list-group-item'>Medical Center</li></ul>"
     },
     {
         "doctor": 8,
-        "desc": "<h3>Studi</h3><p>Diplomata al Liceo Scientifico Marco Rota di Roma con 100/100, si Laurea in Medicina e Chirurgia presso l'Università Federico II di Napoli con votazione di 110 e Lode/110.</p></p><h3>Carriera</h3><p></p>"
+        "desc": "<h3>Studi</h3><p>Diplomata al Liceo Scientifico Marco Rota di Roma con 100/100, si Laurea in Medicina e Chirurgia presso l'Università Federico II di Napoli con votazione di 110 e Lode/110.</p></p><h3>Carriera</h3><p>Ha lavorato presso i seguenti ospedali:</p><ul class='list-group'><li class='list-group-item'>Azienda Ospedaliera Federico II di Napoli</li><li class='list-group-item'>Medical Center</li></ul>"
     },
     {
         "doctor": 9,
-        "desc": "<h3>Studi</h3><p>Diplomata al Liceo Classico Andrea Vitali di Padova con 100/100, si Laurea in Medicina e Chirurgia presso l'Università Cattolica di Milano con votazione di 110 e Lode/110.</p></p><h3>Carriera</h3><p></p>"
+        "desc": "<h3>Studi</h3><p>Diplomata al Liceo Classico Andrea Vitali di Padova con 100/100, si Laurea in Medicina e Chirurgia presso l'Università Cattolica di Milano con votazione di 110 e Lode/110.</p></p><h3>Carriera</h3><p>Ha lavorato presso i seguenti ospedali:</p><ul class='list-group'><li class='list-group-item'>Ospedale Fatebenefratelli di Milano</li><li class='list-group-item'>Ospedale Niguarda di Milano</li><li class='list-group-item'>Medical Center</li></ul>"
     },
     {
         "doctor": 10,
-        "desc": "<h3>Studi</h3><p>Diplomato al Liceo Scientifico Beccaria di Milano con 100/100, si Laurea in Medicina e Chirurgia presso l'Università degli studi di Milano con votazione di 110 e Lode/110.</p></p><h3>Carriera</h3><p></p>"
+        "desc": "<h3>Studi</h3><p>Diplomato al Liceo Scientifico Beccaria di Milano con 100/100, si Laurea in Medicina e Chirurgia presso l'Università degli studi di Milano con votazione di 110 e Lode/110.</p></p><h3>Carriera</h3><p>Ha lavorato presso i seguenti ospedali:</p><ul class='list-group'><li class='list-group-item'>Ospedale Leolpoldo Mandic di Merate</li><li class='list-group-item'>Istituto Clinico Città Studi</li><li class='list-group-item'>Medical Center</li></ul>"
     }
 ]
