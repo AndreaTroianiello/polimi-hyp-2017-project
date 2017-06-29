@@ -5,7 +5,6 @@ $(document).ready(function () {
 		crossDomain: true,
 		url: "../aboutus",
 		success: function (response) {
-			console.log(response);
 			updateInfo(response);
 		},
 		error: function (request, error) {

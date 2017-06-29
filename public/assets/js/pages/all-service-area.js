@@ -46,7 +46,7 @@ function addLetterToList(letter) {
 }
 
 function addServiceToList(service) {
-    $('#'+ service.name.charAt(0)).append('<a class="list-group-item" href="../pages/service.html?id=' + service.id + '">' + service.name + '</a>');
+    $('#'+ service.name.charAt(0)).append('<a class="list-group-item list-area" href="../pages/service.html?id=' + service.id + '">' + service.name + '</a>');
 }
 
 function getAreaName() {
@@ -57,6 +57,7 @@ function getAreaName() {
         url: areaapi + URL.filter,
         success: function (response) {
             setAreaName(response);
+            setClickListener();
         },
         error: function (request, error) {
             setErrorArea();
@@ -101,3 +102,18 @@ var URL = function () {
     }
     return query_string;
 }();
+
+function clearSession() {
+    window.sessionStorage.clear();
+}
+
+function setSessionInfo() {
+    window.sessionStorage.setItem("label", $('title').text());
+    window.sessionStorage.setItem("url", window.location.href);
+}
+
+function setClickListener() {
+    $(".list-area").click(function () {
+        setSessionInfo();
+    });
+}

@@ -127,7 +127,6 @@ function getServiceName(p, operates) {
         crossDomain: true,
         url: serviceapi + operates,
         success: function (response) {
-            console.log(response.name);
             setServiceName(p,response);
         },
         error: function (request, error) {

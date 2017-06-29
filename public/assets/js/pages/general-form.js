@@ -43,7 +43,6 @@ function controlInfo(id) {
 	if (str && !/^\s*$/.test(str)) {
 		return true;
 	} else {
-		console.log(str+","+/^\s*$/.test(str));
 		errorText += "Il campo " + id + " non è valido. \n";
 		return false;
 	}

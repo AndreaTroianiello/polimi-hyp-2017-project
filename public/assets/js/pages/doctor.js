@@ -181,7 +181,6 @@ function setNext() {
 
 
 function setPrevious() {
-    console.log(doctorapi + URL.id + "/previous");
     $.ajax({
         method: "GET",
         dataType: "json",
