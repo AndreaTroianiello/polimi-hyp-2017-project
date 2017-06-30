@@ -74,3 +74,7 @@ When you send a general information inquiry, the request is stored in the databa
 ## Framework and template
 
 The project was built using Bootstrap v3, the latest version of JQuery and the Imperial theme, that can be found at the following page: https://bootstrapmade.com/demo/Imperial/
+
+## Navigation system
+When there is a navigation index pattern (following the P-IDM model), a navigation system is implemented with dynamic links.
+Dynamic links are implemented through sessione storage and are present in the following pages: doctor.html, service.html and location.html.
