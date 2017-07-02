@@ -457,22 +457,16 @@ function orderLocations(req, query) {
 ========================================================== */
 app.get("/aboutus", function (req, res) {
 	sqlDb('whoweare').orderBy("id", "asc").then(result => {
-		if (result.length === 0) {
-			res.json({
-				error: "Invalid service ID"
-			});
-		} else {
 			res.json(result);
-		}
 	});
 });
 
 /* =========================================================
  Information FORM APIs
-
- Receives a general information request, stores it in the database and sends it via email to the user who made the request.
- A JSON object with a message is returned either in case of success or in case of failure.
 ========================================================== */
+
+/* Receives a general information request, stores it in the database and sends it via email to the user who made the request.
+ A JSON object with a message is returned either in case of success or in case of failure.*/
 app.post("/genreq", function (req, res) {
 	let request = {
 		name: req.body.name,
@@ -488,15 +482,26 @@ app.post("/genreq", function (req, res) {
 				sendEmail(request, res);
 			})
 			.catch(function () {
+				res.status(500);
 				res.json({
 					message: "There was an error with you request. Please, try again later."
 				});
 			});
 	} else {
+		res.status(400);
 		res.json({
 			message: "Invalid parameters, some parameter is null or wrong."
 		});
 	}
+});
+
+/* Returns all the general request stored in the database. 
+This API was made only to check if the requests were actually stored somewhere in the database. 
+In a real production environment it should be implemented with some security measures*/
+app.get("/generalrequests", function (req, res) {
+	sqlDb('general_requests').orderBy("id", "desc").then(result => {
+			res.json(result);
+	});
 });
 
 function checkInfo(request) {
@@ -545,8 +550,9 @@ function sendEmail(request, res) {
 			console.log("------------------- ERROR ---------------");
 			console.log(err);
 			console.log("------------------ END ERROR ----------------");
+			res.status(400);
 			res.json({
-				message: "Request received and stored, but there was an error with the mail server and the email was sent."
+				message: "Request received and stored, but there was an error with the mail server and the email was NOT sent."
 			});
 		}
 	});

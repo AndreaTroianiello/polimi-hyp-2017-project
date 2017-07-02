@@ -12,6 +12,18 @@ Team Member n.2: Andrea Troianiello, 10455250, polimi-hyp-2017-10455250
 
 # Project Info
 
+## Optional page
+
+The optional page "Form for general request of info" was implemented and can be accessed through the main menu using the link "Richieste".
+When you send a general information inquiry, the request is stored in the database and a confirmation email is sent to the user who made the request.
+Due to the fact that no authentication is used for emails, it may happen that the receiving server rejects the email.
+To avoid any problem with this, we created an API to let you check if the request was actually processed. 
+The API is available here https://polimi-hyp-2017-team-10459278.herokuapp.com/generalrequests.
+Please, mind that no security/privacy measure was taken and in a real production environment this API shouldn't be implemented without modifications.
+
+*Email may finish in the spam folder*
+
+
 ## How to start the server in local
 
 The environmente variable TEST must be set equal to "true"
@@ -63,13 +75,6 @@ If the path to the table file in the schema.json file is null, the table populat
 
 Every pages requested by the delivery instructions was implemented with realistic content, following the C/P-IDM schema.
 All the content of each page, with the exception of the main menu and the homepage, is loaded via Ajax from the database using RESTful APIs.
-
-## Optional page
-
-The optional page "Form for general request of info" was implemented and can be accessed through the main menu using the link "Richieste".
-When you send a general information inquiry, the request is stored in the database and a confirmation email is sent to the user who made the request.
-
-*Email may finish in the spam folder*
 
 ## Framework and template
 
