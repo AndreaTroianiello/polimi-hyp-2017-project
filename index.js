@@ -69,6 +69,7 @@ If the doctor ID is invalid, a JSON object containing an error message is return
 app.get("/doctors/:doctor_id", function (req, res) {
 	sqlDb("doctors").where("id", req.params.doctor_id).then(result => {
 		if (result.length === 0) {
+			res.status(400);
 			res.json({
 				error: "Invalid doctor ID"
 			});
@@ -98,6 +99,7 @@ If the doctor ID is invalid, a JSON object containing an error message is return
 app.get("/doctors/:doctor_id/curriculum", function (req, res) {
 	sqlDb("curriculums").where("doctor", req.params.doctor_id).then(result => {
 		if (result.length === 0) {
+			res.status(400);
 			res.json({
 				error: "Invalid doctor ID"
 			});
@@ -163,6 +165,7 @@ function getPrevNext(req, res, next) {
 			return req.params.doctor_id == r.id;
 		});
 		if (i === -1) {
+			res.status(400);
 			res.json({
 				error: "No doctor found for the given parameters."
 			});
@@ -220,6 +223,7 @@ app.get("/services/:service_id", function (req, res) {
 		.where("services.id", req.params.service_id)
 		.then(result => {
 			if (result.length === 0) {
+				res.status(400);
 				res.json({
 					error: "Invalid service ID"
 				});
@@ -296,6 +300,7 @@ app.get("/areas/:area_id", function (req, res) {
 		.where("id", req.params.area_id)
 		.then(result => {
 			if (result.length === 0) {
+				res.status(400);
 				res.json({
 					error: "Invalid area ID"
 				});
@@ -370,6 +375,7 @@ app.get("/locations/:location_id", function (req, res) {
 		.where('id', req.params.location_id)
 		.then(result => {
 			if (result.length === 0)
+				res.status(400);
 				res.json({
 					error: "Invalid location ID"
 				});
@@ -399,6 +405,7 @@ app.get("/locations/:location_id/images", function (req, res) {
 					res.json(result);
 				});
 		} else {
+			res.status(400);
 			res.json({
 				message: "Invalid location ID."
 			});
@@ -419,6 +426,7 @@ app.get("/locations/:location_id/directions", function (req, res) {
 					res.json(result);
 				});
 		} else {
+			res.status(400);
 			res.json({
 				message: "Invalid location ID."
 			});
@@ -500,7 +508,7 @@ This API was made only to check if the requests were actually stored somewhere i
 In a real production environment it should be implemented with some security measures*/
 app.get("/generalrequests", function (req, res) {
 	sqlDb('general_requests').orderBy("id", "desc").then(result => {
-			res.json(result);
+		res.json(result);
 	});
 });
 
