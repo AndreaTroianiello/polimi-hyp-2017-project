@@ -550,7 +550,7 @@ function sendEmail(request, res) {
 			console.log("------------------- ERROR ---------------");
 			console.log(err);
 			console.log("------------------ END ERROR ----------------");
-			res.status(400);
+			res.status(500);
 			res.json({
 				message: "Request received and stored, but there was an error with the mail server and the email was NOT sent."
 			});
