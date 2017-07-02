@@ -483,14 +483,9 @@ app.post("/genreq", function (req, res) {
 	};
 
 	if (checkInfo(request)) {
-
-		sendEmail(request);
-
 		sqlDb("general_requests").insert(request)
 			.then(function () {
-				res.json({
-					message: "Request received."
-				});
+				sendEmail(request, res);
 			})
 			.catch(function () {
 				res.json({
@@ -524,9 +519,9 @@ function checkEmail(email) {
 	return false;
 }
 
-function sendEmail(request) {
+function sendEmail(request, res) {
 	sendmail({
-		from: "no-reply@example.com",
+		from: "no-reply@polimi-hyp-2017-team-10459278.herokuapp.com",
 		to: request.email,
 		subject: "Conferma ricezione richiesta Medical Center",
 		html: `<p>Gentile ${request.name} ${request.surname},</p>
@@ -541,7 +536,18 @@ function sendEmail(request) {
 			<tr><td>Messaggio:</td><td> ${request.message}</td></tr>
 			</table>`
 	}, function (err, reply) {
-		console.log(err && err.stack);
-		console.dir(reply);
+		if (!err) {
+			console.log("email sent");
+			res.json({
+				message: "Request received."
+			});
+		} else {
+			console.log("------------------- ERROR ---------------");
+			console.log(err);
+			console.log("------------------ END ERROR ----------------");
+			res.json({
+				message: "Request received and stored, but there was an error with the mail server and the email was sent."
+			});
+		}
 	});
 }
